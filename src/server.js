@@ -5,12 +5,14 @@ const path = require('path');
 const PORT = parseInt(process.env.PORT || '3000', 10);
 const HOST = process.env.HOST || '0.0.0.0';
 
-// Resolve public directory cleanly
+// Resolve static files directory cleanly
 const PUBLIC_ROOT = (() => {
-  const candidate1 = path.join(__dirname, '..', 'public');
+  const candidate1 = path.join(__dirname, '..', 'docs');
   if (fs.existsSync(candidate1)) return candidate1;
-  const candidate2 = path.join(__dirname, 'public');
+  const candidate2 = path.join(__dirname, '..', 'public');
   if (fs.existsSync(candidate2)) return candidate2;
+  const candidate3 = path.join(__dirname, 'docs');
+  if (fs.existsSync(candidate3)) return candidate3;
   return path.join(__dirname, '..');
 })();
 
