@@ -1,0 +1,86 @@
+:root {
+    --sticker-rotate: 30deg;
+    --sticker-p: 20%;
+    --sticker-shadow-opacity: .6;
+    --sticker-lighting-constant: .1;
+    --peel-direction: 0deg;
+    --peel-amount: 1;
+    --sticker-start: calc(-1 * var(--sticker-p));
+    --sticker-end: calc(100% + var(--sticker-p))
+}
+
+.sticker-container {
+    --sticker-peel-y: calc(var(--sticker-start) + var(--peel-amount) * (var(--sticker-end) - var(--sticker-start)));
+    transform: rotate(var(--peel-direction));
+    transform-origin: 50%;
+    position: relative
+}
+
+.sticker-container * {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent
+}
+
+.sticker-main {
+    clip-path: polygon(var(--sticker-start) var(--sticker-peel-y), var(--sticker-end) var(--sticker-peel-y), var(--sticker-end) var(--sticker-end), var(--sticker-start) var(--sticker-end));
+    will-change: clip-path;
+    filter: url(#dropShadow)
+}
+
+.sticker-main>* {
+    transform: rotate(calc(-1 * var(--peel-direction)))
+}
+
+.sticker-lighting {
+    filter: url(#pointLight)
+}
+
+.sticker-image {
+    transform: rotate(var(--sticker-rotate));
+    width: var(--sticker-width, 200px)
+}
+
+.flap {
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(var(--sticker-start) var(--sticker-start), var(--sticker-end) var(--sticker-start), var(--sticker-end) var(--sticker-peel-y), var(--sticker-start) var(--sticker-peel-y));
+    left: 0;
+    top: calc(-100% + 2 * var(--sticker-peel-y) - 1px);
+    will-change: clip-path, top;
+    position: absolute;
+    transform: scaleY(-1)
+}
+
+.flap>* {
+    transform: rotate(calc(-1 * var(--peel-direction)))
+}
+
+.flap-lighting {
+    filter: url(#pointLightFlipped)
+}
+
+.flap-image {
+    transform: rotate(var(--sticker-rotate));
+    filter: url(#expandAndFill);
+    width: var(--sticker-width, 200px)
+}
+
+.sticker-ripple {
+    pointer-events: none;
+    z-index: 10;
+    background: #fff9;
+    border-radius: 50%;
+    position: absolute
+}
+
+.simple-effects .sticker-lighting,
+.simple-effects .flap-lighting,
+.simple-effects .flap-image {
+    filter: none !important
+}
+
+.simple-effects .sticker-main {
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, calc(var(--sticker-shadow-opacity) * .5))) !important
+}

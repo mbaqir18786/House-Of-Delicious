@@ -1,0 +1,29 @@
+{
+  "name": "house-of-delicious",
+  "version": "1.0.0",
+  "description": "House of Delicious (HOD) — Fusion & Fast-Food Café in Vidyavihar, Mumbai",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
+    "healthcheck": "node scripts/healthcheck.js",
+    "pm2:start": "pm2 start config/ecosystem.config.js --env production",
+    "pm2:stop": "pm2 stop config/ecosystem.config.js",
+    "pm2:restart": "pm2 restart config/ecosystem.config.js",
+    "pm2:logs": "pm2 logs house-of-delicious"
+  },
+  "keywords": [
+    "house-of-delicious",
+    "hod",
+    "vidyavihar",
+    "somaiya",
+    "cafe",
+    "restaurant",
+    "mumbai"
+  ],
+  "author": "House of Delicious",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

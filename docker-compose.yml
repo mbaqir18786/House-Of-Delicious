@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: house-of-delicious
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    healthcheck:
+      test: ["CMD", "node", "scripts/healthcheck.js"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
