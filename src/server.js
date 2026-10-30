@@ -35,13 +35,13 @@ const MIME_TYPES = {
 };
 
 function getCacheControl(pathname, ext) {
-  if (pathname.includes('/_next/static/') || ext === '.woff2' || ext === '.webp' || ext === '.png') {
-    return 'public, max-age=31536000, immutable';
+  if (ext === '.woff2' || ext === '.webp' || ext === '.png' || ext === '.jpg' || ext === '.jpeg') {
+    return 'public, max-age=86400';
   }
-  if (ext === '.html') {
+  if (ext === '.html' || ext === '.js' || ext === '.css') {
     return 'public, max-age=0, must-revalidate';
   }
-  return 'public, max-age=86400';
+  return 'public, max-age=3600';
 }
 
 function sendFile(res, filePath, contentType, cacheControl) {
