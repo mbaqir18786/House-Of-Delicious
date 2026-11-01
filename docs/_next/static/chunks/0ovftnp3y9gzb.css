@@ -4486,3 +4486,19 @@ html.lenis body {
     transition-property: overflow;
     transition-duration: 1ms
 }
+
+/* Custom Navbar Brand Logo Size */
+nav a[href="/"].font-modak {
+    font-size: clamp(32px, 3.4vw, 52px) !important;
+    line-height: 1 !important;
+    letter-spacing: -0.01em !important;
+    white-space: nowrap !important;
+    display: inline-block !important;
+}
+@media (max-width: 767px) {
+    nav a[href="/"].font-modak {
+        font-size: clamp(26px, 7.5vw, 34px) !important;
+        -webkit-text-stroke: 3.5px var(--white) !important;
+        line-height: 1 !important;
+    }
+}
