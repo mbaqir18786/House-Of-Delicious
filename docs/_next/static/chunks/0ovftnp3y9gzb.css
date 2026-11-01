@@ -4497,8 +4497,8 @@ nav a[href="/"].font-modak {
 }
 @media (max-width: 767px) {
     nav a[href="/"].font-modak {
-        font-size: clamp(26px, 7.5vw, 34px) !important;
-        -webkit-text-stroke: 3.5px var(--white) !important;
+        font-size: clamp(20px, 5.2vw, 24px) !important;
+        -webkit-text-stroke: 2.2px var(--white) !important;
         line-height: 1 !important;
     }
 }
