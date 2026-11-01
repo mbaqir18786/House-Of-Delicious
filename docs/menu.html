@@ -471,53 +471,57 @@
                 class="inline-block will-change-transform">Burger</span><span> </span><span data-pop="true"
                 class="inline-block will-change-transform">Picks</span></span></h2>
         </div><span class="inline-block" style="opacity:0">
-          <p class="text40 max-md:text-[6vw] ml-[1vw] max-md:block uppercase hidden">6<!-- --> items</p>
+          <p id="items-count-mobile" class="text40 max-md:text-[6vw] ml-[1vw] max-md:block uppercase hidden">4 items</p>
         </span><span class="inline-block" style="opacity:0">
-          <p class="text40 max-md:hidden uppercase">6<!-- --> items</p>
+          <p id="items-count-desktop" class="text40 max-md:hidden uppercase">4 items</p>
         </span>
       </div>
-      
+
       <!-- Mobile Sticky Category Bar -->
       <div class="w-full md:hidden sticky top-[14vw] z-40 bg-[#f5e3cd]/95 backdrop-blur-md py-[2vw] -mx-[4vw] px-[4vw] mt-[2vw] mb-[3vw] overflow-x-auto flex items-center gap-[2vw] scrollbar-none" style="-webkit-overflow-scrolling:touch;">
-        <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="shrink-0 px-[4.5vw] py-[2.2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider bg-red text-white border border-red shadow-md font-bold flex items-center gap-[1.2vw]">
-          <span>Combos</span>
-          <span class="opacity-80 text-[3.2vw]">(9)</span>
-        </a>
-        <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="shrink-0 px-[4.5vw] py-[2.2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider bg-white/85 text-black border border-black/15 shadow-xs flex items-center gap-[1.2vw]">
-          <span>Pizza & Pasta</span>
-          <span class="opacity-60 text-[3.2vw]">(20)</span>
-        </a>
-        <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="shrink-0 px-[4.5vw] py-[2.2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider bg-white/85 text-black border border-black/15 shadow-xs flex items-center gap-[1.2vw]">
+        <button type="button" onclick="selectCategoryMobile('Burgers', this)" class="mobile-cat-btn shrink-0 px-[4.2vw] py-[2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider border flex items-center gap-[1.2vw] cursor-pointer bg-red text-white border-red shadow-md font-bold">
           <span>Burgers</span>
-          <span class="opacity-60 text-[3.2vw]">(15)</span>
-        </a>
-        <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="shrink-0 px-[4.5vw] py-[2.2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider bg-white/85 text-black border border-black/15 shadow-xs flex items-center gap-[1.2vw]">
+          <span class="opacity-70 text-[3.2vw]">(4)</span>
+        </button>
+        <button type="button" onclick="selectCategoryMobile('Pizza and Pasta', this)" class="mobile-cat-btn shrink-0 px-[4.2vw] py-[2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider border flex items-center gap-[1.2vw] cursor-pointer bg-white/90 text-black border-black/15 shadow-xs">
+          <span>Pizza and Pasta</span>
+          <span class="opacity-70 text-[3.2vw]">(2)</span>
+        </button>
+        <button type="button" onclick="selectCategoryMobile('Combos', this)" class="mobile-cat-btn shrink-0 px-[4.2vw] py-[2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider border flex items-center gap-[1.2vw] cursor-pointer bg-white/90 text-black border-black/15 shadow-xs">
+          <span>Combos</span>
+          <span class="opacity-70 text-[3.2vw]">(1)</span>
+        </button>
+        <button type="button" onclick="selectCategoryMobile('Snacks', this)" class="mobile-cat-btn shrink-0 px-[4.2vw] py-[2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider border flex items-center gap-[1.2vw] cursor-pointer bg-white/90 text-black border-black/15 shadow-xs">
           <span>Snacks</span>
-          <span class="opacity-60 text-[3.2vw]">(17)</span>
-        </a>
-        <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="shrink-0 px-[4.5vw] py-[2.2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider bg-white/85 text-black border border-black/15 shadow-xs flex items-center gap-[1.2vw]">
-          <span>Maggi</span>
-          <span class="opacity-60 text-[3.2vw]">(10)</span>
-        </a>
-        <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="shrink-0 px-[4.5vw] py-[2.2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider bg-white/85 text-black border border-black/15 shadow-xs flex items-center gap-[1.2vw]">
-          <span>Momos</span>
-          <span class="opacity-60 text-[3.2vw]">(19)</span>
-        </a>
-        <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="shrink-0 px-[4.5vw] py-[2.2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider bg-white/85 text-black border border-black/15 shadow-xs flex items-center gap-[1.2vw]">
+          <span class="opacity-70 text-[3.2vw]">(2)</span>
+        </button>
+        <button type="button" onclick="selectCategoryMobile('Desserts', this)" class="mobile-cat-btn shrink-0 px-[4.2vw] py-[2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider border flex items-center gap-[1.2vw] cursor-pointer bg-white/90 text-black border-black/15 shadow-xs">
           <span>Desserts</span>
-          <span class="opacity-60 text-[3.2vw]">(25)</span>
-        </a>
-        <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="shrink-0 px-[4.5vw] py-[2.2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider bg-white/85 text-black border border-black/15 shadow-xs flex items-center gap-[1.2vw]">
-          <span>Drinks</span>
-          <span class="opacity-60 text-[3.2vw]">(25)</span>
-        </a>
+          <span class="opacity-70 text-[3.2vw]">(1)</span>
+        </button>
+        <button type="button" onclick="selectCategoryMobile('All', this)" class="mobile-cat-btn shrink-0 px-[4.2vw] py-[2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider border flex items-center gap-[1.2vw] cursor-pointer bg-white/90 text-black border-black/15 shadow-xs">
+          <span>All Items</span>
+          <span class="opacity-70 text-[3.2vw]">(10)</span>
+        </button>
+        <button type="button" onclick="selectCategoryMobile('Maggi', this)" class="mobile-cat-btn shrink-0 px-[4.2vw] py-[2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider border flex items-center gap-[1.2vw] cursor-pointer bg-white/90 text-black border-black/15 shadow-xs">
+          <span>Maggi</span>
+          <span class="opacity-70 text-[3.2vw]">(10)</span>
+        </button>
+        <button type="button" onclick="selectCategoryMobile('Momos', this)" class="mobile-cat-btn shrink-0 px-[4.2vw] py-[2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider border flex items-center gap-[1.2vw] cursor-pointer bg-white/90 text-black border-black/15 shadow-xs">
+          <span>Momos</span>
+          <span class="opacity-70 text-[3.2vw]">(19)</span>
+        </button>
+        <button type="button" onclick="selectCategoryMobile('Drinks', this)" class="mobile-cat-btn shrink-0 px-[4.2vw] py-[2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider border flex items-center gap-[1.2vw] cursor-pointer bg-white/90 text-black border-black/15 shadow-xs">
+          <span>Drinks (Beverages)</span>
+          <span class="opacity-70 text-[3.2vw]">(25)</span>
+        </button>
       </div>
 
-      <!-- Main Layout: Sidebar (Desktop) + Cards Grid -->
-      <div class="w-full flex items-start gap-[2.5vw] mt-[3vw] max-md:mt-0">
-        <!-- Zomato Desktop Category Sidebar -->
-        <aside class="w-[20vw] shrink-0 hidden md:block sticky top-[7vw] self-start rounded-[1.2vw] bg-white border border-black/10 shadow-sm p-[1vw] overflow-hidden">
-          <div class="px-[.8vw] pb-[.8vw] mb-[.6vw] border-b border-black/10 flex items-center justify-between">
+      <!-- Main Layout: Sidebar (20%-30% width) + Remaining Area for 3-Box Grid -->
+      <div class="w-full flex items-start gap-[2vw] mt-[3vw] max-md:mt-0">
+        <!-- Zomato Desktop Category Sidebar (24% Width) -->
+        <aside class="w-[24%] shrink-0 hidden md:block sticky top-[7vw] self-start rounded-[1.2vw] bg-white border border-black/10 shadow-sm p-[1vw] overflow-hidden">
+          <div class="px-[.6vw] pb-[.8vw] mb-[.6vw] border-b border-black/10 flex items-center justify-between">
             <span class="font-mouse-memoirs uppercase text-[1.1vw] tracking-wider text-black/50">Categories</span>
             <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="font-mouse-memoirs text-[.95vw] uppercase text-red hover:underline flex items-center gap-[.2vw]">
               <span>Zomato</span>
@@ -525,543 +529,610 @@
             </a>
           </div>
           <nav class="flex flex-col gap-[.2vw]">
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] bg-red/10 text-red border-l-4 border-red font-mouse-memoirs text-[1.25vw] uppercase tracking-wide transition-all font-bold">
-              <span>Combos</span>
-              <span class="text-[1.05vw] opacity-80">(9)</span>
-            </a>
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] text-black/80 hover:text-red hover:bg-black/5 font-mouse-memoirs text-[1.25vw] uppercase tracking-wide transition-all">
-              <span>Pizza and Pasta</span>
-              <span class="text-[1.05vw] opacity-60 group-hover:opacity-100">(20)</span>
-            </a>
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] text-black/80 hover:text-red hover:bg-black/5 font-mouse-memoirs text-[1.25vw] uppercase tracking-wide transition-all">
+            <button type="button" onclick="selectCategory('Burgers', this)" class="cat-btn group w-full flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] font-mouse-memoirs text-[1.2vw] uppercase tracking-wide transition-all cursor-pointer text-left bg-red/10 text-red border-l-4 border-red font-bold">
               <span>Burgers</span>
-              <span class="text-[1.05vw] opacity-60 group-hover:opacity-100">(15)</span>
-            </a>
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] text-black/80 hover:text-red hover:bg-black/5 font-mouse-memoirs text-[1.25vw] uppercase tracking-wide transition-all">
+              <span class="text-[1vw] opacity-80">(4)</span>
+            </button>
+            <button type="button" onclick="selectCategory('Pizza and Pasta', this)" class="cat-btn group w-full flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] font-mouse-memoirs text-[1.2vw] uppercase tracking-wide transition-all cursor-pointer text-left text-black/80 hover:text-red hover:bg-black/5">
+              <span>Pizza and Pasta</span>
+              <span class="text-[1vw] opacity-60 group-hover:opacity-100">(2)</span>
+            </button>
+            <button type="button" onclick="selectCategory('Combos', this)" class="cat-btn group w-full flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] font-mouse-memoirs text-[1.2vw] uppercase tracking-wide transition-all cursor-pointer text-left text-black/80 hover:text-red hover:bg-black/5">
+              <span>Combos</span>
+              <span class="text-[1vw] opacity-60 group-hover:opacity-100">(1)</span>
+            </button>
+            <button type="button" onclick="selectCategory('Snacks', this)" class="cat-btn group w-full flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] font-mouse-memoirs text-[1.2vw] uppercase tracking-wide transition-all cursor-pointer text-left text-black/80 hover:text-red hover:bg-black/5">
               <span>Snacks</span>
-              <span class="text-[1.05vw] opacity-60 group-hover:opacity-100">(17)</span>
-            </a>
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] text-black/80 hover:text-red hover:bg-black/5 font-mouse-memoirs text-[1.25vw] uppercase tracking-wide transition-all">
-              <span>Maggi</span>
-              <span class="text-[1.05vw] opacity-60 group-hover:opacity-100">(10)</span>
-            </a>
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] text-black/80 hover:text-red hover:bg-black/5 font-mouse-memoirs text-[1.25vw] uppercase tracking-wide transition-all">
-              <span>Momos</span>
-              <span class="text-[1.05vw] opacity-60 group-hover:opacity-100">(19)</span>
-            </a>
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] text-black/80 hover:text-red hover:bg-black/5 font-mouse-memoirs text-[1.25vw] uppercase tracking-wide transition-all">
+              <span class="text-[1vw] opacity-60 group-hover:opacity-100">(2)</span>
+            </button>
+            <button type="button" onclick="selectCategory('Desserts', this)" class="cat-btn group w-full flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] font-mouse-memoirs text-[1.2vw] uppercase tracking-wide transition-all cursor-pointer text-left text-black/80 hover:text-red hover:bg-black/5">
               <span>Desserts</span>
-              <span class="text-[1.05vw] opacity-60 group-hover:opacity-100">(25)</span>
-            </a>
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] text-black/80 hover:text-red hover:bg-black/5 font-mouse-memoirs text-[1.25vw] uppercase tracking-wide transition-all">
+              <span class="text-[1vw] opacity-60 group-hover:opacity-100">(1)</span>
+            </button>
+            <button type="button" onclick="selectCategory('All', this)" class="cat-btn group w-full flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] font-mouse-memoirs text-[1.2vw] uppercase tracking-wide transition-all cursor-pointer text-left text-black/80 hover:text-red hover:bg-black/5">
+              <span>All Items</span>
+              <span class="text-[1vw] opacity-60 group-hover:opacity-100">(10)</span>
+            </button>
+            <button type="button" onclick="selectCategory('Maggi', this)" class="cat-btn group w-full flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] font-mouse-memoirs text-[1.2vw] uppercase tracking-wide transition-all cursor-pointer text-left text-black/80 hover:text-red hover:bg-black/5">
+              <span>Maggi</span>
+              <span class="text-[1vw] opacity-60 group-hover:opacity-100">(10)</span>
+            </button>
+            <button type="button" onclick="selectCategory('Momos', this)" class="cat-btn group w-full flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] font-mouse-memoirs text-[1.2vw] uppercase tracking-wide transition-all cursor-pointer text-left text-black/80 hover:text-red hover:bg-black/5">
+              <span>Momos</span>
+              <span class="text-[1vw] opacity-60 group-hover:opacity-100">(19)</span>
+            </button>
+            <button type="button" onclick="selectCategory('Drinks', this)" class="cat-btn group w-full flex items-center justify-between px-[1vw] py-[.75vw] rounded-[.7vw] font-mouse-memoirs text-[1.2vw] uppercase tracking-wide transition-all cursor-pointer text-left text-black/80 hover:text-red hover:bg-black/5">
               <span>Drinks (Beverages)</span>
-              <span class="text-[1.05vw] opacity-60 group-hover:opacity-100">(25)</span>
-            </a>
+              <span class="text-[1vw] opacity-60 group-hover:opacity-100">(25)</span>
+            </button>
           </nav>
         </aside>
 
-        <!-- Food Cards Grid -->
-        <div class="flex-1 min-w-0 w-full grid grid-cols-2 gap-[2vw] max-md:grid-cols-1 max-md:gap-[6vw]">
-        <div class="opacity-0 w-full">
-          <div
-            class="group h-[35vw] max-md:h-[70vw] w-full rounded-[2vw] overflow-hidden bg-white relative max-md:rounded-[5vw] shrink-0  translate-y-[4vw] transition-all duration-500 ">
-            <div class="absolute w-full left-0 top-1/2 -translate-y-1/2 z-10 pointer-events-none will-change-transform"
-              style="height:6vw;transition:transform 0.44s cubic-bezier(.4,1.6,.7,.95)" aria-hidden="true">
-              <div class="flex w-full h-[3vw] max-md:h-[7vw] transition-all duration-600">
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
+        <!-- Right Side: 3 Boxes Taking the Width as Before -->
+        <div class="flex-1 w-[76%] max-md:w-full min-w-0">
+          <div id="food-grid" class="w-full grid grid-cols-3 gap-[1.5vw] max-md:grid-cols-2 max-sm:grid-cols-1 max-md:gap-[3.5vw]">
+        <div class="menu-card w-full transition-all duration-300" data-category="Burgers" style="">
+          <div class="group h-[32vw] max-md:h-[62vw] max-sm:h-[82vw] w-full rounded-[1.6vw] overflow-hidden bg-white relative max-md:rounded-[3.5vw] shrink-0 transition-all duration-500 shadow-sm hover:shadow-xl">
+            <div class="absolute w-full left-0 top-1/2 -translate-y-1/2 z-10 pointer-events-none will-change-transform" style="height:5vw;transition:transform 0.44s cubic-bezier(.4,1.6,.7,.95)" aria-hidden="true">
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div>
               </div>
-              <div class="flex w-full h-[3vw] max-md:h-[7vw] transition-all duration-600">
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div>
               </div>
             </div>
-            <div class="size-full relative z-20 flex flex-col justify-between p-[2vw] max-md:p-[4vw]">
-              <div class="absolute left-[2vw] z-200 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-                <div
-                  class="rounded-[1.2vw] border border-black/10 bg-white/85 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-400 ease-[cubic-bezier(.45,.85,.34,1.12)] group-hover:opacity-100 group-hover:translate-y-0 ">
-                  <div class="flex items-center justify-between gap-[1vw]">
-                    <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-                    <p class="text40 uppercase text-black/60">6–8 min</p>
+            <div class="size-full relative z-20 flex flex-col justify-between p-[1.6vw] max-md:p-[3.5vw]">
+              <div class="absolute left-[1.2vw] z-200 right-[1.2vw] bottom-[1.2vw] max-md:hidden pointer-events-none">
+                <div class="rounded-[1vw] border border-black/10 bg-white/95 backdrop-blur-md px-[1vw] py-[.8vw] opacity-0 translate-y-[1vw] transition-all duration-400 ease-[cubic-bezier(.45,.85,.34,1.12)] group-hover:opacity-100 group-hover:translate-y-0 shadow-lg">
+                  <div class="flex items-center justify-between gap-[.6vw]">
+                    <p class="text-[.8vw] uppercase tracking-[.18em] font-bold text-black/60 font-mouse-memoirs">Quick details</p>
+                    <p class="text-[.8vw] uppercase text-black/60 font-mouse-memoirs">8–10 min</p>
                   </div>
-                  <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Bun</p>
-                      <p class="text40 uppercase text-black/80">Handmade</p>
+                  <div class="mt-[.4vw] grid grid-cols-3 gap-[.4vw]">
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Bun</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Brioche</p>
                     </div>
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Patty</p>
-                      <p class="text40 uppercase text-black/80">Paneer</p>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Patty</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Veggie</p>
                     </div>
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Spice</p>
-                      <p class="text40 uppercase text-black/80">Mild</p>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Spice</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Mild</p>
                     </div>
                   </div>
-                  <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]"><span
-                      class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70 transition-all">Calories:
-                      <!-- -->720</span><span
-                      class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70 transition-all">Protein:
-                      <!-- -->32g</span></div>
+                  <div class="mt-[.5vw] flex flex-wrap gap-[.4vw]">
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Calories: 580</span>
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Protein: 22g</span>
+                  </div>
                 </div>
-              </div><a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" data-cursor-hide="true" class="px-[2.4vw] py-[.85vw] max-md:px-[6vw] max-md:py-[2.6vw] rounded-full bg-red text-white hover:bg-black font-mouse-memoirs text-[1.45vw] max-md:text-[4.8vw] uppercase tracking-wider ml-auto transition-all duration-300 flex items-center gap-[.6vw] shadow-lg hover:shadow-2xl hover:scale-105 cursor-pointer will-change-transform group/btn font-bold" aria-label="Buy on Zomato">
-  <span>BUY ON ZOMATO</span>
-  <svg class="w-[1.15vw] h-[1.15vw] max-md:w-[3.8vw] max-md:h-[3.8vw] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-</a>
-              <div
-                class="size-[25vw] pointer-events-none max-md:size-[38vw] mx-auto transition-transform duration-700 will-change-transform group-hover:scale-[1.054]">
-                <img alt="Paneer Tikka Pizza" loading="lazy" width="1000" height="1000" decoding="async" data-nimg="1"
-                  class="h-full w-full object-contain"
-                  style="color:transparent;transition:transform 0.7s cubic-bezier(.5,1.45,.2,1);will-change:transform"
-                  srcSet="/_next/image?url=%2Fburgers%2F1b.png&amp;w=1080&amp;q=75 1x, /_next/image?url=%2Fburgers%2F1b.png&amp;w=2048&amp;q=75 2x"
-                  src="/_next/image?url=%2Fburgers%2F1b.png&amp;w=2048&amp;q=75" /></div>
-              <div class="w-full flex items-end justify-between text40 max-md:text-[5vw]">
-                <p class="text-red text60">Paneer Tikka Pizza</p>
-                <p class="text60 max-md:mr-[2vw]">₹220</p>
+              </div>
+              <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" data-cursor-hide="true" class="px-[1.4vw] py-[.55vw] max-md:px-[3.5vw] max-md:py-[1.6vw] rounded-full bg-red text-white hover:bg-black font-mouse-memoirs text-[1.1vw] max-md:text-[3.6vw] uppercase tracking-wider ml-auto transition-all duration-300 flex items-center gap-[.4vw] shadow-md hover:scale-105 cursor-pointer will-change-transform group/btn font-bold" aria-label="Buy on Zomato">
+                <span>BUY ON ZOMATO</span>
+                <svg class="w-[.9vw] h-[.9vw] max-md:w-[3vw] max-md:h-[3vw] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+              <div class="size-[17vw] pointer-events-none max-md:size-[30vw] max-sm:size-[40vw] mx-auto transition-transform duration-700 will-change-transform group-hover:scale-[1.06]">
+                <img alt="Classic Smashed Burger" loading="lazy" width="600" height="600" decoding="async" class="h-full w-full object-contain" src="/burgers/1b.png" />
+              </div>
+              <div class="w-full flex items-end justify-between font-mouse-memoirs">
+                <p class="text-red text-[1.4vw] max-md:text-[4.2vw] leading-tight font-bold">Classic Smashed Burger</p>
+                <p class="text-[1.4vw] max-md:text-[4.2vw] text-black font-bold whitespace-nowrap ml-[.5vw]">₹150</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="opacity-0 w-full">
-          <div
-            class="group h-[35vw] max-md:h-[70vw] w-full rounded-[2vw] overflow-hidden bg-white relative max-md:rounded-[5vw] shrink-0  translate-y-[4vw] transition-all duration-500 ">
-            <div class="absolute w-full left-0 top-1/2 -translate-y-1/2 z-10 pointer-events-none will-change-transform"
-              style="height:6vw;transition:transform 0.44s cubic-bezier(.4,1.6,.7,.95)" aria-hidden="true">
-              <div class="flex w-full h-[3vw] max-md:h-[7vw] transition-all duration-600">
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
+        <div class="menu-card w-full transition-all duration-300" data-category="Burgers" style="">
+          <div class="group h-[32vw] max-md:h-[62vw] max-sm:h-[82vw] w-full rounded-[1.6vw] overflow-hidden bg-white relative max-md:rounded-[3.5vw] shrink-0 transition-all duration-500 shadow-sm hover:shadow-xl">
+            <div class="absolute w-full left-0 top-1/2 -translate-y-1/2 z-10 pointer-events-none will-change-transform" style="height:5vw;transition:transform 0.44s cubic-bezier(.4,1.6,.7,.95)" aria-hidden="true">
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div>
               </div>
-              <div class="flex w-full h-[3vw] max-md:h-[7vw] transition-all duration-600">
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div>
               </div>
             </div>
-            <div class="size-full relative z-20 flex flex-col justify-between p-[2vw] max-md:p-[4vw]">
-              <div class="absolute left-[2vw] z-200 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-                <div
-                  class="rounded-[1.2vw] border border-black/10 bg-white/85 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-400 ease-[cubic-bezier(.45,.85,.34,1.12)] group-hover:opacity-100 group-hover:translate-y-0 ">
-                  <div class="flex items-center justify-between gap-[1vw]">
-                    <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-                    <p class="text40 uppercase text-black/60">6–8 min</p>
+            <div class="size-full relative z-20 flex flex-col justify-between p-[1.6vw] max-md:p-[3.5vw]">
+              <div class="absolute left-[1.2vw] z-200 right-[1.2vw] bottom-[1.2vw] max-md:hidden pointer-events-none">
+                <div class="rounded-[1vw] border border-black/10 bg-white/95 backdrop-blur-md px-[1vw] py-[.8vw] opacity-0 translate-y-[1vw] transition-all duration-400 ease-[cubic-bezier(.45,.85,.34,1.12)] group-hover:opacity-100 group-hover:translate-y-0 shadow-lg">
+                  <div class="flex items-center justify-between gap-[.6vw]">
+                    <p class="text-[.8vw] uppercase tracking-[.18em] font-bold text-black/60 font-mouse-memoirs">Quick details</p>
+                    <p class="text-[.8vw] uppercase text-black/60 font-mouse-memoirs">10–12 min</p>
                   </div>
-                  <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Bun</p>
-                      <p class="text40 uppercase text-black/80">Handmade</p>
+                  <div class="mt-[.4vw] grid grid-cols-3 gap-[.4vw]">
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Bun</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Sesame</p>
                     </div>
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Patty</p>
-                      <p class="text40 uppercase text-black/80">Paneer</p>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Patty</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Veggie</p>
                     </div>
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Spice</p>
-                      <p class="text40 uppercase text-black/80">Hot</p>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Spice</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Medium</p>
                     </div>
                   </div>
-                  <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]"><span
-                      class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70 transition-all">Calories:
-                      <!-- -->810</span><span
-                      class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70 transition-all">Protein:
-                      <!-- -->34g</span></div>
+                  <div class="mt-[.5vw] flex flex-wrap gap-[.4vw]">
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Calories: 620</span>
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Protein: 24g</span>
+                  </div>
                 </div>
-              </div><a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" data-cursor-hide="true" class="px-[2.4vw] py-[.85vw] max-md:px-[6vw] max-md:py-[2.6vw] rounded-full bg-red text-white hover:bg-black font-mouse-memoirs text-[1.45vw] max-md:text-[4.8vw] uppercase tracking-wider ml-auto transition-all duration-300 flex items-center gap-[.6vw] shadow-lg hover:shadow-2xl hover:scale-105 cursor-pointer will-change-transform group/btn font-bold" aria-label="Buy on Zomato">
-  <span>BUY ON ZOMATO</span>
-  <svg class="w-[1.15vw] h-[1.15vw] max-md:w-[3.8vw] max-md:h-[3.8vw] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-</a>
-              <div
-                class="size-[25vw] pointer-events-none max-md:size-[38vw] mx-auto transition-transform duration-700 will-change-transform group-hover:scale-[1.054]">
-                <img alt="Peri Peri Paneer Pizza" loading="lazy" width="1000" height="1000" decoding="async"
-                  data-nimg="1" class="h-full w-full object-contain"
-                  style="color:transparent;transition:transform 0.7s cubic-bezier(.5,1.45,.2,1);will-change:transform"
-                  srcSet="/_next/image?url=%2Fburgers%2F2b.png&amp;w=1080&amp;q=75 1x, /_next/image?url=%2Fburgers%2F2b.png&amp;w=2048&amp;q=75 2x"
-                  src="/_next/image?url=%2Fburgers%2F2b.png&amp;w=2048&amp;q=75" /></div>
-              <div class="w-full flex items-end justify-between text40 max-md:text-[5vw]">
-                <p class="text-red text60">Peri Peri Paneer Pizza</p>
-                <p class="text60 max-md:mr-[2vw]">₹240</p>
+              </div>
+              <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" data-cursor-hide="true" class="px-[1.4vw] py-[.55vw] max-md:px-[3.5vw] max-md:py-[1.6vw] rounded-full bg-red text-white hover:bg-black font-mouse-memoirs text-[1.1vw] max-md:text-[3.6vw] uppercase tracking-wider ml-auto transition-all duration-300 flex items-center gap-[.4vw] shadow-md hover:scale-105 cursor-pointer will-change-transform group/btn font-bold" aria-label="Buy on Zomato">
+                <span>BUY ON ZOMATO</span>
+                <svg class="w-[.9vw] h-[.9vw] max-md:w-[3vw] max-md:h-[3vw] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+              <div class="size-[17vw] pointer-events-none max-md:size-[30vw] max-sm:size-[40vw] mx-auto transition-transform duration-700 will-change-transform group-hover:scale-[1.06]">
+                <img alt="Smoky BBQ Burger" loading="lazy" width="600" height="600" decoding="async" class="h-full w-full object-contain" src="/burgers/2b.png" />
+              </div>
+              <div class="w-full flex items-end justify-between font-mouse-memoirs">
+                <p class="text-red text-[1.4vw] max-md:text-[4.2vw] leading-tight font-bold">Smoky BBQ Burger</p>
+                <p class="text-[1.4vw] max-md:text-[4.2vw] text-black font-bold whitespace-nowrap ml-[.5vw]">₹170</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="opacity-0 w-full">
-          <div
-            class="group h-[35vw] max-md:h-[70vw] w-full rounded-[2vw] overflow-hidden bg-white relative max-md:rounded-[5vw] shrink-0  translate-y-[4vw] transition-all duration-500 ">
-            <div class="absolute w-full left-0 top-1/2 -translate-y-1/2 z-10 pointer-events-none will-change-transform"
-              style="height:6vw;transition:transform 0.44s cubic-bezier(.4,1.6,.7,.95)" aria-hidden="true">
-              <div class="flex w-full h-[3vw] max-md:h-[7vw] transition-all duration-600">
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
+        <div class="menu-card w-full transition-all duration-300" data-category="Burgers" style="">
+          <div class="group h-[32vw] max-md:h-[62vw] max-sm:h-[82vw] w-full rounded-[1.6vw] overflow-hidden bg-white relative max-md:rounded-[3.5vw] shrink-0 transition-all duration-500 shadow-sm hover:shadow-xl">
+            <div class="absolute w-full left-0 top-1/2 -translate-y-1/2 z-10 pointer-events-none will-change-transform" style="height:5vw;transition:transform 0.44s cubic-bezier(.4,1.6,.7,.95)" aria-hidden="true">
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div>
               </div>
-              <div class="flex w-full h-[3vw] max-md:h-[7vw] transition-all duration-600">
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div>
               </div>
             </div>
-            <div class="size-full relative z-20 flex flex-col justify-between p-[2vw] max-md:p-[4vw]">
-              <div class="absolute left-[2vw] z-200 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-                <div
-                  class="rounded-[1.2vw] border border-black/10 bg-white/85 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-400 ease-[cubic-bezier(.45,.85,.34,1.12)] group-hover:opacity-100 group-hover:translate-y-0 ">
-                  <div class="flex items-center justify-between gap-[1vw]">
-                    <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-                    <p class="text40 uppercase text-black/60">8–10 min</p>
+            <div class="size-full relative z-20 flex flex-col justify-between p-[1.6vw] max-md:p-[3.5vw]">
+              <div class="absolute left-[1.2vw] z-200 right-[1.2vw] bottom-[1.2vw] max-md:hidden pointer-events-none">
+                <div class="rounded-[1vw] border border-black/10 bg-white/95 backdrop-blur-md px-[1vw] py-[.8vw] opacity-0 translate-y-[1vw] transition-all duration-400 ease-[cubic-bezier(.45,.85,.34,1.12)] group-hover:opacity-100 group-hover:translate-y-0 shadow-lg">
+                  <div class="flex items-center justify-between gap-[.6vw]">
+                    <p class="text-[.8vw] uppercase tracking-[.18em] font-bold text-black/60 font-mouse-memoirs">Quick details</p>
+                    <p class="text-[.8vw] uppercase text-black/60 font-mouse-memoirs">10–12 min</p>
                   </div>
-                  <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Bun</p>
-                      <p class="text40 uppercase text-black/80">Handmade</p>
+                  <div class="mt-[.4vw] grid grid-cols-3 gap-[.4vw]">
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Bun</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Brioche</p>
                     </div>
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Patty</p>
-                      <p class="text40 uppercase text-black/80">Paneer</p>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Patty</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Cheese</p>
                     </div>
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Spice</p>
-                      <p class="text40 uppercase text-black/80">Mild</p>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Spice</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Mild</p>
                     </div>
                   </div>
-                  <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]"><span
-                      class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70 transition-all">Calories:
-                      <!-- -->900</span><span
-                      class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70 transition-all">Protein:
-                      <!-- -->37g</span></div>
+                  <div class="mt-[.5vw] flex flex-wrap gap-[.4vw]">
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Calories: 690</span>
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Protein: 26g</span>
+                  </div>
                 </div>
-              </div><a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" data-cursor-hide="true" class="px-[2.4vw] py-[.85vw] max-md:px-[6vw] max-md:py-[2.6vw] rounded-full bg-red text-white hover:bg-black font-mouse-memoirs text-[1.45vw] max-md:text-[4.8vw] uppercase tracking-wider ml-auto transition-all duration-300 flex items-center gap-[.6vw] shadow-lg hover:shadow-2xl hover:scale-105 cursor-pointer will-change-transform group/btn font-bold" aria-label="Buy on Zomato">
-  <span>BUY ON ZOMATO</span>
-  <svg class="w-[1.15vw] h-[1.15vw] max-md:w-[3.8vw] max-md:h-[3.8vw] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-</a>
-              <div
-                class="size-[25vw] pointer-events-none max-md:size-[38vw] mx-auto transition-transform duration-700 will-change-transform group-hover:scale-[1.054]">
-                <img alt="Classic Cheese Garlic Bread" loading="lazy" width="1000" height="1000" decoding="async"
-                  data-nimg="1" class="h-full w-full object-contain"
-                  style="color:transparent;transition:transform 0.7s cubic-bezier(.5,1.45,.2,1);will-change:transform"
-                  srcSet="/_next/image?url=%2Fburgers%2F3b.png&amp;w=1080&amp;q=75 1x, /_next/image?url=%2Fburgers%2F3b.png&amp;w=2048&amp;q=75 2x"
-                  src="/_next/image?url=%2Fburgers%2F3b.png&amp;w=2048&amp;q=75" /></div>
-              <div class="w-full flex items-end justify-between text40 max-md:text-[5vw]">
-                <p class="text-red text60">Classic Cheese Garlic Bread</p>
-                <p class="text60 max-md:mr-[2vw]">₹140</p>
+              </div>
+              <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" data-cursor-hide="true" class="px-[1.4vw] py-[.55vw] max-md:px-[3.5vw] max-md:py-[1.6vw] rounded-full bg-red text-white hover:bg-black font-mouse-memoirs text-[1.1vw] max-md:text-[3.6vw] uppercase tracking-wider ml-auto transition-all duration-300 flex items-center gap-[.4vw] shadow-md hover:scale-105 cursor-pointer will-change-transform group/btn font-bold" aria-label="Buy on Zomato">
+                <span>BUY ON ZOMATO</span>
+                <svg class="w-[.9vw] h-[.9vw] max-md:w-[3vw] max-md:h-[3vw] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+              <div class="size-[17vw] pointer-events-none max-md:size-[30vw] max-sm:size-[40vw] mx-auto transition-transform duration-700 will-change-transform group-hover:scale-[1.06]">
+                <img alt="Cheese Burst Burger" loading="lazy" width="600" height="600" decoding="async" class="h-full w-full object-contain" src="/burgers/3b.png" />
+              </div>
+              <div class="w-full flex items-end justify-between font-mouse-memoirs">
+                <p class="text-red text-[1.4vw] max-md:text-[4.2vw] leading-tight font-bold">Cheese Burst Burger</p>
+                <p class="text-[1.4vw] max-md:text-[4.2vw] text-black font-bold whitespace-nowrap ml-[.5vw]">₹190</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="opacity-0 w-full">
-          <div
-            class="group h-[35vw] max-md:h-[70vw] w-full rounded-[2vw] overflow-hidden bg-white relative max-md:rounded-[5vw] shrink-0  translate-y-[4vw] transition-all duration-500 ">
-            <div class="absolute w-full left-0 top-1/2 -translate-y-1/2 z-10 pointer-events-none will-change-transform"
-              style="height:6vw;transition:transform 0.44s cubic-bezier(.4,1.6,.7,.95)" aria-hidden="true">
-              <div class="flex w-full h-[3vw] max-md:h-[7vw] transition-all duration-600">
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
+        <div class="menu-card w-full transition-all duration-300" data-category="Burgers" style="">
+          <div class="group h-[32vw] max-md:h-[62vw] max-sm:h-[82vw] w-full rounded-[1.6vw] overflow-hidden bg-white relative max-md:rounded-[3.5vw] shrink-0 transition-all duration-500 shadow-sm hover:shadow-xl">
+            <div class="absolute w-full left-0 top-1/2 -translate-y-1/2 z-10 pointer-events-none will-change-transform" style="height:5vw;transition:transform 0.44s cubic-bezier(.4,1.6,.7,.95)" aria-hidden="true">
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div>
               </div>
-              <div class="flex w-full h-[3vw] max-md:h-[7vw] transition-all duration-600">
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div>
               </div>
             </div>
-            <div class="size-full relative z-20 flex flex-col justify-between p-[2vw] max-md:p-[4vw]">
-              <div class="absolute left-[2vw] z-200 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-                <div
-                  class="rounded-[1.2vw] border border-black/10 bg-white/85 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-400 ease-[cubic-bezier(.45,.85,.34,1.12)] group-hover:opacity-100 group-hover:translate-y-0 ">
-                  <div class="flex items-center justify-between gap-[1vw]">
-                    <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-                    <p class="text40 uppercase text-black/60">6–8 min</p>
+            <div class="size-full relative z-20 flex flex-col justify-between p-[1.6vw] max-md:p-[3.5vw]">
+              <div class="absolute left-[1.2vw] z-200 right-[1.2vw] bottom-[1.2vw] max-md:hidden pointer-events-none">
+                <div class="rounded-[1vw] border border-black/10 bg-white/95 backdrop-blur-md px-[1vw] py-[.8vw] opacity-0 translate-y-[1vw] transition-all duration-400 ease-[cubic-bezier(.45,.85,.34,1.12)] group-hover:opacity-100 group-hover:translate-y-0 shadow-lg">
+                  <div class="flex items-center justify-between gap-[.6vw]">
+                    <p class="text-[.8vw] uppercase tracking-[.18em] font-bold text-black/60 font-mouse-memoirs">Quick details</p>
+                    <p class="text-[.8vw] uppercase text-black/60 font-mouse-memoirs">10–12 min</p>
                   </div>
-                  <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Bun</p>
-                      <p class="text40 uppercase text-black/80">Flaky Wrap</p>
+                  <div class="mt-[.4vw] grid grid-cols-3 gap-[.4vw]">
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Bun</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Brioche</p>
                     </div>
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Patty</p>
-                      <p class="text40 uppercase text-black/80">Veggie</p>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Patty</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Paneer</p>
                     </div>
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Spice</p>
-                      <p class="text40 uppercase text-black/80">Mild</p>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Spice</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Hot</p>
                     </div>
                   </div>
-                  <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]"><span
-                      class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70 transition-all">Calories:
-                      <!-- -->620</span><span
-                      class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70 transition-all">Protein:
-                      <!-- -->17g</span></div>
+                  <div class="mt-[.5vw] flex flex-wrap gap-[.4vw]">
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Calories: 640</span>
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Protein: 28g</span>
+                  </div>
                 </div>
-              </div><a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" data-cursor-hide="true" class="px-[2.4vw] py-[.85vw] max-md:px-[6vw] max-md:py-[2.6vw] rounded-full bg-red text-white hover:bg-black font-mouse-memoirs text-[1.45vw] max-md:text-[4.8vw] uppercase tracking-wider ml-auto transition-all duration-300 flex items-center gap-[.6vw] shadow-lg hover:shadow-2xl hover:scale-105 cursor-pointer will-change-transform group/btn font-bold" aria-label="Buy on Zomato">
-  <span>BUY ON ZOMATO</span>
-  <svg class="w-[1.15vw] h-[1.15vw] max-md:w-[3.8vw] max-md:h-[3.8vw] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-</a>
-              <div
-                class="size-[25vw] pointer-events-none max-md:size-[38vw] mx-auto transition-transform duration-700 will-change-transform group-hover:scale-[1.054]">
-                <img alt="House Of Delicious Tandoori Roll" loading="lazy" width="1000" height="1000" decoding="async" data-nimg="1"
-                  class="h-full w-full object-contain"
-                  style="color:transparent;transition:transform 0.7s cubic-bezier(.5,1.45,.2,1);will-change:transform"
-                  srcSet="/_next/image?url=%2Fburgers%2F4b.png&amp;w=1080&amp;q=75 1x, /_next/image?url=%2Fburgers%2F4b.png&amp;w=2048&amp;q=75 2x"
-                  src="/_next/image?url=%2Fburgers%2F4b.png&amp;w=2048&amp;q=75" /></div>
-              <div class="w-full flex items-end justify-between text40 max-md:text-[5vw]">
-                <p class="text-red text60">House Of Delicious Tandoori Roll</p>
-                <p class="text60 max-md:mr-[2vw]">₹160</p>
+              </div>
+              <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" data-cursor-hide="true" class="px-[1.4vw] py-[.55vw] max-md:px-[3.5vw] max-md:py-[1.6vw] rounded-full bg-red text-white hover:bg-black font-mouse-memoirs text-[1.1vw] max-md:text-[3.6vw] uppercase tracking-wider ml-auto transition-all duration-300 flex items-center gap-[.4vw] shadow-md hover:scale-105 cursor-pointer will-change-transform group/btn font-bold" aria-label="Buy on Zomato">
+                <span>BUY ON ZOMATO</span>
+                <svg class="w-[.9vw] h-[.9vw] max-md:w-[3vw] max-md:h-[3vw] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+              <div class="size-[17vw] pointer-events-none max-md:size-[30vw] max-sm:size-[40vw] mx-auto transition-transform duration-700 will-change-transform group-hover:scale-[1.06]">
+                <img alt="Fiery Paneer Burger" loading="lazy" width="600" height="600" decoding="async" class="h-full w-full object-contain" src="/burgers/4b.png" />
+              </div>
+              <div class="w-full flex items-end justify-between font-mouse-memoirs">
+                <p class="text-red text-[1.4vw] max-md:text-[4.2vw] leading-tight font-bold">Fiery Paneer Burger</p>
+                <p class="text-[1.4vw] max-md:text-[4.2vw] text-black font-bold whitespace-nowrap ml-[.5vw]">₹180</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="opacity-0 w-full">
-          <div
-            class="group h-[35vw] max-md:h-[70vw] w-full rounded-[2vw] overflow-hidden bg-white relative max-md:rounded-[5vw] shrink-0  translate-y-[4vw] transition-all duration-500 ">
-            <div class="absolute w-full left-0 top-1/2 -translate-y-1/2 z-10 pointer-events-none will-change-transform"
-              style="height:6vw;transition:transform 0.44s cubic-bezier(.4,1.6,.7,.95)" aria-hidden="true">
-              <div class="flex w-full h-[3vw] max-md:h-[7vw] transition-all duration-600">
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
+        <div class="menu-card w-full transition-all duration-300" data-category="Pizza and Pasta" style="display: none;">
+          <div class="group h-[32vw] max-md:h-[62vw] max-sm:h-[82vw] w-full rounded-[1.6vw] overflow-hidden bg-white relative max-md:rounded-[3.5vw] shrink-0 transition-all duration-500 shadow-sm hover:shadow-xl">
+            <div class="absolute w-full left-0 top-1/2 -translate-y-1/2 z-10 pointer-events-none will-change-transform" style="height:5vw;transition:transform 0.44s cubic-bezier(.4,1.6,.7,.95)" aria-hidden="true">
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div>
               </div>
-              <div class="flex w-full h-[3vw] max-md:h-[7vw] transition-all duration-600">
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div>
               </div>
             </div>
-            <div class="size-full relative z-20 flex flex-col justify-between p-[2vw] max-md:p-[4vw]">
-              <div class="absolute left-[2vw] z-200 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-                <div
-                  class="rounded-[1.2vw] border border-black/10 bg-white/85 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-400 ease-[cubic-bezier(.45,.85,.34,1.12)] group-hover:opacity-100 group-hover:translate-y-0 ">
-                  <div class="flex items-center justify-between gap-[1vw]">
-                    <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-                    <p class="text40 uppercase text-black/60">6–8 min</p>
+            <div class="size-full relative z-20 flex flex-col justify-between p-[1.6vw] max-md:p-[3.5vw]">
+              <div class="absolute left-[1.2vw] z-200 right-[1.2vw] bottom-[1.2vw] max-md:hidden pointer-events-none">
+                <div class="rounded-[1vw] border border-black/10 bg-white/95 backdrop-blur-md px-[1vw] py-[.8vw] opacity-0 translate-y-[1vw] transition-all duration-400 ease-[cubic-bezier(.45,.85,.34,1.12)] group-hover:opacity-100 group-hover:translate-y-0 shadow-lg">
+                  <div class="flex items-center justify-between gap-[.6vw]">
+                    <p class="text-[.8vw] uppercase tracking-[.18em] font-bold text-black/60 font-mouse-memoirs">Quick details</p>
+                    <p class="text-[.8vw] uppercase text-black/60 font-mouse-memoirs">10–12 min</p>
                   </div>
-                  <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Bun</p>
-                      <p class="text40 uppercase text-black/80">Handmade</p>
+                  <div class="mt-[.4vw] grid grid-cols-3 gap-[.4vw]">
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Bun</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Handmade Dough</p>
                     </div>
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Patty</p>
-                      <p class="text40 uppercase text-black/80">Paneer</p>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Patty</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Paneer</p>
                     </div>
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Spice</p>
-                      <p class="text40 uppercase text-black/80">Medium</p>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Spice</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Mild</p>
                     </div>
                   </div>
-                  <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]"><span
-                      class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70 transition-all">Calories:
-                      <!-- -->870</span><span
-                      class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70 transition-all">Protein:
-                      <!-- -->36g</span></div>
+                  <div class="mt-[.5vw] flex flex-wrap gap-[.4vw]">
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Calories: 720</span>
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Protein: 32g</span>
+                  </div>
                 </div>
-              </div><a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" data-cursor-hide="true" class="px-[2.4vw] py-[.85vw] max-md:px-[6vw] max-md:py-[2.6vw] rounded-full bg-red text-white hover:bg-black font-mouse-memoirs text-[1.45vw] max-md:text-[4.8vw] uppercase tracking-wider ml-auto transition-all duration-300 flex items-center gap-[.6vw] shadow-lg hover:shadow-2xl hover:scale-105 cursor-pointer will-change-transform group/btn font-bold" aria-label="Buy on Zomato">
-  <span>BUY ON ZOMATO</span>
-  <svg class="w-[1.15vw] h-[1.15vw] max-md:w-[3.8vw] max-md:h-[3.8vw] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-</a>
-              <div
-                class="size-[25vw] pointer-events-none max-md:size-[38vw] mx-auto transition-transform duration-700 will-change-transform group-hover:scale-[1.054]">
-                <img alt="Peri Peri Fries" loading="lazy" width="1000" height="1000" decoding="async" data-nimg="1"
-                  class="h-full w-full object-contain"
-                  style="color:transparent;transition:transform 0.7s cubic-bezier(.5,1.45,.2,1);will-change:transform"
-                  srcSet="/_next/image?url=%2Fburgers%2F5b.png&amp;w=1080&amp;q=75 1x, /_next/image?url=%2Fburgers%2F5b.png&amp;w=2048&amp;q=75 2x"
-                  src="/_next/image?url=%2Fburgers%2F5b.png&amp;w=2048&amp;q=75" /></div>
-              <div class="w-full flex items-end justify-between text40 max-md:text-[5vw]">
-                <p class="text-red text60">Peri Peri Fries</p>
-                <p class="text60 max-md:mr-[2vw]">₹120</p>
+              </div>
+              <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" data-cursor-hide="true" class="px-[1.4vw] py-[.55vw] max-md:px-[3.5vw] max-md:py-[1.6vw] rounded-full bg-red text-white hover:bg-black font-mouse-memoirs text-[1.1vw] max-md:text-[3.6vw] uppercase tracking-wider ml-auto transition-all duration-300 flex items-center gap-[.4vw] shadow-md hover:scale-105 cursor-pointer will-change-transform group/btn font-bold" aria-label="Buy on Zomato">
+                <span>BUY ON ZOMATO</span>
+                <svg class="w-[.9vw] h-[.9vw] max-md:w-[3vw] max-md:h-[3vw] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+              <div class="size-[17vw] pointer-events-none max-md:size-[30vw] max-sm:size-[40vw] mx-auto transition-transform duration-700 will-change-transform group-hover:scale-[1.06]">
+                <img alt="Paneer Tikka Pizza" loading="lazy" width="600" height="600" decoding="async" class="h-full w-full object-contain" src="/burgers/1b.png" />
+              </div>
+              <div class="w-full flex items-end justify-between font-mouse-memoirs">
+                <p class="text-red text-[1.4vw] max-md:text-[4.2vw] leading-tight font-bold">Paneer Tikka Pizza</p>
+                <p class="text-[1.4vw] max-md:text-[4.2vw] text-black font-bold whitespace-nowrap ml-[.5vw]">₹220</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="opacity-0 w-full">
-          <div
-            class="group h-[35vw] max-md:h-[70vw] w-full rounded-[2vw] overflow-hidden bg-white relative max-md:rounded-[5vw] shrink-0  translate-y-[4vw] transition-all duration-500 ">
-            <div class="absolute w-full left-0 top-1/2 -translate-y-1/2 z-10 pointer-events-none will-change-transform"
-              style="height:6vw;transition:transform 0.44s cubic-bezier(.4,1.6,.7,.95)" aria-hidden="true">
-              <div class="flex w-full h-[3vw] max-md:h-[7vw] transition-all duration-600">
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
+        <div class="menu-card w-full transition-all duration-300" data-category="Pizza and Pasta" style="display: none;">
+          <div class="group h-[32vw] max-md:h-[62vw] max-sm:h-[82vw] w-full rounded-[1.6vw] overflow-hidden bg-white relative max-md:rounded-[3.5vw] shrink-0 transition-all duration-500 shadow-sm hover:shadow-xl">
+            <div class="absolute w-full left-0 top-1/2 -translate-y-1/2 z-10 pointer-events-none will-change-transform" style="height:5vw;transition:transform 0.44s cubic-bezier(.4,1.6,.7,.95)" aria-hidden="true">
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div>
               </div>
-              <div class="flex w-full h-[3vw] max-md:h-[7vw] transition-all duration-600">
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-white"></div>
-                <div class="h-full w-[8.33%] max-md:w-[8.33%] transition-colors duration-500 bg-red"></div>
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div>
               </div>
             </div>
-            <div class="size-full relative z-20 flex flex-col justify-between p-[2vw] max-md:p-[4vw]">
-              <div class="absolute left-[2vw] z-200 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-                <div
-                  class="rounded-[1.2vw] border border-black/10 bg-white/85 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-400 ease-[cubic-bezier(.45,.85,.34,1.12)] group-hover:opacity-100 group-hover:translate-y-0 ">
-                  <div class="flex items-center justify-between gap-[1vw]">
-                    <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-                    <p class="text40 uppercase text-black/60">6–8 min</p>
+            <div class="size-full relative z-20 flex flex-col justify-between p-[1.6vw] max-md:p-[3.5vw]">
+              <div class="absolute left-[1.2vw] z-200 right-[1.2vw] bottom-[1.2vw] max-md:hidden pointer-events-none">
+                <div class="rounded-[1vw] border border-black/10 bg-white/95 backdrop-blur-md px-[1vw] py-[.8vw] opacity-0 translate-y-[1vw] transition-all duration-400 ease-[cubic-bezier(.45,.85,.34,1.12)] group-hover:opacity-100 group-hover:translate-y-0 shadow-lg">
+                  <div class="flex items-center justify-between gap-[.6vw]">
+                    <p class="text-[.8vw] uppercase tracking-[.18em] font-bold text-black/60 font-mouse-memoirs">Quick details</p>
+                    <p class="text-[.8vw] uppercase text-black/60 font-mouse-memoirs">12–14 min</p>
                   </div>
-                  <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Bun</p>
-                      <p class="text40 uppercase text-black/80">Handmade</p>
+                  <div class="mt-[.4vw] grid grid-cols-3 gap-[.4vw]">
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Bun</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Handmade Dough</p>
                     </div>
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Patty</p>
-                      <p class="text40 uppercase text-black/80">Paneer</p>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Patty</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Paneer</p>
                     </div>
-                    <div
-                      class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw] transition-all duration-300">
-                      <p class="text40 uppercase text-black/60">Spice</p>
-                      <p class="text40 uppercase text-black/80">Mild</p>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Spice</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Hot</p>
                     </div>
                   </div>
-                  <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]"><span
-                      class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70 transition-all">Calories:
-                      <!-- -->830</span><span
-                      class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70 transition-all">Protein:
-                      <!-- -->33g</span></div>
+                  <div class="mt-[.5vw] flex flex-wrap gap-[.4vw]">
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Calories: 810</span>
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Protein: 34g</span>
+                  </div>
                 </div>
-              </div><a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" data-cursor-hide="true" class="px-[2.4vw] py-[.85vw] max-md:px-[6vw] max-md:py-[2.6vw] rounded-full bg-red text-white hover:bg-black font-mouse-memoirs text-[1.45vw] max-md:text-[4.8vw] uppercase tracking-wider ml-auto transition-all duration-300 flex items-center gap-[.6vw] shadow-lg hover:shadow-2xl hover:scale-105 cursor-pointer will-change-transform group/btn font-bold" aria-label="Buy on Zomato">
-  <span>BUY ON ZOMATO</span>
-  <svg class="w-[1.15vw] h-[1.15vw] max-md:w-[3.8vw] max-md:h-[3.8vw] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-</a>
-              <div
-                class="size-[25vw] pointer-events-none max-md:size-[38vw] mx-auto transition-transform duration-700 will-change-transform group-hover:scale-[1.054]">
-                <img alt="Pull Me Up Chocolate Cake" loading="lazy" width="1000" height="1000" decoding="async"
-                  data-nimg="1" class="h-full w-full object-contain"
-                  style="color:transparent;transition:transform 0.7s cubic-bezier(.5,1.45,.2,1);will-change:transform"
-                  srcSet="/_next/image?url=%2Fburgers%2F6b.png&amp;w=1080&amp;q=75 1x, /_next/image?url=%2Fburgers%2F6b.png&amp;w=2048&amp;q=75 2x"
-                  src="/_next/image?url=%2Fburgers%2F6b.png&amp;w=2048&amp;q=75" /></div>
-              <div class="w-full flex items-end justify-between text40 max-md:text-[5vw]">
-                <p class="text-red text60">Pull Me Up Chocolate Cake</p>
-                <p class="text60 max-md:mr-[2vw]">₹180</p>
+              </div>
+              <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" data-cursor-hide="true" class="px-[1.4vw] py-[.55vw] max-md:px-[3.5vw] max-md:py-[1.6vw] rounded-full bg-red text-white hover:bg-black font-mouse-memoirs text-[1.1vw] max-md:text-[3.6vw] uppercase tracking-wider ml-auto transition-all duration-300 flex items-center gap-[.4vw] shadow-md hover:scale-105 cursor-pointer will-change-transform group/btn font-bold" aria-label="Buy on Zomato">
+                <span>BUY ON ZOMATO</span>
+                <svg class="w-[.9vw] h-[.9vw] max-md:w-[3vw] max-md:h-[3vw] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+              <div class="size-[17vw] pointer-events-none max-md:size-[30vw] max-sm:size-[40vw] mx-auto transition-transform duration-700 will-change-transform group-hover:scale-[1.06]">
+                <img alt="Peri Peri Paneer Pizza" loading="lazy" width="600" height="600" decoding="async" class="h-full w-full object-contain" src="/burgers/2b.png" />
+              </div>
+              <div class="w-full flex items-end justify-between font-mouse-memoirs">
+                <p class="text-red text-[1.4vw] max-md:text-[4.2vw] leading-tight font-bold">Peri Peri Paneer Pizza</p>
+                <p class="text-[1.4vw] max-md:text-[4.2vw] text-black font-bold whitespace-nowrap ml-[.5vw]">₹240</p>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="menu-card w-full transition-all duration-300" data-category="Snacks" style="display: none;">
+          <div class="group h-[32vw] max-md:h-[62vw] max-sm:h-[82vw] w-full rounded-[1.6vw] overflow-hidden bg-white relative max-md:rounded-[3.5vw] shrink-0 transition-all duration-500 shadow-sm hover:shadow-xl">
+            <div class="absolute w-full left-0 top-1/2 -translate-y-1/2 z-10 pointer-events-none will-change-transform" style="height:5vw;transition:transform 0.44s cubic-bezier(.4,1.6,.7,.95)" aria-hidden="true">
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div>
+              </div>
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div>
+              </div>
+            </div>
+            <div class="size-full relative z-20 flex flex-col justify-between p-[1.6vw] max-md:p-[3.5vw]">
+              <div class="absolute left-[1.2vw] z-200 right-[1.2vw] bottom-[1.2vw] max-md:hidden pointer-events-none">
+                <div class="rounded-[1vw] border border-black/10 bg-white/95 backdrop-blur-md px-[1vw] py-[.8vw] opacity-0 translate-y-[1vw] transition-all duration-400 ease-[cubic-bezier(.45,.85,.34,1.12)] group-hover:opacity-100 group-hover:translate-y-0 shadow-lg">
+                  <div class="flex items-center justify-between gap-[.6vw]">
+                    <p class="text-[.8vw] uppercase tracking-[.18em] font-bold text-black/60 font-mouse-memoirs">Quick details</p>
+                    <p class="text-[.8vw] uppercase text-black/60 font-mouse-memoirs">12–15 min</p>
+                  </div>
+                  <div class="mt-[.4vw] grid grid-cols-3 gap-[.4vw]">
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Bun</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Handmade Dough</p>
+                    </div>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Patty</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Paneer</p>
+                    </div>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Spice</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Mild</p>
+                    </div>
+                  </div>
+                  <div class="mt-[.5vw] flex flex-wrap gap-[.4vw]">
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Calories: 900</span>
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Protein: 37g</span>
+                  </div>
+                </div>
+              </div>
+              <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" data-cursor-hide="true" class="px-[1.4vw] py-[.55vw] max-md:px-[3.5vw] max-md:py-[1.6vw] rounded-full bg-red text-white hover:bg-black font-mouse-memoirs text-[1.1vw] max-md:text-[3.6vw] uppercase tracking-wider ml-auto transition-all duration-300 flex items-center gap-[.4vw] shadow-md hover:scale-105 cursor-pointer will-change-transform group/btn font-bold" aria-label="Buy on Zomato">
+                <span>BUY ON ZOMATO</span>
+                <svg class="w-[.9vw] h-[.9vw] max-md:w-[3vw] max-md:h-[3vw] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+              <div class="size-[17vw] pointer-events-none max-md:size-[30vw] max-sm:size-[40vw] mx-auto transition-transform duration-700 will-change-transform group-hover:scale-[1.06]">
+                <img alt="Classic Cheese Garlic Bread" loading="lazy" width="600" height="600" decoding="async" class="h-full w-full object-contain" src="/burgers/3b.png" />
+              </div>
+              <div class="w-full flex items-end justify-between font-mouse-memoirs">
+                <p class="text-red text-[1.4vw] max-md:text-[4.2vw] leading-tight font-bold">Classic Cheese Garlic Bread</p>
+                <p class="text-[1.4vw] max-md:text-[4.2vw] text-black font-bold whitespace-nowrap ml-[.5vw]">₹140</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card w-full transition-all duration-300" data-category="Snacks" style="display: none;">
+          <div class="group h-[32vw] max-md:h-[62vw] max-sm:h-[82vw] w-full rounded-[1.6vw] overflow-hidden bg-white relative max-md:rounded-[3.5vw] shrink-0 transition-all duration-500 shadow-sm hover:shadow-xl">
+            <div class="absolute w-full left-0 top-1/2 -translate-y-1/2 z-10 pointer-events-none will-change-transform" style="height:5vw;transition:transform 0.44s cubic-bezier(.4,1.6,.7,.95)" aria-hidden="true">
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div>
+              </div>
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div>
+              </div>
+            </div>
+            <div class="size-full relative z-20 flex flex-col justify-between p-[1.6vw] max-md:p-[3.5vw]">
+              <div class="absolute left-[1.2vw] z-200 right-[1.2vw] bottom-[1.2vw] max-md:hidden pointer-events-none">
+                <div class="rounded-[1vw] border border-black/10 bg-white/95 backdrop-blur-md px-[1vw] py-[.8vw] opacity-0 translate-y-[1vw] transition-all duration-400 ease-[cubic-bezier(.45,.85,.34,1.12)] group-hover:opacity-100 group-hover:translate-y-0 shadow-lg">
+                  <div class="flex items-center justify-between gap-[.6vw]">
+                    <p class="text-[.8vw] uppercase tracking-[.18em] font-bold text-black/60 font-mouse-memoirs">Quick details</p>
+                    <p class="text-[.8vw] uppercase text-black/60 font-mouse-memoirs">12–14 min</p>
+                  </div>
+                  <div class="mt-[.4vw] grid grid-cols-3 gap-[.4vw]">
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Bun</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Handmade Dough</p>
+                    </div>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Patty</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Paneer</p>
+                    </div>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Spice</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Medium</p>
+                    </div>
+                  </div>
+                  <div class="mt-[.5vw] flex flex-wrap gap-[.4vw]">
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Calories: 870</span>
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Protein: 36g</span>
+                  </div>
+                </div>
+              </div>
+              <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" data-cursor-hide="true" class="px-[1.4vw] py-[.55vw] max-md:px-[3.5vw] max-md:py-[1.6vw] rounded-full bg-red text-white hover:bg-black font-mouse-memoirs text-[1.1vw] max-md:text-[3.6vw] uppercase tracking-wider ml-auto transition-all duration-300 flex items-center gap-[.4vw] shadow-md hover:scale-105 cursor-pointer will-change-transform group/btn font-bold" aria-label="Buy on Zomato">
+                <span>BUY ON ZOMATO</span>
+                <svg class="w-[.9vw] h-[.9vw] max-md:w-[3vw] max-md:h-[3vw] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+              <div class="size-[17vw] pointer-events-none max-md:size-[30vw] max-sm:size-[40vw] mx-auto transition-transform duration-700 will-change-transform group-hover:scale-[1.06]">
+                <img alt="Peri Peri Fries" loading="lazy" width="600" height="600" decoding="async" class="h-full w-full object-contain" src="/burgers/5b.png" />
+              </div>
+              <div class="w-full flex items-end justify-between font-mouse-memoirs">
+                <p class="text-red text-[1.4vw] max-md:text-[4.2vw] leading-tight font-bold">Peri Peri Fries</p>
+                <p class="text-[1.4vw] max-md:text-[4.2vw] text-black font-bold whitespace-nowrap ml-[.5vw]">₹120</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card w-full transition-all duration-300" data-category="Combos" style="display: none;">
+          <div class="group h-[32vw] max-md:h-[62vw] max-sm:h-[82vw] w-full rounded-[1.6vw] overflow-hidden bg-white relative max-md:rounded-[3.5vw] shrink-0 transition-all duration-500 shadow-sm hover:shadow-xl">
+            <div class="absolute w-full left-0 top-1/2 -translate-y-1/2 z-10 pointer-events-none will-change-transform" style="height:5vw;transition:transform 0.44s cubic-bezier(.4,1.6,.7,.95)" aria-hidden="true">
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div>
+              </div>
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div>
+              </div>
+            </div>
+            <div class="size-full relative z-20 flex flex-col justify-between p-[1.6vw] max-md:p-[3.5vw]">
+              <div class="absolute left-[1.2vw] z-200 right-[1.2vw] bottom-[1.2vw] max-md:hidden pointer-events-none">
+                <div class="rounded-[1vw] border border-black/10 bg-white/95 backdrop-blur-md px-[1vw] py-[.8vw] opacity-0 translate-y-[1vw] transition-all duration-400 ease-[cubic-bezier(.45,.85,.34,1.12)] group-hover:opacity-100 group-hover:translate-y-0 shadow-lg">
+                  <div class="flex items-center justify-between gap-[.6vw]">
+                    <p class="text-[.8vw] uppercase tracking-[.18em] font-bold text-black/60 font-mouse-memoirs">Quick details</p>
+                    <p class="text-[.8vw] uppercase text-black/60 font-mouse-memoirs">10–12 min</p>
+                  </div>
+                  <div class="mt-[.4vw] grid grid-cols-3 gap-[.4vw]">
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Bun</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Sesame</p>
+                    </div>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Patty</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Veggie</p>
+                    </div>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Spice</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Mild</p>
+                    </div>
+                  </div>
+                  <div class="mt-[.5vw] flex flex-wrap gap-[.4vw]">
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Calories: 620</span>
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Protein: 17g</span>
+                  </div>
+                </div>
+              </div>
+              <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" data-cursor-hide="true" class="px-[1.4vw] py-[.55vw] max-md:px-[3.5vw] max-md:py-[1.6vw] rounded-full bg-red text-white hover:bg-black font-mouse-memoirs text-[1.1vw] max-md:text-[3.6vw] uppercase tracking-wider ml-auto transition-all duration-300 flex items-center gap-[.4vw] shadow-md hover:scale-105 cursor-pointer will-change-transform group/btn font-bold" aria-label="Buy on Zomato">
+                <span>BUY ON ZOMATO</span>
+                <svg class="w-[.9vw] h-[.9vw] max-md:w-[3vw] max-md:h-[3vw] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+              <div class="size-[17vw] pointer-events-none max-md:size-[30vw] max-sm:size-[40vw] mx-auto transition-transform duration-700 will-change-transform group-hover:scale-[1.06]">
+                <img alt="House Of Delicious Tandoori Roll" loading="lazy" width="600" height="600" decoding="async" class="h-full w-full object-contain" src="/burgers/4b.png" />
+              </div>
+              <div class="w-full flex items-end justify-between font-mouse-memoirs">
+                <p class="text-red text-[1.4vw] max-md:text-[4.2vw] leading-tight font-bold">House Of Delicious Tandoori Roll</p>
+                <p class="text-[1.4vw] max-md:text-[4.2vw] text-black font-bold whitespace-nowrap ml-[.5vw]">₹160</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-card w-full transition-all duration-300" data-category="Desserts" style="display: none;">
+          <div class="group h-[32vw] max-md:h-[62vw] max-sm:h-[82vw] w-full rounded-[1.6vw] overflow-hidden bg-white relative max-md:rounded-[3.5vw] shrink-0 transition-all duration-500 shadow-sm hover:shadow-xl">
+            <div class="absolute w-full left-0 top-1/2 -translate-y-1/2 z-10 pointer-events-none will-change-transform" style="height:5vw;transition:transform 0.44s cubic-bezier(.4,1.6,.7,.95)" aria-hidden="true">
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div>
+              </div>
+              <div class="flex w-full h-[2.5vw] max-md:h-[5vw] transition-all duration-600">
+                <div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div>
+              </div>
+            </div>
+            <div class="size-full relative z-20 flex flex-col justify-between p-[1.6vw] max-md:p-[3.5vw]">
+              <div class="absolute left-[1.2vw] z-200 right-[1.2vw] bottom-[1.2vw] max-md:hidden pointer-events-none">
+                <div class="rounded-[1vw] border border-black/10 bg-white/95 backdrop-blur-md px-[1vw] py-[.8vw] opacity-0 translate-y-[1vw] transition-all duration-400 ease-[cubic-bezier(.45,.85,.34,1.12)] group-hover:opacity-100 group-hover:translate-y-0 shadow-lg">
+                  <div class="flex items-center justify-between gap-[.6vw]">
+                    <p class="text-[.8vw] uppercase tracking-[.18em] font-bold text-black/60 font-mouse-memoirs">Quick details</p>
+                    <p class="text-[.8vw] uppercase text-black/60 font-mouse-memoirs">12–14 min</p>
+                  </div>
+                  <div class="mt-[.4vw] grid grid-cols-3 gap-[.4vw]">
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Bun</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Handmade Dough</p>
+                    </div>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Patty</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Paneer</p>
+                    </div>
+                    <div class="rounded-[.7vw] bg-black/5 border border-black/10 px-[.6vw] py-[.4vw]">
+                      <p class="text-[.7vw] uppercase text-black/50 font-mouse-memoirs">Spice</p>
+                      <p class="text-[.85vw] uppercase text-black/80 font-mouse-memoirs font-bold">Mild</p>
+                    </div>
+                  </div>
+                  <div class="mt-[.5vw] flex flex-wrap gap-[.4vw]">
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Calories: 830</span>
+                    <span class="text-[.75vw] uppercase px-[.6vw] py-[.25vw] rounded-full bg-beige border border-black/10 text-black/70 font-mouse-memoirs">Protein: 33g</span>
+                  </div>
+                </div>
+              </div>
+              <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" data-cursor-hide="true" class="px-[1.4vw] py-[.55vw] max-md:px-[3.5vw] max-md:py-[1.6vw] rounded-full bg-red text-white hover:bg-black font-mouse-memoirs text-[1.1vw] max-md:text-[3.6vw] uppercase tracking-wider ml-auto transition-all duration-300 flex items-center gap-[.4vw] shadow-md hover:scale-105 cursor-pointer will-change-transform group/btn font-bold" aria-label="Buy on Zomato">
+                <span>BUY ON ZOMATO</span>
+                <svg class="w-[.9vw] h-[.9vw] max-md:w-[3vw] max-md:h-[3vw] group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+              </a>
+              <div class="size-[17vw] pointer-events-none max-md:size-[30vw] max-sm:size-[40vw] mx-auto transition-transform duration-700 will-change-transform group-hover:scale-[1.06]">
+                <img alt="Pull Me Up Chocolate Cake" loading="lazy" width="600" height="600" decoding="async" class="h-full w-full object-contain" src="/burgers/6b.png" />
+              </div>
+              <div class="w-full flex items-end justify-between font-mouse-memoirs">
+                <p class="text-red text-[1.4vw] max-md:text-[4.2vw] leading-tight font-bold">Pull Me Up Chocolate Cake</p>
+                <p class="text-[1.4vw] max-md:text-[4.2vw] text-black font-bold whitespace-nowrap ml-[.5vw]">₹180</p>
+              </div>
+            </div>
+          </div>
+        </div>
           </div>
         </div>
       </div>
-      </div>
+
+      <!-- Category Filter Script -->
+      <script>
+        function selectCategory(cat, btn) {
+          document.querySelectorAll('.cat-btn').forEach(function(b) {
+            b.classList.remove('bg-red/10', 'text-red', 'border-l-4', 'border-red', 'font-bold');
+            b.classList.add('text-black/80');
+            var span = b.querySelector('span:last-child');
+            if (span) span.className = 'text-[1vw] opacity-60 group-hover:opacity-100';
+          });
+          btn.classList.add('bg-red/10', 'text-red', 'border-l-4', 'border-red', 'font-bold');
+          btn.classList.remove('text-black/80');
+          var activeSpan = btn.querySelector('span:last-child');
+          if (activeSpan) activeSpan.className = 'text-[1vw] opacity-80';
+
+          filterCards(cat);
+        }
+
+        function selectCategoryMobile(cat, btn) {
+          document.querySelectorAll('.mobile-cat-btn').forEach(function(b) {
+            b.className = 'mobile-cat-btn shrink-0 px-[4.2vw] py-[2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider border flex items-center gap-[1.2vw] cursor-pointer bg-white/90 text-black border-black/15 shadow-xs';
+          });
+          btn.className = 'mobile-cat-btn shrink-0 px-[4.2vw] py-[2vw] rounded-full font-mouse-memoirs text-[3.8vw] uppercase tracking-wider border flex items-center gap-[1.2vw] cursor-pointer bg-red text-white border-red shadow-md font-bold';
+
+          filterCards(cat);
+        }
+
+        function filterCards(cat) {
+          var count = 0;
+          document.querySelectorAll('.menu-card').forEach(function(card) {
+            var cardCat = card.getAttribute('data-category');
+            if (cat === 'All' || cardCat === cat) {
+              card.style.display = 'block';
+              count++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          var mEl = document.getElementById('items-count-mobile');
+          var dEl = document.getElementById('items-count-desktop');
+          if (mEl) mEl.textContent = count + ' items';
+          if (dEl) dEl.textContent = count + ' items';
+
+          if (count === 0) {
+            window.open('https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order', '_blank');
+          }
+        }
+      </script>
     </section>
     <div class="-mt-[18vw]">
       <section id="cta" class="h-fit w-full pt-[18vw] max-md:pt-[12vw] overflow-clip relative bg-beige">
