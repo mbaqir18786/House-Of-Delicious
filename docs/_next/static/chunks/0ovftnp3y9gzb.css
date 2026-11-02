@@ -4502,3 +4502,9 @@ nav a[href="/"].font-modak {
         line-height: 1 !important;
     }
 }
+
+
+/* Ensure Fixed Navbar is always on top of all page content */
+nav.fixed {
+    z-index: 1000 !important;
+}
