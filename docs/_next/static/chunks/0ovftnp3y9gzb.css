@@ -4549,3 +4549,12 @@ nav.fixed {
     margin: 14px auto !important;
   }
 }
+
+
+/* Permanently Hide Concept Website Notice Modal & Backdrop */
+div[aria-describedby*="-desc"],
+div[role="dialog"][aria-describedby*="-desc"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
