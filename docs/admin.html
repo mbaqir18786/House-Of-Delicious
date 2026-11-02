@@ -209,6 +209,17 @@
               <p class="text-[11px] text-neutral-400 mt-1">Or paste image URL below:</p>
               <input type="text" id="foodImageUrl" oninput="updateLivePreview()" placeholder="https://... or /burgers/1b.png"
                 class="w-full mt-1 px-3 py-1.5 rounded-lg border border-neutral-200 text-xs text-neutral-600 focus:outline-none focus:ring-1 focus:ring-[#f91814]" />
+              <div class="mt-2.5 flex items-center gap-4 bg-neutral-100/70 p-2.5 rounded-xl border border-neutral-200">
+                <span class="text-xs font-bold text-neutral-700">Display Style:</span>
+                <label class="flex items-center gap-1.5 text-xs font-semibold text-neutral-800 cursor-pointer">
+                  <input type="radio" name="imageFit" value="cover" checked onchange="updateLivePreview()" />
+                  <span>Full Photo (Best for camera photos)</span>
+                </label>
+                <label class="flex items-center gap-1.5 text-xs font-semibold text-neutral-800 cursor-pointer">
+                  <input type="radio" name="imageFit" value="contain" onchange="updateLivePreview()" />
+                  <span>Cutout (For PNGs)</span>
+                </label>
+              </div>
             </div>
 
             <!-- Quick Details: Prep time, Bun, Patty -->
@@ -687,6 +698,9 @@
       document.getElementById('foodCategory').value = item.cat;
       document.getElementById('foodPrice').value = item.price;
       document.getElementById('foodImageUrl').value = item.image || '';
+      const fitVal = item.imageFit || (item.image?.includes('/burgers/') ? 'contain' : 'cover');
+      const radio = document.querySelector('input[name="imageFit"][value="' + fitVal + '"]');
+      if (radio) radio.checked = true;
       document.getElementById('foodOrderUrl').value = item.orderUrl || 'https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order';
 
       document.getElementById('foodPrepTime').value = item.quick?.time || '8–10 MIN';
@@ -721,6 +735,7 @@
       
       const image = document.getElementById('foodImageUrl').value.trim() || '/burgers/1b.png';
       const orderUrl = document.getElementById('foodOrderUrl').value.trim() || 'https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order';
+      const imageFit = document.querySelector('input[name="imageFit"]:checked')?.value || (image.includes('/burgers/') ? 'contain' : 'cover');
 
       const itemPayload = {
         id: editId || ('item_' + Date.now()),
@@ -729,6 +744,7 @@
         price,
         image,
         orderUrl,
+        imageFit,
         detail: `${document.getElementById('foodBun').value.trim() || 'Brioche'} · ${document.getElementById('foodPatty').value.trim() || 'Patty'}`,
         quick: {
           bun: document.getElementById('foodBun').value.trim() || 'Brioche',
@@ -781,7 +797,14 @@
 
       document.getElementById('previewName').innerText = name;
       document.getElementById('previewPrice').innerText = price.startsWith('₹') ? price : ('₹' + price);
-      document.getElementById('previewImage').src = img;
+      const prevImg = document.getElementById('previewImage');
+      prevImg.src = img;
+      const fit = document.querySelector('input[name="imageFit"]:checked')?.value || (img.includes('/burgers/') ? 'contain' : 'cover');
+      if (fit === 'cover') {
+        prevImg.className = 'w-56 h-48 object-cover rounded-2xl shadow-sm border border-neutral-200 transition-transform duration-300';
+      } else {
+        prevImg.className = 'w-48 h-48 object-contain transition-transform duration-300';
+      }
 
       document.getElementById('previewPrepTime').innerText = prepTime;
       document.getElementById('previewBun').innerText = bun;

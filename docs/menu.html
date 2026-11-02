@@ -527,7 +527,7 @@
                 '</a>' +
                 '</div>' +
                 '<div class="menu-img-wrap mx-auto relative flex items-center justify-center">' +
-                '<img src="' + (item.image || '/burgers/1b.png') + '" alt="' + item.name + '" class="size-full object-contain drop-shadow-2xl transition-transform duration-500 group-hover:scale-110" />' +
+                '<img src="' + (item.image || '/burgers/1b.png') + '" alt="' + item.name + '" class="size-full transition-transform duration-500 group-hover:scale-105 " + (item.imageFit === "contain" || (item.image && item.image.indexOf("/burgers/") !== -1) ? "img-contain" : "img-cover") />' +
                 '</div>' +
                 '<div class="menu-bottom-row w-full flex items-end justify-between border-t border-transparent">' +
                 '<h3 class="menu-item-name font-mouse-memoirs uppercase truncate">' + item.name + '</h3>' +

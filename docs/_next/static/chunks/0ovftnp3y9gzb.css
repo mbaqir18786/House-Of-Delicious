@@ -4508,3 +4508,44 @@ nav a[href="/"].font-modak {
 nav.fixed {
     z-index: 1000 !important;
 }
+
+
+/* Responsive & Crisp Food Image Sizing for Real Photos and Cutouts */
+.menu-img-wrap {
+  width: 90% !important;
+  max-width: 270px !important;
+  height: 230px !important;
+  max-height: 230px !important;
+  margin: 12px auto !important;
+  border-radius: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+.menu-img-wrap img {
+  width: 100% !important;
+  height: 100% !important;
+  transition: transform 0.4s ease !important;
+}
+.menu-img-wrap img:not([src*="/burgers/"]):not(.img-contain) {
+  object-fit: cover !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+.menu-img-wrap img[src*="/burgers/"],
+.menu-img-wrap img.img-contain {
+  object-fit: contain !important;
+  border-radius: 0 !important;
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.18)) !important;
+}
+
+@media (max-width: 767px) {
+  .menu-img-wrap {
+    width: 260px !important;
+    height: 210px !important;
+    max-width: 80vw !important;
+    max-height: 80vw !important;
+    margin: 14px auto !important;
+  }
+}
