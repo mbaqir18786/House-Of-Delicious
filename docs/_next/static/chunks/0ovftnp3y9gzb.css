@@ -4513,9 +4513,9 @@ nav.fixed {
 /* Responsive & Crisp Food Image Sizing for Real Photos and Cutouts */
 .menu-img-wrap {
   width: 90% !important;
-  max-width: 270px !important;
-  height: 230px !important;
-  max-height: 230px !important;
+  max-width: 330px !important;
+  height: 330px !important;
+  max-height: 330px !important;
   margin: 12px auto !important;
   border-radius: 20px !important;
   display: flex !important;
