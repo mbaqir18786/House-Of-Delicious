@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HOD Admin | Menu Management Dashboard</title>
+  <link rel="icon" href="/favicon.ico" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/_next/static/chunks/0ovftnp3y9gzb.css" />
+  <!-- Firebase SDKs (Compat for static single file reliability) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <style>
+    @font-face {
+      font-family: 'Modak';
+      src: url('/_next/static/media/1c549cf76d17aa84-s.p.0duk76ik6drf0.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Mouse Memoirs';
+      src: url('/_next/static/media/e24507cc2fd99222-s.p.116v.fn8s2.9a.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+    }
+    .font-modak { font-family: 'Modak', cursive, sans-serif; }
+    .font-mouse { font-family: 'Mouse Memoirs', sans-serif; }
+    
+    /* Exact Live Card Preview Styles matching HOD website */
+    .preview-card {
+      position: relative;
+      background: #ffffff;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+    .preview-checkers {
+      position: absolute;
+      width: 100%;
+      height: 44px;
+      top: 48%;
+      transform: translateY(-50%);
+      background-image: url('/img-webp/menu-red-white.webp');
+      background-repeat: repeat-x;
+      background-size: auto 100%;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .preview-details-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(8px);
+      z-index: 20;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-[#f5e3cd] text-[#111111] min-h-screen font-sans flex flex-col">
+
+  <!-- AUTH OVERLAY -->
+  <div id="authOverlay" class="fixed inset-0 z-50 bg-[#111111]/90 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl text-center border-4 border-[#f91814]">
+      <h1 class="font-modak text-3xl text-[#f91814] mb-2 tracking-wide">House Of Delicious</h1>
+      <p class="font-mouse text-xl text-neutral-600 mb-6 uppercase tracking-wider">Admin Portal Access</p>
+      
+      <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-left font-bold text-xs uppercase tracking-wider text-neutral-700 mb-1">Enter Admin PIN / Password</label>
+          <input type="password" id="adminPin" placeholder="Enter PIN (Default: hod2026)" required
+            class="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-[#f91814] text-lg font-bold text-center tracking-widest" />
+        </div>
+        <p id="authError" class="text-red-600 text-sm hidden font-bold">Incorrect PIN. Please try again.</p>
+        <button type="submit" 
+          class="w-full py-3.5 bg-[#f91814] hover:bg-[#d9120e] text-white font-mouse text-2xl uppercase tracking-wider rounded-xl transition duration-200 shadow-lg">
+          Unlock Dashboard
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MAIN ADMIN DASHBOARD -->
+  <div id="adminApp" class="hidden flex-1 flex flex-col">
+    <!-- TOP NAVIGATION -->
+    <header class="bg-white border-b border-black/10 sticky top-0 z-40 px-6 py-4 flex items-center justify-between shadow-sm">
+      <div class="flex items-center gap-4">
+        <a href="/menu" target="_blank" title="View Live Menu" class="hover:scale-105 transition">
+          <span class="font-modak text-3xl text-[#f91814]">HOD</span>
+        </a>
+        <div>
+          <h2 class="font-modak text-xl text-black leading-none">Menu Management Dashboard</h2>
+          <p class="text-xs text-neutral-500 font-medium">Create, Edit & Delete Dishes in Real-Time</p>
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-3">
+        <button onclick="openTabModal()" class="px-4 py-2 bg-neutral-900 hover:bg-black text-white font-bold text-sm rounded-xl transition flex items-center gap-1.5 shadow-sm">
+          <span>🏷️</span> Manage Tabs
+        </button>
+        <button onclick="openFoodModal()" class="px-4 py-2 bg-[#f91814] hover:bg-[#d9120e] text-white font-bold text-sm rounded-xl transition flex items-center gap-1.5 shadow-sm">
+          <span>➕</span> Add New Food
+        </button>
+        <button onclick="openSyncModal()" class="px-3.5 py-2 bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm rounded-xl transition" title="Firebase Cloud Sync">
+          <span>☁️</span> Cloud Sync
+        </button>
+        <button onclick="logout()" class="px-3 py-2 bg-neutral-200 hover:bg-neutral-300 text-neutral-700 font-bold text-sm rounded-xl transition" title="Lock Dashboard">
+          🔒
+        </button>
+      </div>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-6 space-y-6">
+
+      <!-- QUICK STATS & TABS FILTER -->
+      <div class="bg-white rounded-3xl p-6 shadow-sm border border-black/5 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h3 class="font-mouse text-2xl uppercase tracking-wider text-neutral-800">Categories / Tabs</h3>
+          <p class="text-xs text-neutral-500">Filter list by clicking any tab below</p>
+        </div>
+        
+        <!-- Category Pill Buttons -->
+        <div id="categoryPillList" class="flex flex-wrap items-center gap-2">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- FOOD ITEMS GRID / LIST -->
+      <div class="bg-white rounded-3xl p-6 shadow-sm border border-black/5">
+        <div class="flex items-center justify-between mb-6 pb-4 border-b border-neutral-100">
+          <div>
+            <h3 id="currentCategoryTitle" class="font-modak text-2xl text-neutral-900">All Items</h3>
+            <p id="itemsCountSubtitle" class="text-xs text-neutral-500 font-medium">0 dishes registered</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="text" id="searchInput" oninput="renderItemsGrid()" placeholder="Search dishes..."
+              class="px-4 py-2 border border-neutral-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#f91814] w-48 md:w-64" />
+          </div>
+        </div>
+
+        <!-- ITEMS CONTAINER -->
+        <div id="foodItemsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Dynamically populated or empty state -->
+        </div>
+      </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-black/5 py-4 px-6 text-center text-xs text-neutral-500 font-medium">
+      House Of Delicious Admin Dashboard &bull; Live menu sync active
+    </footer>
+  </div>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- 1. FOOD ITEM ADD / EDIT MODAL -->
+  <div id="foodModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-4xl w-full p-6 md:p-8 shadow-2xl border border-neutral-200 my-8 relative">
+      <button onclick="closeFoodModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-black text-2xl font-bold w-10 h-10 rounded-full hover:bg-neutral-100 flex items-center justify-center">
+        &times;
+      </button>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- FORM FIELDS (7 COLS) -->
+        <div class="lg:col-span-7 space-y-4">
+          <h3 id="foodModalTitle" class="font-modak text-2xl text-[#f91814]">Add New Food Item</h3>
+          
+          <form id="foodItemForm" onsubmit="saveFoodItem(event)" class="space-y-4">
+            <input type="hidden" id="editFoodId" value="" />
+
+            <!-- Dish Name -->
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-neutral-700 mb-1">Dish Name *</label>
+              <input type="text" id="foodName" required oninput="updateLivePreview()" placeholder="e.g. HOD Signature Smashed Burger"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-[#f91814] text-sm font-semibold" />
+            </div>
+
+            <!-- Category & Price in 1 row -->
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-neutral-700 mb-1">Category / Tab *</label>
+                <select id="foodCategory" required onchange="updateLivePreview()"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-[#f91814] text-sm font-semibold bg-white">
+                  <!-- Populated from categories list -->
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-neutral-700 mb-1">Price (₹) *</label>
+                <input type="text" id="foodPrice" required oninput="updateLivePreview()" placeholder="e.g. ₹150"
+                  class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-[#f91814] text-sm font-semibold" />
+              </div>
+            </div>
+
+            <!-- Image Input (File Upload OR URL) -->
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-neutral-700 mb-1">Food Photo *</label>
+              <div class="flex gap-2">
+                <input type="file" id="foodImageFile" accept="image/*" onchange="handleImageFileUpload(event)"
+                  class="text-xs text-neutral-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-neutral-100 file:text-neutral-700 hover:file:bg-neutral-200 cursor-pointer w-full" />
+              </div>
+              <p class="text-[11px] text-neutral-400 mt-1">Or paste image URL below:</p>
+              <input type="text" id="foodImageUrl" oninput="updateLivePreview()" placeholder="https://... or /burgers/1b.png"
+                class="w-full mt-1 px-3 py-1.5 rounded-lg border border-neutral-200 text-xs text-neutral-600 focus:outline-none focus:ring-1 focus:ring-[#f91814]" />
+            </div>
+
+            <!-- Quick Details: Prep time, Bun, Patty -->
+            <div class="p-4 bg-neutral-50 rounded-2xl border border-neutral-200 space-y-3">
+              <span class="text-xs font-bold uppercase tracking-wider text-neutral-800 block">Quick Details (Hover / Specs)</span>
+              
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">Prep Time</label>
+                  <input type="text" id="foodPrepTime" oninput="updateLivePreview()" placeholder="8–10 MIN"
+                    class="w-full px-2.5 py-1.5 rounded-lg border border-neutral-300 text-xs font-medium" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">Bun</label>
+                  <input type="text" id="foodBun" oninput="updateLivePreview()" placeholder="Brioche"
+                    class="w-full px-2.5 py-1.5 rounded-lg border border-neutral-300 text-xs font-medium" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">Patty</label>
+                  <input type="text" id="foodPatty" oninput="updateLivePreview()" placeholder="Veggie Smash"
+                    class="w-full px-2.5 py-1.5 rounded-lg border border-neutral-300 text-xs font-medium" />
+                </div>
+              </div>
+
+              <!-- Spice, Calories, Protein -->
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">Spice Level</label>
+                  <select id="foodSpice" onchange="updateLivePreview()" class="w-full px-2.5 py-1.5 rounded-lg border border-neutral-300 text-xs font-medium bg-white">
+                    <option value="Mild">Mild</option>
+                    <option value="Medium" selected>Medium</option>
+                    <option value="High">High</option>
+                    <option value="Fiery">Fiery</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">Calories</label>
+                  <input type="text" id="foodCalories" oninput="updateLivePreview()" placeholder="650"
+                    class="w-full px-2.5 py-1.5 rounded-lg border border-neutral-300 text-xs font-medium" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">Protein</label>
+                  <input type="text" id="foodProtein" oninput="updateLivePreview()" placeholder="22g"
+                    class="w-full px-2.5 py-1.5 rounded-lg border border-neutral-300 text-xs font-medium" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Order Now Link -->
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-neutral-700 mb-1">Order Link (Zomato / Direct)</label>
+              <input type="text" id="foodOrderUrl" placeholder="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order"
+                class="w-full px-3 py-2 rounded-xl border border-neutral-300 text-xs text-neutral-600 focus:outline-none focus:ring-1 focus:ring-[#f91814]" />
+            </div>
+
+            <div class="flex items-center justify-end gap-3 pt-3">
+              <button type="button" onclick="closeFoodModal()" class="px-5 py-2.5 rounded-xl border border-neutral-300 font-bold text-sm hover:bg-neutral-100 transition">
+                Cancel
+              </button>
+              <button type="submit" class="px-6 py-2.5 rounded-xl bg-[#f91814] hover:bg-[#d9120e] text-white font-bold text-sm shadow-md transition">
+                Save Food Item
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- LIVE PREVIEW (5 COLS) -->
+        <div class="lg:col-span-5 flex flex-col items-center justify-center bg-neutral-100 p-6 rounded-3xl border border-neutral-200">
+          <div class="w-full flex items-center justify-between mb-4">
+            <span class="text-xs font-bold uppercase tracking-wider text-neutral-500">Live Card Preview</span>
+            <div class="flex items-center gap-1.5">
+              <button type="button" onclick="setPreviewMode('front')" id="btnPreviewFront" class="px-2.5 py-1 rounded-md text-xs font-bold bg-[#f91814] text-white">Front</button>
+              <button type="button" onclick="setPreviewMode('details')" id="btnPreviewDetails" class="px-2.5 py-1 rounded-md text-xs font-bold bg-neutral-200 text-neutral-700">Hover Info</button>
+            </div>
+          </div>
+
+          <!-- EXACT CARD PREVIEW CONTAINER -->
+          <div class="preview-card" id="cardPreviewContainer">
+            <!-- Checkers stripe -->
+            <div class="preview-checkers"></div>
+
+            <!-- Front Card Inner Content -->
+            <div class="p-6 relative z-10 flex flex-col justify-between min-h-[440px]">
+              <!-- Order Now Pill -->
+              <div class="flex justify-end">
+                <span class="bg-[#f91814] text-white text-[13px] font-bold px-4 py-1.5 rounded-full flex items-center gap-1 shadow-sm">
+                  ORDER NOW ↗
+                </span>
+              </div>
+
+              <!-- Dish Photo -->
+              <div class="my-auto py-2 flex items-center justify-center">
+                <img id="previewImage" src="/burgers/1b.png" alt="Food preview" class="w-48 h-48 object-contain transition-transform duration-300" />
+              </div>
+
+              <!-- Bottom Row: Title & Price -->
+              <div class="flex items-end justify-between pt-3 border-t border-transparent">
+                <h4 id="previewName" class="font-mouse text-3xl font-bold uppercase leading-none text-[#f91814] max-w-[75%]">
+                  HOD Signature Smashed Burger
+                </h4>
+                <span id="previewPrice" class="font-mouse text-3xl font-bold text-neutral-900 leading-none whitespace-nowrap">
+                  ₹150
+                </span>
+              </div>
+            </div>
+
+            <!-- Hover / Quick Details View -->
+            <div id="previewDetailsOverlay" class="preview-details-overlay hidden">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="font-mouse text-xl uppercase font-bold text-neutral-800">QUICK DETAILS</span>
+                  <span id="previewPrepTime" class="font-mouse text-lg text-neutral-600 font-bold">8–10 MIN</span>
+                </div>
+
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                  <div class="bg-neutral-100 p-2.5 rounded-xl text-center">
+                    <span class="block font-mouse text-sm text-neutral-500 uppercase">BUN</span>
+                    <span id="previewBun" class="font-mouse text-lg font-bold text-neutral-900 leading-none">Brioche</span>
+                  </div>
+                  <div class="bg-neutral-100 p-2.5 rounded-xl text-center">
+                    <span class="block font-mouse text-sm text-neutral-500 uppercase">PATTY</span>
+                    <span id="previewPatty" class="font-mouse text-lg font-bold text-neutral-900 leading-none">Veggie Smash</span>
+                  </div>
+                  <div class="bg-neutral-100 p-2.5 rounded-xl text-center">
+                    <span class="block font-mouse text-sm text-neutral-500 uppercase">SPICE</span>
+                    <span id="previewSpice" class="font-mouse text-lg font-bold text-neutral-900 leading-none">Medium</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <span id="previewCalories" class="font-mouse text-sm font-bold bg-[#f5e3cd] text-neutral-800 px-3 py-1.5 rounded-full">
+                    CALORIES: 650
+                  </span>
+                  <span id="previewProtein" class="font-mouse text-sm font-bold bg-[#f5e3cd] text-neutral-800 px-3 py-1.5 rounded-full">
+                    PROTEIN: 22G
+                  </span>
+                </div>
+              </div>
+
+              <div class="pt-3 border-t border-neutral-200">
+                <span class="text-xs text-neutral-500 font-medium">Exact styling as visitors see on website</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MANAGE TABS / CATEGORIES MODAL -->
+  <div id="tabModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-neutral-200 relative">
+      <button onclick="closeTabModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-black text-2xl font-bold w-8 h-8 rounded-full flex items-center justify-center">
+        &times;
+      </button>
+
+      <h3 class="font-modak text-2xl text-[#f91814] mb-1">Manage Categories / Tabs</h3>
+      <p class="text-xs text-neutral-500 mb-4">Create, view, or remove category tabs for your menu.</p>
+
+      <!-- Add Tab Form -->
+      <form onsubmit="handleCreateTab(event)" class="flex gap-2 mb-4">
+        <input type="text" id="newCategoryInput" required placeholder="e.g. Combos or Drinks"
+          class="flex-1 px-3.5 py-2 rounded-xl border border-neutral-300 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#f91814]" />
+        <button type="submit" class="px-4 py-2 bg-[#f91814] hover:bg-[#d9120e] text-white font-bold text-sm rounded-xl transition">
+          + Add Tab
+        </button>
+      </form>
+
+      <!-- List of Existing Tabs -->
+      <div class="border border-neutral-200 rounded-2xl p-3 max-h-60 overflow-y-auto space-y-2" id="manageTabList">
+        <!-- Dynamically rendered -->
+      </div>
+
+      <div class="mt-4 pt-3 border-t border-neutral-100 flex justify-end">
+        <button type="button" onclick="closeTabModal()" class="px-5 py-2 rounded-xl bg-neutral-900 text-white font-bold text-sm">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. FIREBASE SYNC & BACKUP MODAL -->
+  <div id="syncModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-neutral-200 relative">
+      <button onclick="closeSyncModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-black text-2xl font-bold w-8 h-8 rounded-full flex items-center justify-center">
+        &times;
+      </button>
+
+      <h3 class="font-modak text-2xl text-[#f91814] mb-1">Cloud Sync & Data Backup</h3>
+      <p class="text-xs text-neutral-500 mb-4">Connect Firebase for multi-device real-time sync, or backup your menu.</p>
+
+      <!-- Firebase Credentials Form -->
+      <div class="space-y-3 p-4 bg-neutral-50 rounded-2xl border border-neutral-200 mb-4">
+        <span class="text-xs font-bold uppercase tracking-wider text-neutral-700 block">Firebase Firestore Settings</span>
+        <div>
+          <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">API Key</label>
+          <input type="text" id="fbApiKey" placeholder="AIzaSy..." class="w-full px-3 py-1.5 rounded-lg border border-neutral-300 text-xs" />
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">Project ID</label>
+            <input type="text" id="fbProjectId" placeholder="house-of-delicious" class="w-full px-3 py-1.5 rounded-lg border border-neutral-300 text-xs" />
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">App ID</label>
+            <input type="text" id="fbAppId" placeholder="1:12345678:web:..." class="w-full px-3 py-1.5 rounded-lg border border-neutral-300 text-xs" />
+          </div>
+        </div>
+        <button onclick="saveFirebaseSettings()" class="w-full py-2 bg-neutral-900 hover:bg-black text-white font-bold text-xs rounded-lg transition">
+          Save & Connect Firebase
+        </button>
+      </div>
+
+      <!-- Backup / Export / Import -->
+      <div class="flex gap-2">
+        <button onclick="exportMenuData()" class="flex-1 py-2.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-bold text-xs rounded-xl border border-neutral-300 transition">
+          📥 Backup Menu (JSON)
+        </button>
+        <label class="flex-1 py-2.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-bold text-xs rounded-xl border border-neutral-300 transition text-center cursor-pointer">
+          📤 Import Menu
+          <input type="file" accept=".json" onchange="importMenuData(event)" class="hidden" />
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC & STATE MANAGEMENT -->
+  <script>
+    const STORAGE_KEY = 'hod_menu_data_v1';
+    const AUTH_PIN = 'hod2026';
+    let activeFilterTab = 'ALL';
+    let previewMode = 'front';
+    let db = null;
+
+    // Default Schema: Starts with requested empty items list (zero mock data)
+    let menuState = {
+      categories: ['Burgers', 'Pizzas', 'Snacks', 'Rolls', 'Desserts'],
+      items: []
+    };
+
+    // Load data on init
+    function initData() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          menuState = JSON.parse(saved);
+          if (!menuState.categories) menuState.categories = ['Burgers', 'Pizzas', 'Snacks', 'Rolls', 'Desserts'];
+          if (!menuState.items) menuState.items = [];
+        } catch(e) {
+          console.error('Error loading menu state', e);
+        }
+      }
+      initFirebaseIfAvailable();
+    }
+
+    function persistData() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(menuState));
+      // Trigger storage event for live syncing if menu is open in another tab
+      window.dispatchEvent(new Event('storage'));
+      
+      // Sync to Firebase if connected
+      if (db) {
+        db.collection('menu').doc('current').set(menuState).catch(err => {
+          console.warn('Firebase sync notice:', err);
+        });
+      }
+    }
+
+    function initFirebaseIfAvailable() {
+      const fbConfigStr = localStorage.getItem('hod_firebase_config');
+      if (fbConfigStr) {
+        try {
+          const config = JSON.parse(fbConfigStr);
+          if (config.apiKey && config.projectId) {
+            if (!firebase.apps.length) {
+              firebase.initializeApp(config);
+            }
+            db = firebase.firestore();
+            db.collection('menu').doc('current').onSnapshot(doc => {
+              if (doc.exists) {
+                const cloudData = doc.data();
+                if (cloudData && cloudData.categories) {
+                  menuState = cloudData;
+                  localStorage.setItem(STORAGE_KEY, JSON.stringify(menuState));
+                  renderDashboard();
+                }
+              }
+            });
+          }
+        } catch(e) {
+          console.warn('Firebase init notice:', e);
+        }
+      }
+    }
+
+    // AUTHENTICATION
+    function handleLogin(e) {
+      e.preventDefault();
+      const pin = document.getElementById('adminPin').value;
+      if (pin === AUTH_PIN) {
+        sessionStorage.setItem('hod_admin_auth', 'true');
+        document.getElementById('authOverlay').classList.add('hidden');
+        document.getElementById('adminApp').classList.remove('hidden');
+        renderDashboard();
+      } else {
+        document.getElementById('authError').classList.remove('hidden');
+      }
+    }
+
+    function logout() {
+      sessionStorage.removeItem('hod_admin_auth');
+      document.getElementById('adminApp').classList.add('hidden');
+      document.getElementById('authOverlay').classList.remove('hidden');
+      document.getElementById('adminPin').value = '';
+    }
+
+    // CHECK AUTH STATE
+    window.addEventListener('DOMContentLoaded', () => {
+      initData();
+      if (sessionStorage.getItem('hod_admin_auth') === 'true') {
+        document.getElementById('authOverlay').classList.add('hidden');
+        document.getElementById('adminApp').classList.remove('hidden');
+        renderDashboard();
+      }
+    });
+
+    // RENDER DASHBOARD
+    function renderDashboard() {
+      renderCategoryPills();
+      renderItemsGrid();
+      populateCategorySelect();
+    }
+
+    // RENDER CATEGORY PILLS (TABS)
+    function renderCategoryPills() {
+      const container = document.getElementById('categoryPillList');
+      if (!container) return;
+
+      const totalItems = menuState.items.length;
+      let html = `
+        <button onclick="setActiveFilter('ALL')" 
+          class="px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider transition ${activeFilterTab === 'ALL' ? 'bg-[#f91814] text-white shadow-md' : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'}">
+          ALL (${totalItems})
+        </button>
+      `;
+
+      menuState.categories.forEach(cat => {
+        const count = menuState.items.filter(item => item.cat.toLowerCase() === cat.toLowerCase()).length;
+        const isActive = activeFilterTab.toLowerCase() === cat.toLowerCase();
+        html += `
+          <button onclick="setActiveFilter('${cat}')" 
+            class="px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider transition ${isActive ? 'bg-[#f91814] text-white shadow-md' : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'}">
+            ${cat} (${count})
+          </button>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function setActiveFilter(tab) {
+      activeFilterTab = tab;
+      renderDashboard();
+    }
+
+    // POPULATE CATEGORY DROPDOWN IN MODAL
+    function populateCategorySelect() {
+      const select = document.getElementById('foodCategory');
+      if (!select) return;
+      select.innerHTML = menuState.categories.map(c => `<option value="${c}">${c}</option>`).join('');
+    }
+
+    // RENDER ITEMS GRID
+    function renderItemsGrid() {
+      const container = document.getElementById('foodItemsContainer');
+      const search = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
+      
+      let filtered = menuState.items;
+      if (activeFilterTab !== 'ALL') {
+        filtered = filtered.filter(i => i.cat.toLowerCase() === activeFilterTab.toLowerCase());
+      }
+      if (search) {
+        filtered = filtered.filter(i => i.name.toLowerCase().includes(search) || (i.cat && i.cat.toLowerCase().includes(search)));
+      }
+
+      document.getElementById('currentCategoryTitle').innerText = activeFilterTab === 'ALL' ? 'All Dishes' : activeFilterTab;
+      document.getElementById('itemsCountSubtitle').innerText = `${filtered.length} dishes in this view`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-16 text-center bg-neutral-50 rounded-3xl border-2 border-dashed border-neutral-200">
+            <span class="text-5xl block mb-3">🍔</span>
+            <h4 class="font-modak text-2xl text-neutral-800">No Food Items Found</h4>
+            <p class="text-xs text-neutral-500 mb-4 max-w-sm mx-auto">
+              ${activeFilterTab === 'ALL' ? 'Your menu is currently clean and empty. Click below to add your first delicious item!' : `No dishes under "${activeFilterTab}" yet.`}
+            </p>
+            <button onclick="openFoodModal('${activeFilterTab !== 'ALL' ? activeFilterTab : ''}')" class="px-5 py-2.5 bg-[#f91814] hover:bg-[#d9120e] text-white font-bold text-xs rounded-xl shadow-md transition">
+              + Add Dish Now
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => `
+        <div class="bg-neutral-50 rounded-2xl border border-neutral-200 p-4 hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-1 bg-white border border-neutral-200 rounded-full text-[11px] font-bold text-neutral-700 uppercase tracking-wide">
+                ${item.cat}
+              </span>
+              <span class="font-mouse text-2xl font-bold text-neutral-900 leading-none">
+                ${item.price}
+              </span>
+            </div>
+
+            <div class="w-full h-36 bg-white rounded-xl mb-3 flex items-center justify-center p-2 border border-neutral-100 overflow-hidden">
+              <img src="${item.image || '/burgers/1b.png'}" alt="${item.name}" class="max-h-full max-w-full object-contain" />
+            </div>
+
+            <h4 class="font-mouse text-2xl font-bold text-[#f91814] uppercase leading-tight line-clamp-1 mb-1">
+              ${item.name}
+            </h4>
+
+            <div class="flex flex-wrap items-center gap-1.5 text-[10px] text-neutral-500 font-semibold mb-3">
+              ${item.quick?.bun ? `<span class="bg-white px-2 py-0.5 rounded border border-neutral-200">Bun: ${item.quick.bun}</span>` : ''}
+              ${item.quick?.patty ? `<span class="bg-white px-2 py-0.5 rounded border border-neutral-200">Patty: ${item.quick.patty}</span>` : ''}
+              ${item.quick?.spice ? `<span class="bg-white px-2 py-0.5 rounded border border-neutral-200">Spice: ${item.quick.spice}</span>` : ''}
+              ${item.nutrition?.calories ? `<span class="bg-[#f5e3cd] text-neutral-800 px-2 py-0.5 rounded">${item.nutrition.calories} Cal</span>` : ''}
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 pt-2 border-t border-neutral-200">
+            <button onclick="editFoodItem('${item.id}')" class="flex-1 py-1.5 bg-neutral-900 hover:bg-black text-white text-xs font-bold rounded-lg transition">
+              ✏️ Edit
+            </button>
+            <button onclick="deleteFoodItem('${item.id}')" class="py-1.5 px-3 bg-red-100 hover:bg-red-200 text-red-700 text-xs font-bold rounded-lg transition" title="Delete Dish">
+              🗑️
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // MODAL HANDLERS
+    function openFoodModal(defaultCategory = '') {
+      document.getElementById('foodModalTitle').innerText = 'Add New Food Item';
+      document.getElementById('foodItemForm').reset();
+      document.getElementById('editFoodId').value = '';
+      document.getElementById('foodOrderUrl').value = 'https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order';
+      
+      populateCategorySelect();
+      if (defaultCategory && menuState.categories.includes(defaultCategory)) {
+        document.getElementById('foodCategory').value = defaultCategory;
+      }
+      
+      updateLivePreview();
+      document.getElementById('foodModal').classList.remove('hidden');
+      document.getElementById('foodModal').classList.add('flex');
+    }
+
+    function closeFoodModal() {
+      document.getElementById('foodModal').classList.add('hidden');
+      document.getElementById('foodModal').classList.remove('flex');
+    }
+
+    function editFoodItem(id) {
+      const item = menuState.items.find(i => i.id === id);
+      if (!item) return;
+
+      document.getElementById('foodModalTitle').innerText = 'Edit Food Item';
+      document.getElementById('editFoodId').value = item.id;
+      document.getElementById('foodName').value = item.name;
+      populateCategorySelect();
+      document.getElementById('foodCategory').value = item.cat;
+      document.getElementById('foodPrice').value = item.price;
+      document.getElementById('foodImageUrl').value = item.image || '';
+      document.getElementById('foodOrderUrl').value = item.orderUrl || 'https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order';
+
+      document.getElementById('foodPrepTime').value = item.quick?.time || '8–10 MIN';
+      document.getElementById('foodBun').value = item.quick?.bun || 'Brioche';
+      document.getElementById('foodPatty').value = item.quick?.patty || 'Veggie Smash';
+      document.getElementById('foodSpice').value = item.quick?.spice || 'Medium';
+      document.getElementById('foodCalories').value = item.nutrition?.calories || '650';
+      document.getElementById('foodProtein').value = item.nutrition?.protein || '22g';
+
+      updateLivePreview();
+      document.getElementById('foodModal').classList.remove('hidden');
+      document.getElementById('foodModal').classList.add('flex');
+    }
+
+    function deleteFoodItem(id) {
+      const item = menuState.items.find(i => i.id === id);
+      if (!item) return;
+      if (confirm(`Are you sure you want to delete "${item.name}"?`)) {
+        menuState.items = menuState.items.filter(i => i.id !== id);
+        persistData();
+        renderDashboard();
+      }
+    }
+
+    function saveFoodItem(e) {
+      e.preventDefault();
+      const editId = document.getElementById('editFoodId').value;
+      const name = document.getElementById('foodName').value.trim();
+      const cat = document.getElementById('foodCategory').value;
+      let price = document.getElementById('foodPrice').value.trim();
+      if (!price.startsWith('₹')) price = '₹' + price;
+      
+      const image = document.getElementById('foodImageUrl').value.trim() || '/burgers/1b.png';
+      const orderUrl = document.getElementById('foodOrderUrl').value.trim() || 'https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order';
+
+      const itemPayload = {
+        id: editId || ('item_' + Date.now()),
+        name,
+        cat,
+        price,
+        image,
+        orderUrl,
+        detail: `${document.getElementById('foodBun').value.trim() || 'Brioche'} · ${document.getElementById('foodPatty').value.trim() || 'Patty'}`,
+        quick: {
+          bun: document.getElementById('foodBun').value.trim() || 'Brioche',
+          patty: document.getElementById('foodPatty').value.trim() || 'Patty',
+          spice: document.getElementById('foodSpice').value,
+          time: document.getElementById('foodPrepTime').value.trim() || '8–10 MIN'
+        },
+        nutrition: {
+          calories: document.getElementById('foodCalories').value.trim() || '650',
+          protein: document.getElementById('foodProtein').value.trim() || '22g'
+        }
+      };
+
+      if (editId) {
+        const idx = menuState.items.findIndex(i => i.id === editId);
+        if (idx !== -1) menuState.items[idx] = itemPayload;
+      } else {
+        menuState.items.push(itemPayload);
+      }
+
+      persistData();
+      closeFoodModal();
+      renderDashboard();
+    }
+
+    // IMAGE FILE UPLOAD CONVERTER (Local Base64 Storage)
+    function handleImageFileUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        document.getElementById('foodImageUrl').value = evt.target.result;
+        updateLivePreview();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // LIVE PREVIEW UPDATER
+    function updateLivePreview() {
+      const name = document.getElementById('foodName')?.value || 'Dish Name';
+      const price = document.getElementById('foodPrice')?.value || '₹150';
+      const img = document.getElementById('foodImageUrl')?.value || '/burgers/1b.png';
+      const prepTime = document.getElementById('foodPrepTime')?.value || '8–10 MIN';
+      const bun = document.getElementById('foodBun')?.value || 'Brioche';
+      const patty = document.getElementById('foodPatty')?.value || 'Patty';
+      const spice = document.getElementById('foodSpice')?.value || 'Medium';
+      const cal = document.getElementById('foodCalories')?.value || '650';
+      const protein = document.getElementById('foodProtein')?.value || '22g';
+
+      document.getElementById('previewName').innerText = name;
+      document.getElementById('previewPrice').innerText = price.startsWith('₹') ? price : ('₹' + price);
+      document.getElementById('previewImage').src = img;
+
+      document.getElementById('previewPrepTime').innerText = prepTime;
+      document.getElementById('previewBun').innerText = bun;
+      document.getElementById('previewPatty').innerText = patty;
+      document.getElementById('previewSpice').innerText = spice;
+      document.getElementById('previewCalories').innerText = `CALORIES: ${cal}`;
+      document.getElementById('previewProtein').innerText = `PROTEIN: ${protein}`;
+    }
+
+    function setPreviewMode(mode) {
+      previewMode = mode;
+      const overlay = document.getElementById('previewDetailsOverlay');
+      const btnF = document.getElementById('btnPreviewFront');
+      const btnD = document.getElementById('btnPreviewDetails');
+
+      if (mode === 'details') {
+        overlay.classList.remove('hidden');
+        btnD.className = 'px-2.5 py-1 rounded-md text-xs font-bold bg-[#f91814] text-white';
+        btnF.className = 'px-2.5 py-1 rounded-md text-xs font-bold bg-neutral-200 text-neutral-700';
+      } else {
+        overlay.classList.add('hidden');
+        btnF.className = 'px-2.5 py-1 rounded-md text-xs font-bold bg-[#f91814] text-white';
+        btnD.className = 'px-2.5 py-1 rounded-md text-xs font-bold bg-neutral-200 text-neutral-700';
+      }
+    }
+
+    // MANAGE TABS
+    function openTabModal() {
+      renderManageTabList();
+      document.getElementById('tabModal').classList.remove('hidden');
+      document.getElementById('tabModal').classList.add('flex');
+    }
+    function closeTabModal() {
+      document.getElementById('tabModal').classList.add('hidden');
+      document.getElementById('tabModal').classList.remove('flex');
+      renderDashboard();
+    }
+
+    function renderManageTabList() {
+      const container = document.getElementById('manageTabList');
+      container.innerHTML = menuState.categories.map((c, idx) => {
+        const count = menuState.items.filter(i => i.cat.toLowerCase() === c.toLowerCase()).length;
+        return `
+          <div class="flex items-center justify-between p-2.5 bg-neutral-50 rounded-xl border border-neutral-100">
+            <span class="font-bold text-sm text-neutral-800">${c} (${count} items)</span>
+            <button onclick="deleteTab('${c}')" class="text-red-500 hover:text-red-700 text-xs font-bold px-2 py-1 rounded hover:bg-red-50">
+              Delete
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function handleCreateTab(e) {
+      e.preventDefault();
+      const input = document.getElementById('newCategoryInput');
+      const newCat = input.value.trim();
+      if (!newCat) return;
+
+      if (menuState.categories.some(c => c.toLowerCase() === newCat.toLowerCase())) {
+        alert('This category tab already exists!');
+        return;
+      }
+
+      menuState.categories.push(newCat);
+      persistData();
+      input.value = '';
+      renderManageTabList();
+    }
+
+    function deleteTab(catName) {
+      const count = menuState.items.filter(i => i.cat.toLowerCase() === catName.toLowerCase()).length;
+      if (count > 0) {
+        if (!confirm(`Category "${catName}" has ${count} dishes assigned. Deleting this tab will also delete its items. Proceed?`)) {
+          return;
+        }
+        menuState.items = menuState.items.filter(i => i.cat.toLowerCase() !== catName.toLowerCase());
+      }
+      menuState.categories = menuState.categories.filter(c => c !== catName);
+      persistData();
+      renderManageTabList();
+    }
+
+    // SYNC & BACKUP MODALS
+    function openSyncModal() {
+      const conf = localStorage.getItem('hod_firebase_config');
+      if (conf) {
+        try {
+          const c = JSON.parse(conf);
+          document.getElementById('fbApiKey').value = c.apiKey || '';
+          document.getElementById('fbProjectId').value = c.projectId || '';
+          document.getElementById('fbAppId').value = c.appId || '';
+        } catch(e) {}
+      }
+      document.getElementById('syncModal').classList.remove('hidden');
+      document.getElementById('syncModal').classList.add('flex');
+    }
+    function closeSyncModal() {
+      document.getElementById('syncModal').classList.add('hidden');
+      document.getElementById('syncModal').classList.remove('flex');
+    }
+
+    function saveFirebaseSettings() {
+      const apiKey = document.getElementById('fbApiKey').value.trim();
+      const projectId = document.getElementById('fbProjectId').value.trim();
+      const appId = document.getElementById('fbAppId').value.trim();
+
+      if (!apiKey || !projectId) {
+        alert('Please enter at least an API Key and Project ID');
+        return;
+      }
+
+      const conf = { apiKey, projectId, appId };
+      localStorage.setItem('hod_firebase_config', JSON.stringify(conf));
+      initFirebaseIfAvailable();
+      alert('Firebase configuration saved successfully! Cloud real-time sync active.');
+      closeSyncModal();
+    }
+
+    function exportMenuData() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(menuState, null, 2));
+      const a = document.createElement('a');
+      a.setAttribute("href", dataStr);
+      a.setAttribute("download", `hod_menu_backup_${new Date().toISOString().slice(0,10)}.json`);
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    function importMenuData(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          const imported = JSON.parse(evt.target.result);
+          if (imported.categories && Array.isArray(imported.items)) {
+            menuState = imported;
+            persistData();
+            renderDashboard();
+            alert('Menu imported successfully!');
+            closeSyncModal();
+          } else {
+            alert('Invalid menu JSON file format.');
+          }
+        } catch(err) {
+          alert('Could not parse JSON file.');
+        }
+      };
+      reader.readAsText(file);
+    }
+  </script>
+</body>
+</html>

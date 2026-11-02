@@ -462,794 +462,91 @@
     <p class="text40 max-md:text-[5vw] ml-[1vw] max-md:block uppercase hidden">15 items</p>
     <p class="text40 max-md:hidden uppercase">15 items</p>
   </div>
-  <div class="w-full sticky top-[72px] md:top-[100px] z-40 bg-[#f5e3cd]/95 backdrop-blur-md category-tabs-wrapper">
-    <div class="category-tabs-bar">
-      
-  <button type="button" class="category-tab-btn category-tab-active">
-    <span>All</span>
-    <span class="category-tab-count">(15)</span>
-  </button>
-
-  <button type="button" class="category-tab-btn category-tab-inactive">
-    <span>Burgers</span>
-    <span class="category-tab-count">(6)</span>
-  </button>
-
-  <button type="button" class="category-tab-btn category-tab-inactive">
-    <span>Pizzas</span>
-    <span class="category-tab-count">(2)</span>
-  </button>
-
-  <button type="button" class="category-tab-btn category-tab-inactive">
-    <span>Snacks</span>
-    <span class="category-tab-count">(3)</span>
-  </button>
-
-  <button type="button" class="category-tab-btn category-tab-inactive">
-    <span>Rolls</span>
-    <span class="category-tab-count">(2)</span>
-  </button>
-
-  <button type="button" class="category-tab-btn category-tab-inactive">
-    <span>Desserts</span>
-    <span class="category-tab-count">(2)</span>
-  </button>
-
+  
+  <div id="dynamicTabsWrapper" class="w-full sticky top-[72px] md:top-[100px] z-40 bg-[#f5e3cd]/95 backdrop-blur-md category-tabs-wrapper">
+    <div id="dynamicTabsBar" class="category-tabs-bar">
+      <button type="button" class="category-tab-btn category-tab-active">
+        <span>ALL</span>
+        <span class="category-tab-count">(0)</span>
+      </button>
     </div>
   </div>
-  <div class="w-full grid grid-cols-3 gap-[2vw] mt-[2vw] max-md:grid-cols-1 max-md:gap-[24px]">
-    
-    <div class="w-full">
-      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
-        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
-        </div>
-        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
-          <div class="w-full flex justify-end items-center z-30">
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
-              <span>ORDER NOW</span>
-              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
-            </a>
-          </div>
-          <div class="menu-img-wrap pointer-events-none mx-auto transition-transform duration-500 will-change-transform group-hover:scale-105">
-            <img alt="HOD Signature Smashed Burger" loading="lazy" width="800" height="800" decoding="async" class="size-full object-contain" src="/burgers/1b.png"/>
-          </div>
-          <div class="menu-bottom-row w-full flex items-end justify-between">
-            <p class="menu-item-name text-red font-mouse-memoirs uppercase">HOD Signature Smashed Burger</p>
-            <p class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹150</p>
-          </div>
-        </div>
-        <div class="absolute left-[2vw] z-40 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-          <div class="rounded-[1.2vw] border border-black/10 bg-white/90 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-            <div class="flex items-center justify-between gap-[1vw]">
-              <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-              <p class="text40 uppercase text-black/60">8–10 min</p>
-            </div>
-            <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Bun</p>
-                <p class="text40 uppercase text-black/80">Brioche</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Patty</p>
-                <p class="text40 uppercase text-black/80">Veggie Smash</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Spice</p>
-                <p class="text40 uppercase text-black/80">Medium</p>
-              </div>
-            </div>
-            <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]">
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Calories: 650</span>
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Protein: 22g</span>
-            </div>
-          </div>
-        </div>
+
+  <div id="dynamicMenuGridContainer" class="w-full">
+    <div class="w-full py-16 text-center my-8 rounded-3xl bg-white/40 border-2 border-dashed border-red/20">
+      <div class="flex flex-col items-center justify-center gap-2">
+        <span class="text-4xl">🍔</span>
+        <p class="font-modak text-2xl text-red uppercase">No Items Added Yet</p>
+        <p class="font-mouse-memoirs text-xl text-neutral-600 uppercase">Add your delicious dishes from the Admin Panel to display here!</p>
       </div>
     </div>
-  
-    <div class="w-full">
-      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
-        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
-        </div>
-        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
-          <div class="w-full flex justify-end items-center z-30">
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
-              <span>ORDER NOW</span>
-              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
-            </a>
-          </div>
-          <div class="menu-img-wrap pointer-events-none mx-auto transition-transform duration-500 will-change-transform group-hover:scale-105">
-            <img alt="Crispy Paneer Cheese Burger" loading="lazy" width="800" height="800" decoding="async" class="size-full object-contain" src="/burgers/2b.png"/>
-          </div>
-          <div class="menu-bottom-row w-full flex items-end justify-between">
-            <p class="menu-item-name text-red font-mouse-memoirs uppercase">Crispy Paneer Cheese Burger</p>
-            <p class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹170</p>
-          </div>
-        </div>
-        <div class="absolute left-[2vw] z-40 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-          <div class="rounded-[1.2vw] border border-black/10 bg-white/90 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-            <div class="flex items-center justify-between gap-[1vw]">
-              <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-              <p class="text40 uppercase text-black/60">10–12 min</p>
-            </div>
-            <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Bun</p>
-                <p class="text40 uppercase text-black/80">Sesame</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Patty</p>
-                <p class="text40 uppercase text-black/80">Crisp Paneer</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Spice</p>
-                <p class="text40 uppercase text-black/80">Medium</p>
-              </div>
-            </div>
-            <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]">
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Calories: 710</span>
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Protein: 26g</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="w-full">
-      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
-        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
-        </div>
-        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
-          <div class="w-full flex justify-end items-center z-30">
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
-              <span>ORDER NOW</span>
-              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
-            </a>
-          </div>
-          <div class="menu-img-wrap pointer-events-none mx-auto transition-transform duration-500 will-change-transform group-hover:scale-105">
-            <img alt="Double Cheese Burst Burger" loading="lazy" width="800" height="800" decoding="async" class="size-full object-contain" src="/burgers/3b.png"/>
-          </div>
-          <div class="menu-bottom-row w-full flex items-end justify-between">
-            <p class="menu-item-name text-red font-mouse-memoirs uppercase">Double Cheese Burst Burger</p>
-            <p class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹190</p>
-          </div>
-        </div>
-        <div class="absolute left-[2vw] z-40 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-          <div class="rounded-[1.2vw] border border-black/10 bg-white/90 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-            <div class="flex items-center justify-between gap-[1vw]">
-              <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-              <p class="text40 uppercase text-black/60">10–12 min</p>
-            </div>
-            <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Bun</p>
-                <p class="text40 uppercase text-black/80">Brioche</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Patty</p>
-                <p class="text40 uppercase text-black/80">Double Cheese</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Spice</p>
-                <p class="text40 uppercase text-black/80">Mild</p>
-              </div>
-            </div>
-            <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]">
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Calories: 780</span>
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Protein: 24g</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="w-full">
-      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
-        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
-        </div>
-        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
-          <div class="w-full flex justify-end items-center z-30">
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
-              <span>ORDER NOW</span>
-              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
-            </a>
-          </div>
-          <div class="menu-img-wrap pointer-events-none mx-auto transition-transform duration-500 will-change-transform group-hover:scale-105">
-            <img alt="Tandoori Paneer Burger" loading="lazy" width="800" height="800" decoding="async" class="size-full object-contain" src="/burgers/4b.png"/>
-          </div>
-          <div class="menu-bottom-row w-full flex items-end justify-between">
-            <p class="menu-item-name text-red font-mouse-memoirs uppercase">Tandoori Paneer Burger</p>
-            <p class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹160</p>
-          </div>
-        </div>
-        <div class="absolute left-[2vw] z-40 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-          <div class="rounded-[1.2vw] border border-black/10 bg-white/90 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-            <div class="flex items-center justify-between gap-[1vw]">
-              <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-              <p class="text40 uppercase text-black/60">10–12 min</p>
-            </div>
-            <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Bun</p>
-                <p class="text40 uppercase text-black/80">Sesame</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Patty</p>
-                <p class="text40 uppercase text-black/80">Tandoori Paneer</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Spice</p>
-                <p class="text40 uppercase text-black/80">High</p>
-              </div>
-            </div>
-            <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]">
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Calories: 690</span>
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Protein: 25g</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="w-full">
-      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
-        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
-        </div>
-        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
-          <div class="w-full flex justify-end items-center z-30">
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
-              <span>ORDER NOW</span>
-              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
-            </a>
-          </div>
-          <div class="menu-img-wrap pointer-events-none mx-auto transition-transform duration-500 will-change-transform group-hover:scale-105">
-            <img alt="Spicy Schezwan Burger" loading="lazy" width="800" height="800" decoding="async" class="size-full object-contain" src="/burgers/5b.png"/>
-          </div>
-          <div class="menu-bottom-row w-full flex items-end justify-between">
-            <p class="menu-item-name text-red font-mouse-memoirs uppercase">Spicy Schezwan Burger</p>
-            <p class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹150</p>
-          </div>
-        </div>
-        <div class="absolute left-[2vw] z-40 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-          <div class="rounded-[1.2vw] border border-black/10 bg-white/90 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-            <div class="flex items-center justify-between gap-[1vw]">
-              <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-              <p class="text40 uppercase text-black/60">8–10 min</p>
-            </div>
-            <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Bun</p>
-                <p class="text40 uppercase text-black/80">Brioche</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Patty</p>
-                <p class="text40 uppercase text-black/80">Spicy Crisp</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Spice</p>
-                <p class="text40 uppercase text-black/80">Fiery</p>
-              </div>
-            </div>
-            <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]">
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Calories: 640</span>
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Protein: 21g</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="w-full">
-      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
-        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
-        </div>
-        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
-          <div class="w-full flex justify-end items-center z-30">
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
-              <span>ORDER NOW</span>
-              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
-            </a>
-          </div>
-          <div class="menu-img-wrap pointer-events-none mx-auto transition-transform duration-500 will-change-transform group-hover:scale-105">
-            <img alt="Classic Aloo Tikki Cheese Burger" loading="lazy" width="800" height="800" decoding="async" class="size-full object-contain" src="/burgers/6b.png"/>
-          </div>
-          <div class="menu-bottom-row w-full flex items-end justify-between">
-            <p class="menu-item-name text-red font-mouse-memoirs uppercase">Classic Aloo Tikki Cheese Burger</p>
-            <p class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹120</p>
-          </div>
-        </div>
-        <div class="absolute left-[2vw] z-40 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-          <div class="rounded-[1.2vw] border border-black/10 bg-white/90 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-            <div class="flex items-center justify-between gap-[1vw]">
-              <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-              <p class="text40 uppercase text-black/60">6–8 min</p>
-            </div>
-            <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Bun</p>
-                <p class="text40 uppercase text-black/80">Classic</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Patty</p>
-                <p class="text40 uppercase text-black/80">Aloo Tikki</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Spice</p>
-                <p class="text40 uppercase text-black/80">Mild</p>
-              </div>
-            </div>
-            <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]">
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Calories: 520</span>
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Protein: 14g</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="w-full">
-      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
-        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
-        </div>
-        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
-          <div class="w-full flex justify-end items-center z-30">
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
-              <span>ORDER NOW</span>
-              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
-            </a>
-          </div>
-          <div class="menu-img-wrap pointer-events-none mx-auto transition-transform duration-500 will-change-transform group-hover:scale-105">
-            <img alt="Paneer Tikka Pizza" loading="lazy" width="800" height="800" decoding="async" class="size-full object-contain" src="/burgers/1b.png"/>
-          </div>
-          <div class="menu-bottom-row w-full flex items-end justify-between">
-            <p class="menu-item-name text-red font-mouse-memoirs uppercase">Paneer Tikka Pizza</p>
-            <p class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹220</p>
-          </div>
-        </div>
-        <div class="absolute left-[2vw] z-40 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-          <div class="rounded-[1.2vw] border border-black/10 bg-white/90 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-            <div class="flex items-center justify-between gap-[1vw]">
-              <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-              <p class="text40 uppercase text-black/60">12–15 min</p>
-            </div>
-            <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Bun</p>
-                <p class="text40 uppercase text-black/80">Handmade Crust</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Patty</p>
-                <p class="text40 uppercase text-black/80">Paneer Cubes</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Spice</p>
-                <p class="text40 uppercase text-black/80">Medium</p>
-              </div>
-            </div>
-            <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]">
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Calories: 840</span>
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Protein: 32g</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="w-full">
-      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
-        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
-        </div>
-        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
-          <div class="w-full flex justify-end items-center z-30">
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
-              <span>ORDER NOW</span>
-              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
-            </a>
-          </div>
-          <div class="menu-img-wrap pointer-events-none mx-auto transition-transform duration-500 will-change-transform group-hover:scale-105">
-            <img alt="Peri Peri Paneer Pizza" loading="lazy" width="800" height="800" decoding="async" class="size-full object-contain" src="/burgers/2b.png"/>
-          </div>
-          <div class="menu-bottom-row w-full flex items-end justify-between">
-            <p class="menu-item-name text-red font-mouse-memoirs uppercase">Peri Peri Paneer Pizza</p>
-            <p class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹240</p>
-          </div>
-        </div>
-        <div class="absolute left-[2vw] z-40 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-          <div class="rounded-[1.2vw] border border-black/10 bg-white/90 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-            <div class="flex items-center justify-between gap-[1vw]">
-              <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-              <p class="text40 uppercase text-black/60">12–15 min</p>
-            </div>
-            <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Bun</p>
-                <p class="text40 uppercase text-black/80">Handmade Crust</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Patty</p>
-                <p class="text40 uppercase text-black/80">Peri Peri Paneer</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Spice</p>
-                <p class="text40 uppercase text-black/80">Spicy</p>
-              </div>
-            </div>
-            <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]">
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Calories: 880</span>
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Protein: 34g</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="w-full">
-      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
-        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
-        </div>
-        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
-          <div class="w-full flex justify-end items-center z-30">
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
-              <span>ORDER NOW</span>
-              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
-            </a>
-          </div>
-          <div class="menu-img-wrap pointer-events-none mx-auto transition-transform duration-500 will-change-transform group-hover:scale-105">
-            <img alt="Classic Cheese Garlic Bread" loading="lazy" width="800" height="800" decoding="async" class="size-full object-contain" src="/burgers/3b.png"/>
-          </div>
-          <div class="menu-bottom-row w-full flex items-end justify-between">
-            <p class="menu-item-name text-red font-mouse-memoirs uppercase">Classic Cheese Garlic Bread</p>
-            <p class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹140</p>
-          </div>
-        </div>
-        <div class="absolute left-[2vw] z-40 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-          <div class="rounded-[1.2vw] border border-black/10 bg-white/90 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-            <div class="flex items-center justify-between gap-[1vw]">
-              <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-              <p class="text40 uppercase text-black/60">8–10 min</p>
-            </div>
-            <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Bun</p>
-                <p class="text40 uppercase text-black/80">Garlic Baguette</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Patty</p>
-                <p class="text40 uppercase text-black/80">Molten Cheese</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Spice</p>
-                <p class="text40 uppercase text-black/80">Mild</p>
-              </div>
-            </div>
-            <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]">
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Calories: 480</span>
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Protein: 16g</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="w-full">
-      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
-        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
-        </div>
-        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
-          <div class="w-full flex justify-end items-center z-30">
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
-              <span>ORDER NOW</span>
-              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
-            </a>
-          </div>
-          <div class="menu-img-wrap pointer-events-none mx-auto transition-transform duration-500 will-change-transform group-hover:scale-105">
-            <img alt="Peri Peri French Fries" loading="lazy" width="800" height="800" decoding="async" class="size-full object-contain" src="/burgers/4b.png"/>
-          </div>
-          <div class="menu-bottom-row w-full flex items-end justify-between">
-            <p class="menu-item-name text-red font-mouse-memoirs uppercase">Peri Peri French Fries</p>
-            <p class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹110</p>
-          </div>
-        </div>
-        <div class="absolute left-[2vw] z-40 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-          <div class="rounded-[1.2vw] border border-black/10 bg-white/90 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-            <div class="flex items-center justify-between gap-[1vw]">
-              <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-              <p class="text40 uppercase text-black/60">6–8 min</p>
-            </div>
-            <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Bun</p>
-                <p class="text40 uppercase text-black/80">Golden Potatoes</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Patty</p>
-                <p class="text40 uppercase text-black/80">Crispy Cut</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Spice</p>
-                <p class="text40 uppercase text-black/80">Spicy</p>
-              </div>
-            </div>
-            <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]">
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Calories: 380</span>
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Protein: 6g</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="w-full">
-      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
-        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
-        </div>
-        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
-          <div class="w-full flex justify-end items-center z-30">
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
-              <span>ORDER NOW</span>
-              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
-            </a>
-          </div>
-          <div class="menu-img-wrap pointer-events-none mx-auto transition-transform duration-500 will-change-transform group-hover:scale-105">
-            <img alt="Cheesy Loaded Fries" loading="lazy" width="800" height="800" decoding="async" class="size-full object-contain" src="/burgers/5b.png"/>
-          </div>
-          <div class="menu-bottom-row w-full flex items-end justify-between">
-            <p class="menu-item-name text-red font-mouse-memoirs uppercase">Cheesy Loaded Fries</p>
-            <p class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹150</p>
-          </div>
-        </div>
-        <div class="absolute left-[2vw] z-40 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-          <div class="rounded-[1.2vw] border border-black/10 bg-white/90 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-            <div class="flex items-center justify-between gap-[1vw]">
-              <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-              <p class="text40 uppercase text-black/60">8–10 min</p>
-            </div>
-            <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Bun</p>
-                <p class="text40 uppercase text-black/80">Crisp Fries</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Patty</p>
-                <p class="text40 uppercase text-black/80">Warm Cheddar</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Spice</p>
-                <p class="text40 uppercase text-black/80">Medium</p>
-              </div>
-            </div>
-            <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]">
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Calories: 590</span>
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Protein: 12g</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="w-full">
-      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
-        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
-        </div>
-        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
-          <div class="w-full flex justify-end items-center z-30">
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
-              <span>ORDER NOW</span>
-              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
-            </a>
-          </div>
-          <div class="menu-img-wrap pointer-events-none mx-auto transition-transform duration-500 will-change-transform group-hover:scale-105">
-            <img alt="HOD Special Roll" loading="lazy" width="800" height="800" decoding="async" class="size-full object-contain" src="/burgers/3b.png"/>
-          </div>
-          <div class="menu-bottom-row w-full flex items-end justify-between">
-            <p class="menu-item-name text-red font-mouse-memoirs uppercase">HOD Special Roll</p>
-            <p class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹150</p>
-          </div>
-        </div>
-        <div class="absolute left-[2vw] z-40 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-          <div class="rounded-[1.2vw] border border-black/10 bg-white/90 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-            <div class="flex items-center justify-between gap-[1vw]">
-              <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-              <p class="text40 uppercase text-black/60">8–10 min</p>
-            </div>
-            <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Bun</p>
-                <p class="text40 uppercase text-black/80">Lachha Paratha</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Patty</p>
-                <p class="text40 uppercase text-black/80">HOD Special Mix</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Spice</p>
-                <p class="text40 uppercase text-black/80">Medium</p>
-              </div>
-            </div>
-            <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]">
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Calories: 620</span>
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Protein: 17g</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="w-full">
-      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
-        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
-        </div>
-        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
-          <div class="w-full flex justify-end items-center z-30">
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
-              <span>ORDER NOW</span>
-              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
-            </a>
-          </div>
-          <div class="menu-img-wrap pointer-events-none mx-auto transition-transform duration-500 will-change-transform group-hover:scale-105">
-            <img alt="Paneer Tikka Kathi Roll" loading="lazy" width="800" height="800" decoding="async" class="size-full object-contain" src="/burgers/4b.png"/>
-          </div>
-          <div class="menu-bottom-row w-full flex items-end justify-between">
-            <p class="menu-item-name text-red font-mouse-memoirs uppercase">Paneer Tikka Kathi Roll</p>
-            <p class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹170</p>
-          </div>
-        </div>
-        <div class="absolute left-[2vw] z-40 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-          <div class="rounded-[1.2vw] border border-black/10 bg-white/90 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-            <div class="flex items-center justify-between gap-[1vw]">
-              <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-              <p class="text40 uppercase text-black/60">10–12 min</p>
-            </div>
-            <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Bun</p>
-                <p class="text40 uppercase text-black/80">Flaky Paratha</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Patty</p>
-                <p class="text40 uppercase text-black/80">Grilled Paneer</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Spice</p>
-                <p class="text40 uppercase text-black/80">Medium</p>
-              </div>
-            </div>
-            <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]">
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Calories: 640</span>
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Protein: 22g</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="w-full">
-      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
-        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
-        </div>
-        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
-          <div class="w-full flex justify-end items-center z-30">
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
-              <span>ORDER NOW</span>
-              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
-            </a>
-          </div>
-          <div class="menu-img-wrap pointer-events-none mx-auto transition-transform duration-500 will-change-transform group-hover:scale-105">
-            <img alt="Pull Me Up Chocolate Cake" loading="lazy" width="800" height="800" decoding="async" class="size-full object-contain" src="/burgers/6b.png"/>
-          </div>
-          <div class="menu-bottom-row w-full flex items-end justify-between">
-            <p class="menu-item-name text-red font-mouse-memoirs uppercase">Pull Me Up Chocolate Cake</p>
-            <p class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹180</p>
-          </div>
-        </div>
-        <div class="absolute left-[2vw] z-40 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-          <div class="rounded-[1.2vw] border border-black/10 bg-white/90 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-            <div class="flex items-center justify-between gap-[1vw]">
-              <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-              <p class="text40 uppercase text-black/60">5–8 min</p>
-            </div>
-            <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Bun</p>
-                <p class="text40 uppercase text-black/80">Handmade Cake</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Patty</p>
-                <p class="text40 uppercase text-black/80">Molten Fudge</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Spice</p>
-                <p class="text40 uppercase text-black/80">Sweet</p>
-              </div>
-            </div>
-            <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]">
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Calories: 830</span>
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Protein: 14g</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="w-full">
-      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
-        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
-          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
-        </div>
-        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
-          <div class="w-full flex justify-end items-center z-30">
-            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
-              <span>ORDER NOW</span>
-              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
-            </a>
-          </div>
-          <div class="menu-img-wrap pointer-events-none mx-auto transition-transform duration-500 will-change-transform group-hover:scale-105">
-            <img alt="Oreo Overload Thick Shake" loading="lazy" width="800" height="800" decoding="async" class="size-full object-contain" src="/burgers/6b.png"/>
-          </div>
-          <div class="menu-bottom-row w-full flex items-end justify-between">
-            <p class="menu-item-name text-red font-mouse-memoirs uppercase">Oreo Overload Thick Shake</p>
-            <p class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹160</p>
-          </div>
-        </div>
-        <div class="absolute left-[2vw] z-40 right-[2vw] bottom-[2vw] max-md:hidden pointer-events-none">
-          <div class="rounded-[1.2vw] border border-black/10 bg-white/90 backdrop-blur-md px-[1.2vw] py-[1vw] opacity-0 translate-y-[1vw] transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
-            <div class="flex items-center justify-between gap-[1vw]">
-              <p class="text40 uppercase tracking-[.18em] text-black/60">Quick details</p>
-              <p class="text40 uppercase text-black/60">5–8 min</p>
-            </div>
-            <div class="mt-[.6vw] grid grid-cols-3 gap-[.6vw]">
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Bun</p>
-                <p class="text40 uppercase text-black/80">Glass Jar</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Patty</p>
-                <p class="text40 uppercase text-black/80">Oreo Fudge</p>
-              </div>
-              <div class="rounded-[.9vw] bg-black/5 border border-black/10 px-[.8vw] py-[.6vw]">
-                <p class="text40 uppercase text-black/60">Spice</p>
-                <p class="text40 uppercase text-black/80">Sweet</p>
-              </div>
-            </div>
-            <div class="mt-[.7vw] flex flex-wrap gap-[.6vw]">
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Calories: 690</span>
-              <span class="text40 uppercase px-[.7vw] py-[.35vw] rounded-full bg-beige border border-black/10 text-black/70">Protein: 12g</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
   </div>
+
+  <script>
+    (function() {
+      function renderStaticDynamicMenu() {
+        try {
+          var saved = localStorage.getItem('hod_menu_data_v1');
+          if (!saved) return;
+          var state = JSON.parse(saved);
+          var items = Array.isArray(state.items) ? state.items : [];
+          var categories = Array.isArray(state.categories) ? state.categories : ['Burgers', 'Pizzas', 'Snacks', 'Rolls', 'Desserts'];
+
+          var tabsBar = document.getElementById('dynamicTabsBar');
+          var gridContainer = document.getElementById('dynamicMenuGridContainer');
+          if (!tabsBar || !gridContainer) return;
+
+          // Render Tabs
+          var tabsHtml = '<button type="button" class="category-tab-btn category-tab-active"><span>ALL</span><span class="category-tab-count">(' + items.length + ')</span></button>';
+          categories.forEach(function(cat) {
+            var count = items.filter(function(i) { return (i.cat || '').toLowerCase() === cat.toLowerCase(); }).length;
+            tabsHtml += '<button type="button" class="category-tab-btn category-tab-inactive"><span>' + cat.toUpperCase() + '</span><span class="category-tab-count">(' + count + ')</span></button>';
+          });
+          tabsBar.innerHTML = tabsHtml;
+
+          // Render Cards (first 6 items by default)
+          if (items.length > 0) {
+            var visible = items.slice(0, 6);
+            var cardsHtml = '<div class="w-full grid grid-cols-3 gap-[2vw] mt-[2vw] max-md:grid-cols-1 max-md:gap-[24px]">';
+            visible.forEach(function(item) {
+              cardsHtml += '<div class="w-full"><div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">' +
+                '<div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">' +
+                '<div class="flex w-full h-1/2">' + Array(12).fill(0).map(function(_, a) { return '<div class="h-full w-[8.33%] ' + (a%2===0?'bg-red':'bg-white') + '"></div>'; }).join('') + '</div>' +
+                '<div class="flex w-full h-1/2">' + Array(12).fill(0).map(function(_, a) { return '<div class="h-full w-[8.33%] ' + (a%2===1?'bg-red':'bg-white') + '"></div>'; }).join('') + '</div>' +
+                '</div>' +
+                '<div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">' +
+                '<div class="w-full flex justify-end items-center z-30">' +
+                '<a href="' + (item.orderUrl || 'https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order') + '" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">' +
+                '<span>ORDER NOW</span>' +
+                '<svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>' +
+                '</a>' +
+                '</div>' +
+                '<div class="menu-img-wrap mx-auto relative flex items-center justify-center">' +
+                '<img src="' + (item.image || '/burgers/1b.png') + '" alt="' + item.name + '" class="size-full object-contain drop-shadow-2xl transition-transform duration-500 group-hover:scale-110" />' +
+                '</div>' +
+                '<div class="menu-bottom-row w-full flex items-end justify-between border-t border-transparent">' +
+                '<h3 class="menu-item-name font-mouse-memoirs uppercase truncate">' + item.name + '</h3>' +
+                '<span class="menu-item-price font-mouse-memoirs font-bold">' + item.price + '</span>' +
+                '</div>' +
+                '</div>' +
+                '</div></div>';
+            });
+            cardsHtml += '</div>';
+
+            if (items.length > 6) {
+              cardsHtml += '<div class="w-full flex justify-center mt-[3vw] max-md:mt-[6vw]">' +
+                '<button type="button" class="group px-8 py-3.5 bg-red hover:bg-black text-white font-mouse-memoirs text-2xl uppercase tracking-wider rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2 cursor-pointer">' +
+                '<span>SEE MORE (' + (items.length - 6) + ' MORE) ↓</span>' +
+                '</button></div>';
+            }
+            gridContainer.innerHTML = cardsHtml;
+          }
+        } catch(e) {}
+      }
+      renderStaticDynamicMenu();
+      window.addEventListener('storage', renderStaticDynamicMenu);
+    })();
+  </script>
 </section>
     <div class="-mt-[18vw]">
       <section id="cta" class="h-fit w-full pt-[18vw] max-md:pt-[12vw] overflow-clip relative bg-beige">
