@@ -508,6 +508,8 @@
                   renderDashboard();
                 }
               }
+            }, err => {
+              console.warn('Firebase sync status (check Firestore Rules):', err.message);
             });
           }
         } catch(e) {
