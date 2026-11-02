@@ -439,6 +439,7 @@
   <script>
     const STORAGE_KEY = 'hod_menu_data_v1';
     const AUTH_PIN = 'hod2026';
+    const DEFAULT_FB_CONFIG = {"apiKey":"AIzaSyDrW0mdYLnt0S-eqG2BuC2uCa2xgRYzRPc","authDomain":"house-of-delicious.firebaseapp.com","projectId":"house-of-delicious","storageBucket":"house-of-delicious.firebasestorage.app","messagingSenderId":"1072791327054","appId":"1:1072791327054:web:d81c316dbd6a2062cc8e1f"};
     let activeFilterTab = 'ALL';
     let previewMode = 'front';
     let db = null;
@@ -478,7 +479,7 @@
     }
 
     function initFirebaseIfAvailable() {
-      const fbConfigStr = localStorage.getItem('hod_firebase_config');
+      let fbConfigStr = localStorage.getItem('hod_firebase_config') || JSON.stringify(DEFAULT_FB_CONFIG);
       if (fbConfigStr) {
         try {
           const config = JSON.parse(fbConfigStr);
@@ -936,3 +937,4 @@
   </script>
 </body>
 </html>
+

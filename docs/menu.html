@@ -58,6 +58,11 @@
   <meta name="twitter:image" content="https://mbaqir18786.github.io/House-Of-Delicious/img-webp/og-image.webp" />
   <link rel="icon" href="/favicon.ico?favicon.0zm.9b8gmi8mf.ico" sizes="48x48" type="image/x-icon" />
   <script src="/_next/static/chunks/03~yq9q893hmn.js" noModule=""></script>
+
+  <!-- Firebase Cloud Sync SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  
 </head>
 
 <body class="min-h-full flex flex-col">
@@ -545,6 +550,29 @@
       }
       renderStaticDynamicMenu();
       window.addEventListener('storage', renderStaticDynamicMenu);
+
+      // Firebase Live Firestore Listener
+      try {
+        var fbConfig = {"apiKey":"AIzaSyDrW0mdYLnt0S-eqG2BuC2uCa2xgRYzRPc","authDomain":"house-of-delicious.firebaseapp.com","projectId":"house-of-delicious","storageBucket":"house-of-delicious.firebasestorage.app","messagingSenderId":"1072791327054","appId":"1:1072791327054:web:d81c316dbd6a2062cc8e1f"};
+        if (!firebase.apps.length) {
+          firebase.initializeApp(fbConfig);
+        }
+        var db = firebase.firestore();
+        db.collection('menu').doc('current').onSnapshot(function(doc) {
+          if (doc.exists) {
+            var data = doc.data();
+            if (data && Array.isArray(data.items)) {
+              localStorage.setItem('hod_menu_data_v1', JSON.stringify(data));
+              renderStaticDynamicMenu();
+            }
+          }
+        }, function(err) {
+          console.warn('Firebase menu listener notice:', err);
+        });
+      } catch(err) {
+        console.warn('Firebase init notice in menu.html:', err);
+      }
+
     })();
   </script>
 </section>
