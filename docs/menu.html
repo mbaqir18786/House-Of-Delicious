@@ -59,11 +59,7 @@
   <link rel="icon" href="/favicon.ico?favicon.0zm.9b8gmi8mf.ico" sizes="48x48" type="image/x-icon" />
   <script src="/_next/static/chunks/03~yq9q893hmn.js" noModule=""></script>
 
-  <!-- Firebase Cloud Sync SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-  
-</head>
+  </head>
 
 <body class="min-h-full flex flex-col">
   <div hidden=""><!--$--><!--/$--></div>
@@ -470,297 +466,153 @@
   
   <div id="dynamicTabsWrapper" class="w-full sticky top-[72px] md:top-[100px] z-40 bg-[#f5e3cd]/95 backdrop-blur-md category-tabs-wrapper">
     <div id="dynamicTabsBar" class="category-tabs-bar">
-      <button type="button" class="category-tab-btn category-tab-active">
-        <span>ALL</span>
-        <span class="category-tab-count">(0)</span>
-      </button>
+<button type="button" class="category-tab-btn category-tab-active"><span>ALL</span><span class="category-tab-count">(15)</span></button><button type="button" class="category-tab-btn category-tab-inactive"><span>BURGERS</span><span class="category-tab-count">(6)</span></button><button type="button" class="category-tab-btn category-tab-inactive"><span>PIZZAS</span><span class="category-tab-count">(2)</span></button><button type="button" class="category-tab-btn category-tab-inactive"><span>SNACKS</span><span class="category-tab-count">(3)</span></button><button type="button" class="category-tab-btn category-tab-inactive"><span>ROLLS</span><span class="category-tab-count">(2)</span></button><button type="button" class="category-tab-btn category-tab-inactive"><span>DESSERTS</span><span class="category-tab-count">(2)</span></button>
     </div>
   </div>
 
   <div id="dynamicMenuGridContainer" class="w-full">
-    <div class="w-full py-16 text-center my-8 rounded-3xl bg-white/40 border-2 border-dashed border-red/20">
-      <div class="flex flex-col items-center justify-center gap-2">
-        <span class="text-4xl">🍔</span>
-        <p class="font-modak text-2xl text-red uppercase">No Items Added Yet</p>
-        <p class="font-mouse-memoirs text-xl text-neutral-600 uppercase">Add your delicious dishes from the Admin Panel to display here!</p>
+<div class="w-full grid grid-cols-3 gap-[2vw] mt-[2vw] max-md:grid-cols-1 max-md:gap-[24px]">
+    <div class="w-full">
+      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
+        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
+          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
+          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
+        </div>
+        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
+          <div class="w-full flex justify-end items-center z-30">
+            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
+              <span>ORDER NOW</span>
+              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
+            </a>
+          </div>
+          <div class="menu-img-wrap mx-auto relative flex items-center justify-center">
+            <img src="/burgers/1b.png" alt="HOD Signature Smashed Burger" class="size-full transition-transform duration-500 group-hover:scale-105 img-contain" />
+          </div>
+          <div class="menu-bottom-row w-full flex items-end justify-between border-t border-transparent">
+            <h3 class="menu-item-name font-mouse-memoirs uppercase truncate">HOD Signature Smashed Burger</h3>
+            <span class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹150</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-
-  <script>
-    (function() {
-      function renderStaticDynamicMenu() {
-        try {
-          var saved = localStorage.getItem('hod_menu_data_v1');
-          if (!saved) return;
-          var state = JSON.parse(saved);
-          var items = Array.isArray(state.items) ? state.items : [];
-          var categories = Array.isArray(state.categories) ? state.categories : ['Burgers', 'Pizzas', 'Snacks', 'Rolls', 'Desserts'];
-
-          var tabsBar = document.getElementById('dynamicTabsBar');
-          var gridContainer = document.getElementById('dynamicMenuGridContainer');
-          if (!tabsBar || !gridContainer) return;
-
-          // Render Tabs
-          var tabsHtml = '<button type="button" class="category-tab-btn category-tab-active"><span>ALL</span><span class="category-tab-count">(' + items.length + ')</span></button>';
-          categories.forEach(function(cat) {
-            var count = items.filter(function(i) { return (i.cat || '').toLowerCase() === cat.toLowerCase(); }).length;
-            tabsHtml += '<button type="button" class="category-tab-btn category-tab-inactive"><span>' + cat.toUpperCase() + '</span><span class="category-tab-count">(' + count + ')</span></button>';
-          });
-          tabsBar.innerHTML = tabsHtml;
-
-          // Render Cards (first 6 items by default)
-          if (items.length > 0) {
-            var visible = items.slice(0, 6);
-            var cardsHtml = '<div class="w-full grid grid-cols-3 gap-[2vw] mt-[2vw] max-md:grid-cols-1 max-md:gap-[24px]">';
-            visible.forEach(function(item) {
-              cardsHtml += '<div class="w-full"><div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">' +
-                '<div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">' +
-                '<div class="flex w-full h-1/2">' + Array(12).fill(0).map(function(_, a) { return '<div class="h-full w-[8.33%] ' + (a%2===0?'bg-red':'bg-white') + '"></div>'; }).join('') + '</div>' +
-                '<div class="flex w-full h-1/2">' + Array(12).fill(0).map(function(_, a) { return '<div class="h-full w-[8.33%] ' + (a%2===1?'bg-red':'bg-white') + '"></div>'; }).join('') + '</div>' +
-                '</div>' +
-                '<div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">' +
-                '<div class="w-full flex justify-end items-center z-30">' +
-                '<a href="' + (item.orderUrl || 'https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order') + '" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">' +
-                '<span>ORDER NOW</span>' +
-                '<svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>' +
-                '</a>' +
-                '</div>' +
-                '<div class="menu-img-wrap mx-auto relative flex items-center justify-center">' +
-                '<img src="' + (item.image || '/burgers/1b.png') + '" alt="' + item.name + '" class="size-full transition-transform duration-500 group-hover:scale-105 ' + (item.imageFit === "contain" || (item.image && item.image.indexOf("/burgers/") !== -1) ? "img-contain" : "img-cover") + '" />' +
-                '</div>' +
-                '<div class="menu-bottom-row w-full flex items-end justify-between border-t border-transparent">' +
-                '<h3 class="menu-item-name font-mouse-memoirs uppercase truncate">' + item.name + '</h3>' +
-                '<span class="menu-item-price font-mouse-memoirs font-bold">' + item.price + '</span>' +
-                '</div>' +
-                '</div>' +
-                '</div></div>';
-            });
-            cardsHtml += '</div>';
-
-            if (items.length > 6) {
-              cardsHtml += '<div class="w-full flex justify-center mt-[3vw] max-md:mt-[6vw]">' +
-                '<button type="button" class="group px-8 py-3.5 bg-red hover:bg-black text-white font-mouse-memoirs text-2xl uppercase tracking-wider rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2 cursor-pointer">' +
-                '<span>SEE MORE (' + (items.length - 6) + ' MORE) ↓</span>' +
-                '</button></div>';
-            }
-            gridContainer.innerHTML = cardsHtml;
-          }
-        } catch(e) {}
-      }
-      renderStaticDynamicMenu();
-      window.addEventListener('storage', renderStaticDynamicMenu);
-
-      // Firebase Live Firestore Listener
-      try {
-        var fbConfig = {"apiKey":"AIzaSyDrW0mdYLnt0S-eqG2BuC2uCa2xgRYzRPc","authDomain":"house-of-delicious.firebaseapp.com","projectId":"house-of-delicious","storageBucket":"house-of-delicious.firebasestorage.app","messagingSenderId":"1072791327054","appId":"1:1072791327054:web:d81c316dbd6a2062cc8e1f"};
-        if (!firebase.apps.length) {
-          firebase.initializeApp(fbConfig);
-        }
-        var db = firebase.firestore();
-        db.collection('menu').doc('current').onSnapshot(function(doc) {
-          if (doc.exists) {
-            var data = doc.data();
-            if (data && Array.isArray(data.items)) {
-              localStorage.setItem('hod_menu_data_v1', JSON.stringify(data));
-              renderStaticDynamicMenu();
-            }
-          }
-        }, function(err) {
-          console.warn('Firebase menu listener notice:', err);
-        });
-      } catch(err) {
-        console.warn('Firebase init notice in menu.html:', err);
-      }
-
-    })();
-  </script>
-</section>
-    <div class="-mt-[18vw]">
-      <section id="cta" class="h-fit w-full pt-[18vw] max-md:pt-[12vw] overflow-clip relative bg-beige">
-        <div
-          class="h-screen my-[8vw] mt-0 flex items-center justify-center w-full relative max-md:my-[2vw] max-md:mt-0 max-md:h-fit max-md:flex-col max-md:gap-0 max-md:px-[2vw]">
-          <div
-            class="absolute z-222 bottom-[1vw] max-md:bottom-[65vw] max-md:left-[2vw] max-md:translate-x-0! -rotate-45 left-1/2  -translate-x-1/2 w-[35vw] h-auto  max-md:w-[70vw] object-contain max-md:mb-[4vw] "
-            style="--sticker-rotate:30deg;--sticker-p:20%;--sticker-peelback-hover:30%;--sticker-peelback-active:40%;--sticker-peel-easing:power3.out;--sticker-peel-hover-easing:power2.out;--sticker-width:35vw;--sticker-shadow-opacity:0.6;--sticker-lighting-constant:0.1;--peel-direction:0deg;--peel-amount:1">
-            <svg width="0" height="0">
-              <defs>
-                <filter id="pointLight">
-                  <feGaussianBlur stdDeviation="1" result="blur"></feGaussianBlur>
-                  <feSpecularLighting result="spec" in="blur" specularExponent="100" specularConstant="0.1"
-                    lighting-color="white">
-                    <fePointLight x="100" y="100" z="300"></fePointLight>
-                  </feSpecularLighting>
-                  <feComposite in="spec" in2="SourceGraphic" result="lit"></feComposite>
-                  <feComposite in="lit" in2="SourceAlpha" operator="in"></feComposite>
-                </filter>
-                <filter id="pointLightFlipped">
-                  <feGaussianBlur stdDeviation="10" result="blur"></feGaussianBlur>
-                  <feSpecularLighting result="spec" in="blur" specularExponent="100"
-                    specularConstant="0.7000000000000001" lighting-color="white">
-                    <fePointLight x="100" y="100" z="300"></fePointLight>
-                  </feSpecularLighting>
-                  <feComposite in="spec" in2="SourceGraphic" result="lit"></feComposite>
-                  <feComposite in="lit" in2="SourceAlpha" operator="in"></feComposite>
-                </filter>
-                <filter id="dropShadow">
-                  <feDropShadow dx="2" dy="4" stdDeviation="1.7999999999999998" flood-color="black" flood-opacity="0.6">
-                  </feDropShadow>
-                </filter>
-                <filter id="expandAndFill">
-                  <feOffset dx="0" dy="0" in="SourceAlpha" result="shape"></feOffset>
-                  <feFlood flood-color="rgb(179,179,179)" result="flood"></feFlood>
-                  <feComposite operator="in" in="flood" in2="shape"></feComposite>
-                </filter>
-              </defs>
-            </svg>
-            <div class="sticker-container">
-              <div class="sticker-main">
-                <div class="sticker-lighting"><img src="/img/burger-boy.png" alt="" class="sticker-image"
-                    draggable="false" /></div>
-              </div>
-              <div class="flap">
-                <div class="flap-lighting"><img src="/img/burger-boy.png" alt="" class="flap-image" draggable="false" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="w-[60vw] flex items-start gap-[2vw] justify-center flex-col self h-full max-md:w-full max-md:gap-[4vw] max-md:items-center max-md:h-fit">
-            <p
-              class="text-red -rotate-7 ml-[.5vw] uppercase text-stroke-180 font-modak leading-[.9]! text60 max-md:rotate-0 max-md:ml-0 max-md:translate-y-0 max-md:text-center">
-              VISIT US</p>
-            <h2
-              class="text-red text-stroke-180 heading300 uppercase leading-[.75] max-md:leading-[.85]! max-md:text-[10vw] max-md:text-center">
-              <span class="sr-only">feel the
-                Change</span><span aria-hidden="true" class="" style="visibility:hidden"><span data-pop="true"
-                  class="inline-block will-change-transform">feel</span><span> </span><span data-pop="true"
-                  class="inline-block will-change-transform">the</span><br /><span data-pop="true"
-                  class="inline-block will-change-transform">Change</span></span></h2><span class="inline-block"
-              style="opacity:0">
-              <p
-                class="text40 w-[30vw]   font-mouse-memoirs leading-[1.1] max-md:w-full max-md:text-[4vw] max-md:text-center">
-                Vibrant Central Perk vibes, freshly prepared fusion comfort food, and student-friendly pricing. Open
-                daily from 11:00 AM to 11:00 PM.</p>
-            </span>
-            <div class="max-md:w-full max-md:flex max-md:justify-center"><a data-cursor-hide="true" type="link-btn"
-                class="relative w-fit mx-auto border-none bg-transparent p-0 block cursor-pointer outline-none select-none "
-                data-anm-btn="btn" data-wf--btn-blob--variant="secondary" href="/menu"><svg
-                  xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="-10 -10 602 475" preserveAspectRatio="none"
-                  data-anm-btn="svg" class="absolute inset-0 w-full h-full z-0 pointer-events-none">
-                  <path stroke="#ffffff" stroke-width="10" fill="#F91914"
-                    d="M310.777 0.20434C424.154 2.91791 540.733 50.9739 574.176 159.34C606.479 264.014 533.962 365.999 442.064 425.623C364.995 475.626 270.863 455.893 193.524 406.309C93.8313 342.395 -27.3608 259.503 5.48889 145.729C40.0621 25.9857 186.179 -2.77783 310.777 0.20434Z"
-                    data-anm-btn="path" class="transition-[fill] duration-200"></path>
-                </svg><span data-anm-btn="text"
-                  class="relative z-10 text-white font-bold text40 uppercase inline-block px-[4vw] py-[1.5vw] max-md:px-[10vw] max-md:py-[4vw] "
-                  aria-hidden="false">Order Now</span></a></div>
-          </div>
-          <div
-            class="w-[45vw] rounded-[2vw] overflow-hidden h-[60vw] max-md:w-full max-md:h-[40vh] max-md:min-h-[40vw] max-md:rounded-[4vw]">
-            <img alt="Premium smashed burger on a wooden board" loading="lazy" width="1000" height="1000"
-              decoding="async" data-nimg="1" class="h-full w-full object-cover" style="color:transparent"
-              srcSet="/_next/image?url=%2Fimg-webp%2Fcta.webp&amp;w=1080&amp;q=75 1x, /_next/image?url=%2Fimg-webp%2Fcta.webp&amp;w=2048&amp;q=75 2x"
-              src="/_next/image?url=%2Fimg-webp%2Fcta.webp&amp;w=2048&amp;q=75" /></div>
+    <div class="w-full">
+      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
+        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
+          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
+          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
         </div>
-      </section>
+        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
+          <div class="w-full flex justify-end items-center z-30">
+            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
+              <span>ORDER NOW</span>
+              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
+            </a>
+          </div>
+          <div class="menu-img-wrap mx-auto relative flex items-center justify-center">
+            <img src="/burgers/2b.png" alt="Crispy Paneer Cheese Burger" class="size-full transition-transform duration-500 group-hover:scale-105 img-contain" />
+          </div>
+          <div class="menu-bottom-row w-full flex items-end justify-between border-t border-transparent">
+            <h3 class="menu-item-name font-mouse-memoirs uppercase truncate">Crispy Paneer Cheese Burger</h3>
+            <span class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹170</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <footer class="h-fit w-full  overflow-hidden self relative">
-      <div
-        class="relative z-30 flex items-center justify-between gap-[2vw] pb-[1vw] max-md:flex-col max-md:items-center max-md:gap-[4vw] max-md:pb-[6vw]">
-        <nav class="flex flex-wrap items-center gap-x-[2vw] gap-y-[.6vw] max-md:gap-x-[5vw] max-md:gap-y-[2vw]"
-          aria-label="Footer navigation"><a class="text40 uppercase font-mouse-memoirs hover:text-red transition-colors"
-            aria-label="Home" href="/">
-            <div aria-hidden="true"><span class="inline-block" style="opacity:0"><span
-                  class="overflow-hidden  relative inline-block group "><span
-                    class="block  group-hover:-translate-y-full translate-y-0 transition-all duration-300">Home</span><span
-                    class="block absolute inset-0 w-full h-full group-hover:translate-y-0 translate-y-full transition-all duration-300"
-                    aria-hidden="true">Home</span></span></span></div>
-          </a><a class="text40 uppercase font-mouse-memoirs hover:text-red transition-colors" aria-label="Burgers"
-            href="/menu">
-            <div aria-hidden="true"><span class="inline-block" style="opacity:0"><span
-                  class="overflow-hidden  relative inline-block group "><span
-                    class="block  group-hover:-translate-y-full translate-y-0 transition-all duration-300">Menu</span><span
-                    class="block absolute inset-0 w-full h-full group-hover:translate-y-0 translate-y-full transition-all duration-300"
-                    aria-hidden="true">Menu</span></span></span></div>
-          </a><a class="text40 uppercase font-mouse-memoirs hover:text-red transition-colors" aria-label="Spices"
-            href="/spices">
-            <div aria-hidden="true"><span class="inline-block" style="opacity:0"><span
-                  class="overflow-hidden  relative inline-block group "><span
-                    class="block  group-hover:-translate-y-full translate-y-0 transition-all duration-300">Spices</span><span
-                    class="block absolute inset-0 w-full h-full group-hover:translate-y-0 translate-y-full transition-all duration-300"
-                    aria-hidden="true">Spices</span></span></span></div>
-          </a><a class="text40 uppercase font-mouse-memoirs hover:text-red transition-colors" aria-label="Contact"
-            href="/contact">
-            <div aria-hidden="true"><span class="inline-block" style="opacity:0"><span
-                  class="overflow-hidden  relative inline-block group "><span
-                    class="block  group-hover:-translate-y-full translate-y-0 transition-all duration-300">Contact</span><span
-                    class="block absolute inset-0 w-full h-full group-hover:translate-y-0 translate-y-full transition-all duration-300"
-                    aria-hidden="true">Contact</span></span></span></div>
-          </a></nav><span class="inline-block" style="opacity:0">
-          <p class="text40 max-md:hidden uppercase opacity-80 font-mouse-memoirs">┬⌐ <!-- -->2026<!-- --> HOD ΓÇö All
-            rights reserved</p>
-        </span>
-      </div>
-      <div class="relative z-30 max-md:hidden">
-        <div class="h-[2px]  w-full bg-black/20"></div>
-      </div>
-      <div class="relative z-30 max-md:hidden pt-[1vw] opacity-80 max-md:pt-[4vw]"><span class="inline-block"
-          style="opacity:0">
-          <p class="text40 uppercase font-mouse-memoirs">Handmade Pizzas ┬╖ Fusion Rolls ┬╖ Shakes ┬╖ Vidyavihar</p>
-        </span></div>
-      <div class="mt-[10vw]  relative min-h-[18vw] max-md:mt-[5vw]">
-        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-0 z-20" aria-hidden="true"><img
-            src="/img-webp/lettuce.webp" alt="" draggable="false"
-            style="position:absolute;bottom:0;left:12%;width:calc(11vw * var(--juggle-scale, 1));opacity:0;user-select:none;will-change:transform, opacity" /><img
-            src="/img-webp/tomato.webp" alt="" draggable="false"
-            style="position:absolute;bottom:0;left:34%;width:calc(9vw * var(--juggle-scale, 1));opacity:0;user-select:none;will-change:transform, opacity" /><img
-            src="/img-webp/cheese-logo.webp" alt="" draggable="false"
-            style="position:absolute;bottom:0;left:56%;width:calc(12vw * var(--juggle-scale, 1));opacity:0;user-select:none;will-change:transform, opacity" /><img
-            src="/img-webp/meat.webp" alt="" draggable="false"
-            style="position:absolute;bottom:0;left:80%;width:calc(13vw * var(--juggle-scale, 1));opacity:0;user-select:none;will-change:transform, opacity" />
+    <div class="w-full">
+      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
+        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
+          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
+          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
         </div>
-        <h2
-          class="heading600 leading-[.5] translate-y-[5vw] max-md:translate-y-0 text-center text-red text-stroke z-10 relative">
-          <span class="sr-only">House Of Delicious</span><span aria-hidden="true" class="" style="visibility:hidden"><span
-              data-pop="true" class="inline-block will-change-transform">C</span><span data-pop="true"
-              class="inline-block will-change-transform">R</span><span data-pop="true"
-              class="inline-block will-change-transform">A</span><span data-pop="true"
-              class="inline-block will-change-transform">V</span></span></h2>
-        <div class="relative hidden max-md:block z-30 mt-[10vw]">
-          <div class="relative">
-            <div class="h-[2px] w-full bg-black/20"></div>
+        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
+          <div class="w-full flex justify-end items-center z-30">
+            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
+              <span>ORDER NOW</span>
+              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
+            </a>
+          </div>
+          <div class="menu-img-wrap mx-auto relative flex items-center justify-center">
+            <img src="/burgers/3b.png" alt="Double Cheese Burst Burger" class="size-full transition-transform duration-500 group-hover:scale-105 img-contain" />
+          </div>
+          <div class="menu-bottom-row w-full flex items-end justify-between border-t border-transparent">
+            <h3 class="menu-item-name font-mouse-memoirs uppercase truncate">Double Cheese Burst Burger</h3>
+            <span class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹190</span>
           </div>
         </div>
-        <div class="relative z-30 pt-[1vw] max-md:pt-[4vw]">
-          <p class="text40 uppercase font-mouse-memoirs opacity-80 text-center"><span class="inline-block"
-              style="opacity:0"><span class="hidden max-md:block">Handmade Pizzas ┬╖ Fusion Rolls ┬╖ Shakes ┬╖
-                Vidyavihar</span></span><span class="inline-block" style="opacity:0"><span class="md:hidden block">┬⌐
-                <!-- -->2026<!-- --> HOD ΓÇö All rights reserved</span></span></p>
+      </div>
+    </div>
+    <div class="w-full">
+      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
+        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
+          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
+          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
+        </div>
+        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
+          <div class="w-full flex justify-end items-center z-30">
+            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
+              <span>ORDER NOW</span>
+              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
+            </a>
+          </div>
+          <div class="menu-img-wrap mx-auto relative flex items-center justify-center">
+            <img src="/burgers/4b.png" alt="Tandoori Paneer Burger" class="size-full transition-transform duration-500 group-hover:scale-105 img-contain" />
+          </div>
+          <div class="menu-bottom-row w-full flex items-end justify-between border-t border-transparent">
+            <h3 class="menu-item-name font-mouse-memoirs uppercase truncate">Tandoori Paneer Burger</h3>
+            <span class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹160</span>
+          </div>
         </div>
       </div>
-    </footer><!--$--><!--/$-->
+    </div>
+    <div class="w-full">
+      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
+        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
+          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
+          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
+        </div>
+        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
+          <div class="w-full flex justify-end items-center z-30">
+            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
+              <span>ORDER NOW</span>
+              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
+            </a>
+          </div>
+          <div class="menu-img-wrap mx-auto relative flex items-center justify-center">
+            <img src="/burgers/5b.png" alt="Spicy Schezwan Burger" class="size-full transition-transform duration-500 group-hover:scale-105 img-contain" />
+          </div>
+          <div class="menu-bottom-row w-full flex items-end justify-between border-t border-transparent">
+            <h3 class="menu-item-name font-mouse-memoirs uppercase truncate">Spicy Schezwan Burger</h3>
+            <span class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹150</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-full">
+      <div class="menu-card group w-full bg-white relative shrink-0 transition-all duration-300 shadow-md">
+        <div class="menu-card-checkers absolute w-full left-0 z-10 pointer-events-none" aria-hidden="true">
+          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div></div>
+          <div class="flex w-full h-1/2"><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div><div class="h-full w-[8.33%] bg-white"></div><div class="h-full w-[8.33%] bg-red"></div></div>
+        </div>
+        <div class="menu-card-inner size-full relative z-20 flex flex-col justify-between">
+          <div class="w-full flex justify-end items-center z-30">
+            <a href="https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order" target="_blank" rel="noopener noreferrer" class="menu-order-btn rounded-full bg-red text-white font-mouse-memoirs uppercase tracking-wider hover:bg-black transition-all cursor-pointer shadow-sm flex items-center justify-center gap-[6px]">
+              <span>ORDER NOW</span>
+              <svg class="menu-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
+            </a>
+          </div>
+          <div class="menu-img-wrap mx-auto relative flex items-center justify-center">
+            <img src="/burgers/6b.png" alt="Classic Aloo Tikki Cheese Burger" class="size-full transition-transform duration-500 group-hover:scale-105 img-contain" />
+          </div>
+          <div class="menu-bottom-row w-full flex items-end justify-between border-t border-transparent">
+            <h3 class="menu-item-name font-mouse-memoirs uppercase truncate">Classic Aloo Tikki Cheese Burger</h3>
+            <span class="menu-item-price font-mouse-memoirs uppercase font-bold text-black">₹120</span>
+          </div>
+        </div>
+      </div>
+    </div></div>
+  <div class="w-full flex justify-center mt-[3vw] max-md:mt-[6vw]">
+    <button type="button" class="group px-8 py-3.5 bg-red hover:bg-black text-white font-mouse-memoirs text-2xl uppercase tracking-wider rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2 cursor-pointer">
+      <span>SEE MORE (9 MORE) ↓</span>
+    </button>
   </div>
-  <div class="fixed inset-0 w-full h-dvh pointer-events-none z-9999 overflow-hidden"><svg
-      class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-      <path fill="#f91814" d="M -1 101 L 101 101 L 101 101 Q 50 101 -1 101 Z"></path>
-    </svg><svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-      <path fill="#EF6F2E" d="M -1 101 L 101 101 L 101 101 Q 50 101 -1 101 Z"></path>
-    </svg><svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-      <path fill="#F4A804" d="M -1 101 L 101 101 L 101 101 Q 50 101 -1 101 Z"></path>
-    </svg>
-    <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none" style="opacity:0"><span
-        class="font-modak text-[#4C0016] heading180 uppercase ">Craving...</span></div>
-  </div><!--$!--><template data-dgst="BAILOUT_TO_CLIENT_SIDE_RENDERING"></template><!--/$-->
-  <script src="/_next/static/chunks/0zaia6i55l01..js" id="_R_" async=""></script>
-  <script>(self.__next_f = self.__next_f || []).push([0])</script>
-  <script>self.__next_f.push([1, "1:\"$Sreact.fragment\"\n2:I[76761,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"default\"]\n3:I[79520,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"\"]\n4:I[55334,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"AnimationProvider\"]\n5:I[44091,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"default\"]\n6:I[28981,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"default\"]\n7:I[83138,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"default\"]\n8:I[82148,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"default\"]\n9:I[78519,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"default\"]\na:I[65022,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"default\"]\nb:I[39756,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"default\"]\nc:I[37457,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"default\"]\nd:I[57390,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\",\"/_next/static/chunks/0286ehihuc~da.js\",\"/_next/static/chunks/0v8rh9ns1udzx.js\"],\"default\"]\ne:I[2355,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"Analytics\"]\nf:I[68763,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\",\"/_next/static/chunks/007kg070x-b~l.js\",\"/_next/static/chunks/0v8rh9ns1udzx.js\",\"/_next/static/chunks/014r2tef6u366.js\"],\"default\"]\n10:I[36507,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\",\"/_next/static/chunks/007kg070x-b~l.js\",\"/_next/static/chunks/0v8rh9ns1udzx.js\",\"/_next/static/chunks/014r2tef6u366.js\"],\"default\"]\n11:I[5500,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\",\"/_next/static/chunks/007kg070x-b~l.js\",\"/_next/static/chunks/0v8rh9ns1udzx.js\",\"/_next/static/chunks/014r2tef6u366.js\"],\"Image\"]\n12:I[59598,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\",\"/_next/static/chunks/007kg070x-b~l.js\",\"/_next/static/chunks/0v8rh9ns1udzx.js\",\"/_next/static/chunks/014r2tef6u366.js\"],\"default\"]\n13:I[43072,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\",\"/_next/static/chunks/007kg070x-b~l.js\",\"/_next/static/chunks/0v8rh9ns1udzx.js\",\"/_next/static/chunks/014r2tef6u366.js\"],\"default\"]\n14:I[80308,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_n"])</script>
-  <script>self.__next_f.push([1, "ext/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\",\"/_next/static/chunks/007kg070x-b~l.js\",\"/_next/static/chunks/0v8rh9ns1udzx.js\",\"/_next/static/chunks/014r2tef6u366.js\"],\"default\"]\n20:I[68027,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"default\",1]\n:HL[\"/_next/static/chunks/0ovftnp3y9gzb.css\",\"style\"]\n:HL[\"/_next/static/media/1c549cf76d17aa84-s.p.0duk76ik6drf0.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/media/e24507cc2fd99222-s.p.116v.fn8s2.9a.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/chunks/05n9.pfd~lr39.css\",\"style\"]\n"])</script>
-  <script>self.__next_f.push([1, "0:{\"P\":null,\"c\":[\"\",\"menu\"],\"q\":\"\",\"i\":false,\"f\":[[[\"\",{\"children\":[\"menu\",{\"children\":[\"__PAGE__\",{}]}]},\"$undefined\",\"$undefined\",16],[[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/chunks/0ovftnp3y9gzb.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"script\",\"script-0\",{\"src\":\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"async\":true,\"nonce\":\"$undefined\"}],[\"$\",\"script\",\"script-1\",{\"src\":\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"async\":true,\"nonce\":\"$undefined\"}],[\"$\",\"script\",\"script-2\",{\"src\":\"/_next/static/chunks/0h72oc0nv1wic.js\",\"async\":true,\"nonce\":\"$undefined\"}],[\"$\",\"script\",\"script-3\",{\"src\":\"/_next/static/chunks/0d3shmwh5_nmn.js\",\"async\":true,\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"en\",\"className\":\"modak_e8c77bb9-module__To9VbG__variable mouse_memoirs_a09dbcb8-module__HOyvqG__variable h-full antialiased\",\"children\":[[\"$\",\"$L2\",null,{}],[\"$\",\"body\",null,{\"className\":\"min-h-full flex flex-col\",\"children\":[[\"$\",\"$L3\",null,{\"id\":\"restaurant-schema\",\"type\":\"application/ld+json\",\"dangerouslySetInnerHTML\":{\"__html\":\"{\\\"@context\\\":\\\"https://schema.org\\\",\\\"@type\\\":\\\"Restaurant\\\",\\\"name\\\":\\\"House of Delicious\\\",\\\"image\\\":\\\"https://mbaqir18786.github.io/House-Of-Delicious/img-webp/burgerwithhands.webp\\\",\\\"@id\\\":\\\"https://mbaqir18786.github.io/House-Of-Delicious\\\",\\\"url\\\":\\\"https://mbaqir18786.github.io/House-Of-Delicious\\\",\\\"address\\\":{\\\"@type\\\":\\\"PostalAddress\\\",\\\"addressLocality\\\":\\\"Navarra\\\",\\\"addressCountry\\\":\\\"ES\\\"},\\\"menu\\\":\\\"https://mbaqir18786.github.io/House-Of-Delicious/menu\\\",\\\"servesCuisine\\\":\\\"Artisan Burgers\\\",\\\"priceRange\\\":\\\"$$\\\"}\"}}],[\"$\",\"$L4\",null,{\"children\":[[\"$\",\"$L5\",null,{}],[\"$\",\"$L6\",null,{}],[\"$\",\"$L7\",null,{}],[\"$\",\"$L8\",null,{\"children\":[[\"$\",\"$L9\",null,{}],[\"$\",\"$La\",null,{}],[\"$\",\"$Lb\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$Lc\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[\"$\",\"$Ld\",null,{}],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],[\"$\",\"$Le\",null,{}]]}]]}]]}]]}],{\"children\":[[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$Lb\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$Lc\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"$Lf\",null,{}],[\"$\",\"section\",null,{\"data-nav-dark\":\"true\",\"className\":\"  w-full  relative max-md:h-[80vh] h-screen\",\"children\":[[\"$\",\"$L10\",null,{\"fill\":\"#F5E3CD\",\"flip\":true}],[\"$\",\"$L11\",null,{\"src\":\"/img-webp/smoky-burger.webp\",\"alt\":\"menu hero\",\"width\":1000,\"height\":1000,\"className\":\"h-full w-full object-cover\"}],[\"$\",\"div\",null,{\"className\":\"size-[13vw] max-md:size-[30vw] absolute top-[13vw] max-md:top-[90vw] -translate-y-1/2 left-[25vw]\",\"children\":[\"$\",\"$L11\",null,{\"src\":\"/img-webp/smile.png\",\"priority\":true,\"alt\":\"burger\",\"width\":1000,\"height\":1000,\"className\":\"h-full w-full object-contain\"}]}],[\"$\",\"$L12\",null,{\"scroll\":false,\"as\":\"h1\",\"delay\":0,\"className\":\"text-stroke-180 w-[60vw] max-md:mb-[12vw] heading300 max-md:w-full text-center uppercase leading-[.85] text-[#F4A804] absolute left-1/2 -translate-x-1/2 bottom-[12vw]\",\"split\":\"words\",\"children\":\"Eat like you mean it\"}]]}],[\"$\",\"$L13\",null,{}],[\"$\",\"div\",null,{\"className\":\"-mt-[18vw]\",\"children\":[\"$\",\"section\",null,{\"id\":\"cta\",\"className\":\"h-fit w-full pt-[18vw] max-md:pt-[12vw] overflow-clip relative bg-beige\",\"children\":[false,[\"$\",\"div\",null,{\"className\":\"h-screen my-[8vw] mt-0 flex items-center justify-center w-full relative max-md:my-[2vw] max-md:mt-0 max-md:h-fit max-md:flex-col max-md:gap-0 max-md:px-[2vw]\",\"children\":[[\"$\",\"$L14\",null,{\"triggers\":[\"-0% 50%\",\"50% 50%\"],\"className\":\"absolute z-222 bottom-[1vw] max-md:bottom-[65vw] max-md:left-[2vw] max-md:translate-x-0! -rotate-45 left-1/2  -translate-x-1/2 w-[35vw] h-auto  max-md:w-[70vw] object-contain max-md:mb-[4vw]\",\"imageSrc\":\"/img/burger-boy.png\",\"alt\":\"Happy customer enjoying a HOD artisan burger\",\"width\":\"35vw\"}],[\"$\",\"div\",null,{\"className\":\"w-[60vw] flex items-start gap-[2vw] justify-center flex-col self h-full max-md:w-full max-md:gap-[4vw] max-md:items-center max-md:h-fit\",\"children\":[[\"$\",\"p\",null,{\"className\":\"text-red -rotate-7 ml-[.5vw] uppercase text-stroke-180 font-modak leading-[.9]! text60 max-md:rotate-0 max-md:ml-0 max-md:translate-y-0 max-md:text-center\",\"children\":\"VISIT US\"}],[\"$\",\"$L12\",null,{\"as\":\"h2\",\"className\":\"text-red text-stroke-180 heading300 uppercase leading-[.75] max-md:leading-[.85]! max-md:text-[10vw] max-md:text-center\",\"split\":\"words\",\"scrollStart\":\"top 88%\",\"children\":\"feel the\\nChange\"}],\"$L15\",\"$L16\"]}],\"$L17\"]}]]}]}],\"$L18\"],[\"$L19\",\"$L1a\",\"$L1b\",\"$L1c\"],\"$L1d\"]}],{},null,false,null]},null,false,\"$@1e\"]},null,false,null],\"$L1f\",false]],\"m\":\"$undefined\",\"G\":[\"Γé╣180\",[\"$L21\"]],\"S\":true,\"h\":null,\"s\":\"$undefined\",\"l\":\"$undefined\",\"p\":\"$undefined\",\"d\":\"$undefined\",\"b\":\"D0tWgX6hun4wv9jI7ry5S\"}\n"])</script>
-  <script>self.__next_f.push([1, "22:I[63168,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\",\"/_next/static/chunks/007kg070x-b~l.js\",\"/_next/static/chunks/0v8rh9ns1udzx.js\",\"/_next/static/chunks/014r2tef6u366.js\"],\"default\"]\n23:I[23057,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\",\"/_next/static/chunks/007kg070x-b~l.js\",\"/_next/static/chunks/0v8rh9ns1udzx.js\",\"/_next/static/chunks/014r2tef6u366.js\"],\"default\"]\n24:I[97713,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\",\"/_next/static/chunks/007kg070x-b~l.js\",\"/_next/static/chunks/0v8rh9ns1udzx.js\",\"/_next/static/chunks/014r2tef6u366.js\"],\"default\"]\n25:I[97367,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"OutletBoundary\"]\n26:\"$Sreact.suspense\"\n29:I[97367,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"ViewportBoundary\"]\n2b:I[97367,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"MetadataBoundary\"]\n15:[\"$\",\"$L22\",null,{\"delay\":0.25,\"children\":[\"$\",\"p\",null,{\"className\":\"text40 w-[30vw]   font-mouse-memoirs leading-[1.1] max-md:w-full max-md:text-[4vw] max-md:text-center\",\"children\":\"Vibrant Central Perk vibes, freshly prepared fusion comfort food, and student-friendly pricing. Open daily from 11:00 AM to 11:00 PM.\"}]}]\n16:[\"$\",\"div\",null,{\"className\":\"max-md:w-full max-md:flex max-md:justify-center\",\"children\":[\"$\",\"$L23\",null,{}]}]\n17:[\"$\",\"div\",null,{\"className\":\"w-[45vw] rounded-[2vw] overflow-hidden h-[60vw] max-md:w-full max-md:h-[40vh] max-md:min-h-[40vw] max-md:rounded-[4vw]\",\"children\":[\"$\",\"$L11\",null,{\"src\":\"/img-webp/cta.webp\",\"alt\":\"Premium smashed burger on a wooden board\",\"width\":1000,\"height\":1000,\"className\":\"h-full w-full object-cover\"}]}]\n18:[\"$\",\"$L24\",null,{}]\n19:[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/chunks/05n9.pfd~lr39.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]\n1a:[\"$\",\"script\",\"script-0\",{\"src\":\"/_next/static/chunks/007kg070x-b~l.js\",\"async\":true,\"nonce\":\"$undefined\"}]\n1b:[\"$\",\"script\",\"script-1\",{\"src\":\"/_next/static/chunks/0v8rh9ns1udzx.js\",\"async\":true,\"nonce\":\"$undefined\"}]\n1c:[\"$\",\"script\",\"script-2\",{\"src\":\"/_next/static/chunks/014r2tef6u366.js\",\"async\":true,\"nonce\":\"$undefined\"}]\n1d:[\"$\",\"$L25\",null,{\"children\":[\"$\",\"$26\",null,{\"name\":\"Next.MetadataOutlet\",\"children\":\"$@27\"}]}]\n28:[]\n1e:\"$W28\"\n1f:[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$L29\",null,{\"children\":\"$L2a\"}],[\"$\",\"div\",null,{\"hidden\":true,\"children\":[\"$\",\"$L2b\",null,{\"children\":[\"$\",\"$26\",null,{\"name\":\"Next.Metadata\",\"children\":\"$L2c\"}]}]}],[\"$\",\"meta\",null,{\"name\":\"next-size-adjust\",\"content\":\"\"}]]}]\n21:[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/chunks/0ovftnp3y9gzb.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]\n"])</script>
-  <script>self.__next_f.push([1, "2a:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\n"])</script>
-  <script>self.__next_f.push([1, "2d:I[27201,[\"/_next/static/chunks/0jg2m1sj81gv0.js\",\"/_next/static/chunks/15b1_xl_2nu.v.js\",\"/_next/static/chunks/0h72oc0nv1wic.js\",\"/_next/static/chunks/0d3shmwh5_nmn.js\"],\"IconMark\"]\n27:null\n"])</script>
-  <script>self.__next_f.push([1, "2c:[[\"$\",\"title\",\"0\",{\"children\":\"Menu & Must-Try Items | House of Delicious\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"Explore our selection of premium smashed burgers, hand-crafted with fresh, organic ingredients. From classic cheeseburgers to our signature HOD specials.\"}],[\"$\",\"link\",\"2\",{\"rel\":\"manifest\",\"href\":\"/manifest.webmanifest\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"meta\",\"3\",{\"name\":\"keywords\",\"content\":\"house of delicious,HOD,fusion cafe,handmade pizza,tandoori rolls,vidyavihar cafe\"}],[\"$\",\"meta\",\"4\",{\"name\":\"robots\",\"content\":\"index, follow\"}],[\"$\",\"meta\",\"5\",{\"name\":\"googlebot\",\"content\":\"index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1\"}],[\"$\",\"meta\",\"6\",{\"name\":\"format-detection\",\"content\":\"telephone=no, address=no, email=no\"}],[\"$\",\"meta\",\"7\",{\"property\":\"og:title\",\"content\":\"House of Delicious | Fusion & Fast-Food Caf├⌐\"}],[\"$\",\"meta\",\"8\",{\"property\":\"og:description\",\"content\":\"Experience the ultimate artisan smashed burgers at HOD. Fresh ingredients, bold flavors, and zero guilt.\"}],[\"$\",\"meta\",\"9\",{\"property\":\"og:url\",\"content\":\"https://mbaqir18786.github.io/House-Of-Delicious\"}],[\"$\",\"meta\",\"10\",{\"property\":\"og:site_name\",\"content\":\"House of Delicious\"}],[\"$\",\"meta\",\"11\",{\"property\":\"og:locale\",\"content\":\"en_US\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:image\",\"content\":\"https://mbaqir18786.github.io/House-Of-Delicious/img-webp/og-image.webp\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:image:width\",\"content\":\"1200\"}],[\"$\",\"meta\",\"14\",{\"property\":\"og:image:height\",\"content\":\"630\"}],[\"$\",\"meta\",\"15\",{\"property\":\"og:image:alt\",\"content\":\"House of Delicious\"}],[\"$\",\"meta\",\"16\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"17\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"18\",{\"name\":\"twitter:title\",\"content\":\"House of Delicious | Fusion & Fast-Food Caf├⌐\"}],[\"$\",\"meta\",\"19\",{\"name\":\"twitter:description\",\"content\":\"Experience the ultimate artisan smashed burgers at HOD. Fresh ingredients, bold flavors, and zero guilt.\"}],[\"$\",\"meta\",\"20\",{\"name\":\"twitter:image\",\"content\":\"https://mbaqir18786.github.io/House-Of-Delicious/img-webp/og-image.webp\"}],[\"$\",\"link\",\"21\",{\"rel\":\"icon\",\"href\":\"/favicon.ico?favicon.0zm.9b8gmi8mf.ico\",\"sizes\":\"48x48\",\"type\":\"image/x-icon\"}],[\"$\",\"$L2d\",\"22\",{}]]\n"])</script>
-
-</body>
-
-</html>
+  

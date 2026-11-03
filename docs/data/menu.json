@@ -1,0 +1,296 @@
+{
+  "categories": [
+    "Burgers",
+    "Pizzas",
+    "Snacks",
+    "Rolls",
+    "Desserts"
+  ],
+  "items": [
+    {
+      "id": "item-1",
+      "name": "HOD Signature Smashed Burger",
+      "price": "₹150",
+      "cat": "Burgers",
+      "image": "/burgers/1b.png",
+      "imageFit": "contain",
+      "detail": "Double smashed patty · melted cheddar · secret sauce",
+      "quick": {
+        "bun": "Brioche",
+        "patty": "Veggie Smash",
+        "spice": "Medium",
+        "time": "8–10 min"
+      },
+      "nutrition": {
+        "calories": 650,
+        "protein": "22g"
+      }
+    },
+    {
+      "id": "item-2",
+      "name": "Crispy Paneer Cheese Burger",
+      "price": "₹170",
+      "cat": "Burgers",
+      "image": "/burgers/2b.png",
+      "imageFit": "contain",
+      "detail": "Crisp panko paneer · chipotle mayo · fresh slaw",
+      "quick": {
+        "bun": "Sesame",
+        "patty": "Crisp Paneer",
+        "spice": "Medium",
+        "time": "10–12 min"
+      },
+      "nutrition": {
+        "calories": 710,
+        "protein": "26g"
+      }
+    },
+    {
+      "id": "item-3",
+      "name": "Double Cheese Burst Burger",
+      "price": "₹190",
+      "cat": "Burgers",
+      "image": "/burgers/3b.png",
+      "imageFit": "contain",
+      "detail": "Molten cheese core · caramelized onions · house dip",
+      "quick": {
+        "bun": "Brioche",
+        "patty": "Double Cheese",
+        "spice": "Mild",
+        "time": "10–12 min"
+      },
+      "nutrition": {
+        "calories": 780,
+        "protein": "24g"
+      }
+    },
+    {
+      "id": "item-4",
+      "name": "Tandoori Paneer Burger",
+      "price": "₹160",
+      "cat": "Burgers",
+      "image": "/burgers/4b.png",
+      "imageFit": "contain",
+      "detail": "Smoky tandoori marinade · mint mayo · crisp capsicum",
+      "quick": {
+        "bun": "Sesame",
+        "patty": "Tandoori Paneer",
+        "spice": "High",
+        "time": "10–12 min"
+      },
+      "nutrition": {
+        "calories": 690,
+        "protein": "25g"
+      }
+    },
+    {
+      "id": "item-5",
+      "name": "Spicy Schezwan Burger",
+      "price": "₹150",
+      "cat": "Burgers",
+      "image": "/burgers/5b.png",
+      "imageFit": "contain",
+      "detail": "Fiery Schezwan glaze · crunchy lettuce · garlic crunch",
+      "quick": {
+        "bun": "Brioche",
+        "patty": "Spicy Crisp",
+        "spice": "Fiery",
+        "time": "8–10 min"
+      },
+      "nutrition": {
+        "calories": 640,
+        "protein": "21g"
+      }
+    },
+    {
+      "id": "item-6",
+      "name": "Classic Aloo Tikki Cheese Burger",
+      "price": "₹120",
+      "cat": "Burgers",
+      "image": "/burgers/6b.png",
+      "imageFit": "contain",
+      "detail": "Spiced potato patty · amul cheese slice · tangy sauce",
+      "quick": {
+        "bun": "Classic",
+        "patty": "Aloo Tikki",
+        "spice": "Mild",
+        "time": "6–8 min"
+      },
+      "nutrition": {
+        "calories": 520,
+        "protein": "14g"
+      }
+    },
+    {
+      "id": "item-7",
+      "name": "Paneer Tikka Pizza",
+      "price": "₹220",
+      "cat": "Pizzas",
+      "image": "/burgers/1b.png",
+      "imageFit": "contain",
+      "detail": "Hand-stretched crust · tandoori spiced paneer · bell peppers · 100% real mozzarella",
+      "quick": {
+        "bun": "Handmade Crust",
+        "patty": "Paneer Cubes",
+        "spice": "Medium",
+        "time": "12–15 min"
+      },
+      "nutrition": {
+        "calories": 840,
+        "protein": "32g"
+      }
+    },
+    {
+      "id": "item-8",
+      "name": "Peri Peri Paneer Pizza",
+      "price": "₹240",
+      "cat": "Pizzas",
+      "image": "/burgers/2b.png",
+      "imageFit": "contain",
+      "detail": "Zesty peri peri seasoning · grilled cottage cheese · onions & paprika",
+      "quick": {
+        "bun": "Handmade Crust",
+        "patty": "Peri Peri Paneer",
+        "spice": "Spicy",
+        "time": "12–15 min"
+      },
+      "nutrition": {
+        "calories": 880,
+        "protein": "34g"
+      }
+    },
+    {
+      "id": "item-9",
+      "name": "Classic Cheese Garlic Bread",
+      "price": "₹140",
+      "cat": "Snacks",
+      "image": "/burgers/3b.png",
+      "imageFit": "contain",
+      "detail": "Toasted French baguette brushed with roasted garlic herb butter & loaded with molten amul cheese",
+      "quick": {
+        "bun": "Garlic Baguette",
+        "patty": "Molten Cheese",
+        "spice": "Mild",
+        "time": "8–10 min"
+      },
+      "nutrition": {
+        "calories": 480,
+        "protein": "16g"
+      }
+    },
+    {
+      "id": "item-10",
+      "name": "Peri Peri French Fries",
+      "price": "₹110",
+      "cat": "Snacks",
+      "image": "/burgers/4b.png",
+      "imageFit": "contain",
+      "detail": "Crispy golden salted fries tossed in bold African peri peri spice blend",
+      "quick": {
+        "bun": "Golden Potatoes",
+        "patty": "Crispy Cut",
+        "spice": "Spicy",
+        "time": "6–8 min"
+      },
+      "nutrition": {
+        "calories": 380,
+        "protein": "6g"
+      }
+    },
+    {
+      "id": "item-11",
+      "name": "Cheesy Loaded Fries",
+      "price": "₹150",
+      "cat": "Snacks",
+      "image": "/burgers/5b.png",
+      "imageFit": "contain",
+      "detail": "Golden fries smothered in warm liquid cheddar, jalapenos & house signature sauce",
+      "quick": {
+        "bun": "Crisp Fries",
+        "patty": "Warm Cheddar",
+        "spice": "Medium",
+        "time": "8–10 min"
+      },
+      "nutrition": {
+        "calories": 590,
+        "protein": "12g"
+      }
+    },
+    {
+      "id": "item-12",
+      "name": "HOD Special Roll",
+      "price": "₹150",
+      "cat": "Rolls",
+      "image": "/burgers/3b.png",
+      "imageFit": "contain",
+      "detail": "Chef special spiced filling with creamy garlic sauce wrapped in flaky lachha paratha",
+      "quick": {
+        "bun": "Lachha Paratha",
+        "patty": "HOD Special Mix",
+        "spice": "Medium",
+        "time": "8–10 min"
+      },
+      "nutrition": {
+        "calories": 620,
+        "protein": "17g"
+      }
+    },
+    {
+      "id": "item-13",
+      "name": "Paneer Tikka Kathi Roll",
+      "price": "₹170",
+      "cat": "Rolls",
+      "image": "/burgers/4b.png",
+      "imageFit": "contain",
+      "detail": "Grilled spiced paneer cubes rolled in soft handmade paratha with mint relish",
+      "quick": {
+        "bun": "Flaky Paratha",
+        "patty": "Grilled Paneer",
+        "spice": "Medium",
+        "time": "10–12 min"
+      },
+      "nutrition": {
+        "calories": 640,
+        "protein": "22g"
+      }
+    },
+    {
+      "id": "item-14",
+      "name": "Pull Me Up Chocolate Cake",
+      "price": "₹180",
+      "cat": "Desserts",
+      "image": "/burgers/6b.png",
+      "imageFit": "contain",
+      "detail": "Thick chocolate shake · pull-me-up molten cake drenched in warm ganache",
+      "quick": {
+        "bun": "Handmade Cake",
+        "patty": "Molten Fudge",
+        "spice": "Sweet",
+        "time": "5–8 min"
+      },
+      "nutrition": {
+        "calories": 830,
+        "protein": "14g"
+      }
+    },
+    {
+      "id": "item-15",
+      "name": "Oreo Overload Thick Shake",
+      "price": "₹160",
+      "cat": "Desserts",
+      "image": "/burgers/6b.png",
+      "imageFit": "contain",
+      "detail": "Creamy vanilla ice cream churned with crunchy Oreos & dark chocolate fudge",
+      "quick": {
+        "bun": "Glass Jar",
+        "patty": "Oreo Fudge",
+        "spice": "Sweet",
+        "time": "5–8 min"
+      },
+      "nutrition": {
+        "calories": 690,
+        "protein": "12g"
+      }
+    }
+  ]
+}

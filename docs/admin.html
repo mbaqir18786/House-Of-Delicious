@@ -7,9 +7,6 @@
   <link rel="icon" href="/favicon.ico" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/_next/static/chunks/0ovftnp3y9gzb.css" />
-  <!-- Firebase SDKs (Compat for static single file reliability) -->
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <style>
     @font-face {
       font-family: 'Modak';
@@ -453,14 +450,6 @@
     const DEFAULT_FB_CONFIG = {"apiKey":"AIzaSyDrW0mdYLnt0S-eqG2BuC2uCa2xgRYzRPc","authDomain":"house-of-delicious.firebaseapp.com","projectId":"house-of-delicious","storageBucket":"house-of-delicious.firebasestorage.app","messagingSenderId":"1072791327054","appId":"1:1072791327054:web:d81c316dbd6a2062cc8e1f"};
     let activeFilterTab = 'ALL';
     let previewMode = 'front';
-    let db = null;
-
-    // Default Schema: Starts with requested empty items list (zero mock data)
-    let menuState = {
-      categories: ['Burgers', 'Pizzas', 'Snacks', 'Rolls', 'Desserts'],
-      items: []
-    };
-
     // Load data on init
     function initData() {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -473,424 +462,135 @@
           console.error('Error loading menu state', e);
         }
       }
-      initFirebaseIfAvailable();
+      
+      // Always fetch data/menu.json if items are empty
+      if (!menuState.items || !menuState.items.length) {
+        fetch('/data/menu.json')
+          .then(r => r.json())
+          .then(data => {
+            if (data && Array.isArray(data.items) && data.items.length) {
+              menuState = data;
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(menuState));
+              renderDashboard();
+            }
+          })
+          .catch(() => {});
+      }
     }
 
     function persistData() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(menuState));
       // Trigger storage event for live syncing if menu is open in another tab
       window.dispatchEvent(new Event('storage'));
-      
-      // Sync to Firebase if connected
-      if (db) {
-        db.collection('menu').doc('current').set(menuState).catch(err => {
-          console.warn('Firebase sync notice:', err);
-        });
-      }
     }
 
-    function initFirebaseIfAvailable() {
-      let fbConfigStr = localStorage.getItem('hod_firebase_config') || JSON.stringify(DEFAULT_FB_CONFIG);
-      if (fbConfigStr) {
-        try {
-          const config = JSON.parse(fbConfigStr);
-          if (config.apiKey && config.projectId) {
-            if (!firebase.apps.length) {
-              firebase.initializeApp(config);
-            }
-            db = firebase.firestore();
-            db.collection('menu').doc('current').onSnapshot(doc => {
-              if (doc.exists) {
-                const cloudData = doc.data();
-                if (cloudData && cloudData.categories) {
-                  menuState = cloudData;
-                  localStorage.setItem(STORAGE_KEY, JSON.stringify(menuState));
-                  renderDashboard();
-                }
-              }
-            }, err => {
-              console.warn('Firebase sync status (check Firestore Rules):', err.message);
-            });
+    function openPublishModal() {
+      const savedToken = localStorage.getItem('hod_gh_token') || '';
+      const input = document.getElementById('ghToken');
+      if (input) input.value = savedToken;
+      document.getElementById('publishModal').classList.remove('hidden');
+      document.getElementById('publishModal').classList.add('flex');
+    }
+
+    function closePublishModal() {
+      document.getElementById('publishModal').classList.add('hidden');
+      document.getElementById('publishModal').classList.remove('flex');
+    }
+
+    function downloadMenuJson() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(menuState, null, 2));
+      const a = document.createElement('a');
+      a.href = dataStr;
+      a.download = 'menu.json';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    function copyMenuJson() {
+      navigator.clipboard.writeText(JSON.stringify(menuState, null, 2))
+        .then(() => alert('📋 menu.json copied to clipboard!'))
+        .catch(() => alert('Failed to copy to clipboard'));
+    }
+
+    async function publishLiveToGitHub() {
+      const tokenInput = document.getElementById('ghToken');
+      const token = (tokenInput ? tokenInput.value : '').trim();
+      if (!token) {
+        alert('Please enter your GitHub Personal Access Token to publish directly to the live site.');
+        return;
+      }
+      localStorage.setItem('hod_gh_token', token);
+
+      const statusEl = document.getElementById('publishStatus');
+      const btn = document.getElementById('btnPublishLive');
+      btn.disabled = true;
+      btn.innerHTML = '<span>⏳</span> Publishing to Live Website...';
+      if (statusEl) {
+        statusEl.className = 'text-xs text-center font-bold py-1 text-neutral-600 block';
+        statusEl.textContent = 'Connecting to GitHub repository...';
+      }
+
+      const repo = 'mbaqir18786/House-Of-Delicious';
+      const filePath = 'docs/data/menu.json';
+      const apiUrl = 'https://api.github.com/repos/' + repo + '/contents/' + filePath;
+
+      try {
+        // 1. Get file SHA if it exists
+        let sha = null;
+        const getRes = await fetch(apiUrl, {
+          headers: {
+            'Authorization': 'token ' + token,
+            'Accept': 'application/vnd.github.v3+json'
           }
-        } catch(e) {
-          console.warn('Firebase init notice:', e);
+        });
+        if (getRes.ok) {
+          const fileInfo = await getRes.json();
+          sha = fileInfo.sha;
         }
-      }
-    }
 
-    // AUTHENTICATION
-    function handleLogin(e) {
-      e.preventDefault();
-      const pin = document.getElementById('adminPin').value;
-      if (pin === AUTH_PIN) {
-        sessionStorage.setItem('hod_admin_auth', 'true');
-        document.getElementById('authOverlay').classList.add('hidden');
-        document.getElementById('adminApp').classList.remove('hidden');
-        renderDashboard();
-      } else {
-        document.getElementById('authError').classList.remove('hidden');
-      }
-    }
+        // 2. Prepare base64 content
+        const jsonString = JSON.stringify(menuState, null, 2);
+        const encoded = btoa(unescape(encodeURIComponent(jsonString)));
 
-    function logout() {
-      sessionStorage.removeItem('hod_admin_auth');
-      document.getElementById('adminApp').classList.add('hidden');
-      document.getElementById('authOverlay').classList.remove('hidden');
-      document.getElementById('adminPin').value = '';
-    }
+        // 3. Commit file
+        const putRes = await fetch(apiUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'token ' + token,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify({
+            message: 'feat(menu): update menu items from admin panel',
+            content: encoded,
+            sha: sha
+          })
+        });
 
-    // CHECK AUTH STATE
-    window.addEventListener('DOMContentLoaded', () => {
-      initData();
-      if (sessionStorage.getItem('hod_admin_auth') === 'true') {
-        document.getElementById('authOverlay').classList.add('hidden');
-        document.getElementById('adminApp').classList.remove('hidden');
-        renderDashboard();
-      }
-    });
-
-    // RENDER DASHBOARD
-    function renderDashboard() {
-      renderCategoryPills();
-      renderItemsGrid();
-      populateCategorySelect();
-    }
-
-    // RENDER CATEGORY PILLS (TABS)
-    function renderCategoryPills() {
-      const container = document.getElementById('categoryPillList');
-      if (!container) return;
-
-      const totalItems = menuState.items.length;
-      let html = `
-        <button onclick="setActiveFilter('ALL')" 
-          class="px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider transition ${activeFilterTab === 'ALL' ? 'bg-[#f91814] text-white shadow-md' : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'}">
-          ALL (${totalItems})
-        </button>
-      `;
-
-      menuState.categories.forEach(cat => {
-        const count = menuState.items.filter(item => item.cat.toLowerCase() === cat.toLowerCase()).length;
-        const isActive = activeFilterTab.toLowerCase() === cat.toLowerCase();
-        html += `
-          <button onclick="setActiveFilter('${cat}')" 
-            class="px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider transition ${isActive ? 'bg-[#f91814] text-white shadow-md' : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'}">
-            ${cat} (${count})
-          </button>
-        `;
-      });
-
-      container.innerHTML = html;
-    }
-
-    function setActiveFilter(tab) {
-      activeFilterTab = tab;
-      renderDashboard();
-    }
-
-    // POPULATE CATEGORY DROPDOWN IN MODAL
-    function populateCategorySelect() {
-      const select = document.getElementById('foodCategory');
-      if (!select) return;
-      select.innerHTML = menuState.categories.map(c => `<option value="${c}">${c}</option>`).join('');
-    }
-
-    // RENDER ITEMS GRID
-    function renderItemsGrid() {
-      const container = document.getElementById('foodItemsContainer');
-      const search = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
-      
-      let filtered = menuState.items;
-      if (activeFilterTab !== 'ALL') {
-        filtered = filtered.filter(i => i.cat.toLowerCase() === activeFilterTab.toLowerCase());
-      }
-      if (search) {
-        filtered = filtered.filter(i => i.name.toLowerCase().includes(search) || (i.cat && i.cat.toLowerCase().includes(search)));
-      }
-
-      document.getElementById('currentCategoryTitle').innerText = activeFilterTab === 'ALL' ? 'All Dishes' : activeFilterTab;
-      document.getElementById('itemsCountSubtitle').innerText = `${filtered.length} dishes in this view`;
-
-      if (filtered.length === 0) {
-        container.innerHTML = `
-          <div class="col-span-full py-16 text-center bg-neutral-50 rounded-3xl border-2 border-dashed border-neutral-200">
-            <span class="text-5xl block mb-3">🍔</span>
-            <h4 class="font-modak text-2xl text-neutral-800">No Food Items Found</h4>
-            <p class="text-xs text-neutral-500 mb-4 max-w-sm mx-auto">
-              ${activeFilterTab === 'ALL' ? 'Your menu is currently clean and empty. Click below to add your first delicious item!' : `No dishes under "${activeFilterTab}" yet.`}
-            </p>
-            <button onclick="openFoodModal('${activeFilterTab !== 'ALL' ? activeFilterTab : ''}')" class="px-5 py-2.5 bg-[#f91814] hover:bg-[#d9120e] text-white font-bold text-xs rounded-xl shadow-md transition">
-              + Add Dish Now
-            </button>
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = filtered.map(item => `
-        <div class="bg-neutral-50 rounded-2xl border border-neutral-200 p-4 hover:shadow-md transition flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between gap-2 mb-2">
-              <span class="px-2.5 py-1 bg-white border border-neutral-200 rounded-full text-[11px] font-bold text-neutral-700 uppercase tracking-wide">
-                ${item.cat}
-              </span>
-              <span class="font-mouse text-2xl font-bold text-neutral-900 leading-none">
-                ${item.price}
-              </span>
-            </div>
-
-            <div class="w-full h-36 bg-white rounded-xl mb-3 flex items-center justify-center p-2 border border-neutral-100 overflow-hidden">
-              <img src="${item.image || '/burgers/1b.png'}" alt="${item.name}" class="max-h-full max-w-full object-contain" />
-            </div>
-
-            <h4 class="font-mouse text-2xl font-bold text-[#f91814] uppercase leading-tight line-clamp-1 mb-1">
-              ${item.name}
-            </h4>
-
-            <div class="flex flex-wrap items-center gap-1.5 text-[10px] text-neutral-500 font-semibold mb-3">
-              ${item.quick?.bun ? `<span class="bg-white px-2 py-0.5 rounded border border-neutral-200">Bun: ${item.quick.bun}</span>` : ''}
-              ${item.quick?.patty ? `<span class="bg-white px-2 py-0.5 rounded border border-neutral-200">Patty: ${item.quick.patty}</span>` : ''}
-              ${item.quick?.spice ? `<span class="bg-white px-2 py-0.5 rounded border border-neutral-200">Spice: ${item.quick.spice}</span>` : ''}
-              ${item.nutrition?.calories ? `<span class="bg-[#f5e3cd] text-neutral-800 px-2 py-0.5 rounded">${item.nutrition.calories} Cal</span>` : ''}
-            </div>
-          </div>
-
-          <div class="flex items-center gap-2 pt-2 border-t border-neutral-200">
-            <button onclick="editFoodItem('${item.id}')" class="flex-1 py-1.5 bg-neutral-900 hover:bg-black text-white text-xs font-bold rounded-lg transition">
-              ✏️ Edit
-            </button>
-            <button onclick="deleteFoodItem('${item.id}')" class="py-1.5 px-3 bg-red-100 hover:bg-red-200 text-red-700 text-xs font-bold rounded-lg transition" title="Delete Dish">
-              🗑️
-            </button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // MODAL HANDLERS
-    function openFoodModal(defaultCategory = '') {
-      document.getElementById('foodModalTitle').innerText = 'Add New Food Item';
-      document.getElementById('foodItemForm').reset();
-      document.getElementById('editFoodId').value = '';
-      document.getElementById('foodOrderUrl').value = 'https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order';
-      
-      populateCategorySelect();
-      if (defaultCategory && menuState.categories.includes(defaultCategory)) {
-        document.getElementById('foodCategory').value = defaultCategory;
-      }
-      
-      updateLivePreview();
-      document.getElementById('foodModal').classList.remove('hidden');
-      document.getElementById('foodModal').classList.add('flex');
-    }
-
-    function closeFoodModal() {
-      document.getElementById('foodModal').classList.add('hidden');
-      document.getElementById('foodModal').classList.remove('flex');
-    }
-
-    function editFoodItem(id) {
-      const item = menuState.items.find(i => i.id === id);
-      if (!item) return;
-
-      document.getElementById('foodModalTitle').innerText = 'Edit Food Item';
-      document.getElementById('editFoodId').value = item.id;
-      document.getElementById('foodName').value = item.name;
-      populateCategorySelect();
-      document.getElementById('foodCategory').value = item.cat;
-      document.getElementById('foodPrice').value = item.price;
-      document.getElementById('foodImageUrl').value = item.image || '';
-      const fitVal = item.imageFit || (item.image?.includes('/burgers/') ? 'contain' : 'cover');
-      const radio = document.querySelector('input[name="imageFit"][value="' + fitVal + '"]');
-      if (radio) radio.checked = true;
-      document.getElementById('foodOrderUrl').value = item.orderUrl || 'https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order';
-
-      document.getElementById('foodPrepTime').value = item.quick?.time || '8–10 MIN';
-      document.getElementById('foodBun').value = item.quick?.bun || 'Brioche';
-      document.getElementById('foodPatty').value = item.quick?.patty || 'Veggie Smash';
-      document.getElementById('foodSpice').value = item.quick?.spice || 'Medium';
-      document.getElementById('foodCalories').value = item.nutrition?.calories || '650';
-      document.getElementById('foodProtein').value = item.nutrition?.protein || '22g';
-
-      updateLivePreview();
-      document.getElementById('foodModal').classList.remove('hidden');
-      document.getElementById('foodModal').classList.add('flex');
-    }
-
-    function deleteFoodItem(id) {
-      const item = menuState.items.find(i => i.id === id);
-      if (!item) return;
-      if (confirm(`Are you sure you want to delete "${item.name}"?`)) {
-        menuState.items = menuState.items.filter(i => i.id !== id);
-        persistData();
-        renderDashboard();
-      }
-    }
-
-    function saveFoodItem(e) {
-      e.preventDefault();
-      const editId = document.getElementById('editFoodId').value;
-      const name = document.getElementById('foodName').value.trim();
-      const cat = document.getElementById('foodCategory').value;
-      let price = document.getElementById('foodPrice').value.trim();
-      if (!price.startsWith('₹')) price = '₹' + price;
-      
-      const image = document.getElementById('foodImageUrl').value.trim() || '/burgers/1b.png';
-      const orderUrl = document.getElementById('foodOrderUrl').value.trim() || 'https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order';
-      const imageFit = document.querySelector('input[name="imageFit"]:checked')?.value || (image.includes('/burgers/') ? 'contain' : 'cover');
-
-      const itemPayload = {
-        id: editId || ('item_' + Date.now()),
-        name,
-        cat,
-        price,
-        image,
-        orderUrl,
-        imageFit,
-        detail: `${document.getElementById('foodBun').value.trim() || 'Brioche'} · ${document.getElementById('foodPatty').value.trim() || 'Patty'}`,
-        quick: {
-          bun: document.getElementById('foodBun').value.trim() || 'Brioche',
-          patty: document.getElementById('foodPatty').value.trim() || 'Patty',
-          spice: document.getElementById('foodSpice').value,
-          time: document.getElementById('foodPrepTime').value.trim() || '8–10 MIN'
-        },
-        nutrition: {
-          calories: document.getElementById('foodCalories').value.trim() || '650',
-          protein: document.getElementById('foodProtein').value.trim() || '22g'
+        if (putRes.ok) {
+          if (statusEl) {
+            statusEl.className = 'text-xs text-center font-bold py-1 text-green-600 block';
+            statusEl.textContent = '🎉 Successfully published! Live website will reflect changes in ~30 seconds.';
+          }
+          alert('🎉 Live publish successful! Your updated menu is now deploying to the website for all customers worldwide.');
+        } else {
+          const errData = await putRes.json();
+          throw new Error(errData.message || 'GitHub API returned ' + putRes.status);
         }
-      };
-
-      if (editId) {
-        const idx = menuState.items.findIndex(i => i.id === editId);
-        if (idx !== -1) menuState.items[idx] = itemPayload;
-      } else {
-        menuState.items.push(itemPayload);
-      }
-
-      persistData();
-      closeFoodModal();
-      renderDashboard();
-    }
-
-    // IMAGE FILE UPLOAD CONVERTER (Local Base64 Storage)
-    function handleImageFileUpload(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        document.getElementById('foodImageUrl').value = evt.target.result;
-        updateLivePreview();
-      };
-      reader.readAsDataURL(file);
-    }
-
-    // LIVE PREVIEW UPDATER
-    function updateLivePreview() {
-      const name = document.getElementById('foodName')?.value || 'Dish Name';
-      const price = document.getElementById('foodPrice')?.value || '₹150';
-      const img = document.getElementById('foodImageUrl')?.value || '/burgers/1b.png';
-      const prepTime = document.getElementById('foodPrepTime')?.value || '8–10 MIN';
-      const bun = document.getElementById('foodBun')?.value || 'Brioche';
-      const patty = document.getElementById('foodPatty')?.value || 'Patty';
-      const spice = document.getElementById('foodSpice')?.value || 'Medium';
-      const cal = document.getElementById('foodCalories')?.value || '650';
-      const protein = document.getElementById('foodProtein')?.value || '22g';
-
-      document.getElementById('previewName').innerText = name;
-      document.getElementById('previewPrice').innerText = price.startsWith('₹') ? price : ('₹' + price);
-      const prevImg = document.getElementById('previewImage');
-      prevImg.src = img;
-      const fit = document.querySelector('input[name="imageFit"]:checked')?.value || (img.includes('/burgers/') ? 'contain' : 'cover');
-      if (fit === 'cover') {
-        prevImg.className = 'w-56 h-48 object-cover rounded-2xl shadow-sm border border-neutral-200 transition-transform duration-300';
-      } else {
-        prevImg.className = 'w-48 h-48 object-contain transition-transform duration-300';
-      }
-
-      document.getElementById('previewPrepTime').innerText = prepTime;
-      document.getElementById('previewBun').innerText = bun;
-      document.getElementById('previewPatty').innerText = patty;
-      document.getElementById('previewSpice').innerText = spice;
-      document.getElementById('previewCalories').innerText = `CALORIES: ${cal}`;
-      document.getElementById('previewProtein').innerText = `PROTEIN: ${protein}`;
-    }
-
-    function setPreviewMode(mode) {
-      previewMode = mode;
-      const overlay = document.getElementById('previewDetailsOverlay');
-      const btnF = document.getElementById('btnPreviewFront');
-      const btnD = document.getElementById('btnPreviewDetails');
-
-      if (mode === 'details') {
-        overlay.classList.remove('hidden');
-        btnD.className = 'px-2.5 py-1 rounded-md text-xs font-bold bg-[#f91814] text-white';
-        btnF.className = 'px-2.5 py-1 rounded-md text-xs font-bold bg-neutral-200 text-neutral-700';
-      } else {
-        overlay.classList.add('hidden');
-        btnF.className = 'px-2.5 py-1 rounded-md text-xs font-bold bg-[#f91814] text-white';
-        btnD.className = 'px-2.5 py-1 rounded-md text-xs font-bold bg-neutral-200 text-neutral-700';
-      }
-    }
-
-    // MANAGE TABS
-    function openTabModal() {
-      renderManageTabList();
-      document.getElementById('tabModal').classList.remove('hidden');
-      document.getElementById('tabModal').classList.add('flex');
-    }
-    function closeTabModal() {
-      document.getElementById('tabModal').classList.add('hidden');
-      document.getElementById('tabModal').classList.remove('flex');
-      renderDashboard();
-    }
-
-    function renderManageTabList() {
-      const container = document.getElementById('manageTabList');
-      container.innerHTML = menuState.categories.map((c, idx) => {
-        const count = menuState.items.filter(i => i.cat.toLowerCase() === c.toLowerCase()).length;
-        return `
-          <div class="flex items-center justify-between p-2.5 bg-neutral-50 rounded-xl border border-neutral-100">
-            <span class="font-bold text-sm text-neutral-800">${c} (${count} items)</span>
-            <button onclick="deleteTab('${c}')" class="text-red-500 hover:text-red-700 text-xs font-bold px-2 py-1 rounded hover:bg-red-50">
-              Delete
-            </button>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function handleCreateTab(e) {
-      e.preventDefault();
-      const input = document.getElementById('newCategoryInput');
-      const newCat = input.value.trim();
-      if (!newCat) return;
-
-      if (menuState.categories.some(c => c.toLowerCase() === newCat.toLowerCase())) {
-        alert('This category tab already exists!');
-        return;
-      }
-
-      menuState.categories.push(newCat);
-      persistData();
-      input.value = '';
-      renderManageTabList();
-    }
-
-    function deleteTab(catName) {
-      const count = menuState.items.filter(i => i.cat.toLowerCase() === catName.toLowerCase()).length;
-      if (count > 0) {
-        if (!confirm(`Category "${catName}" has ${count} dishes assigned. Deleting this tab will also delete its items. Proceed?`)) {
-          return;
+      } catch (err) {
+        console.error('Publish error:', err);
+        if (statusEl) {
+          statusEl.className = 'text-xs text-center font-bold py-1 text-red block';
+          statusEl.textContent = 'Publish failed: ' + err.message;
         }
-        menuState.items = menuState.items.filter(i => i.cat.toLowerCase() !== catName.toLowerCase());
+        alert('Failed to publish: ' + err.message + '. Please ensure your GitHub token has repo write access.');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span>🚀</span> Publish Changes to Live Website';
       }
-      menuState.categories = menuState.categories.filter(c => c !== catName);
-      persistData();
-      renderManageTabList();
     }
 
-    // SYNC & BACKUP MODALS
     function openSyncModal() {
       const conf = localStorage.getItem('hod_firebase_config');
       if (conf) {
@@ -909,22 +609,7 @@
       document.getElementById('syncModal').classList.remove('flex');
     }
 
-    function saveFirebaseSettings() {
-      const apiKey = document.getElementById('fbApiKey').value.trim();
-      const projectId = document.getElementById('fbProjectId').value.trim();
-      const appId = document.getElementById('fbAppId').value.trim();
-
-      if (!apiKey || !projectId) {
-        alert('Please enter at least an API Key and Project ID');
-        return;
-      }
-
-      const conf = { apiKey, projectId, appId };
-      localStorage.setItem('hod_firebase_config', JSON.stringify(conf));
-      initFirebaseIfAvailable();
-      alert('Firebase configuration saved successfully! Cloud real-time sync active.');
-      closeSyncModal();
-    }
+    
 
     function exportMenuData() {
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(menuState, null, 2));
