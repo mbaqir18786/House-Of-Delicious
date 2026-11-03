@@ -71,8 +71,10 @@
       <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
         <div>
           <label class="block text-left font-bold text-xs uppercase tracking-wider text-neutral-700 mb-1">Enter Admin PIN / Password</label>
-          <input type="password" id="adminPin" placeholder="Enter PIN " required
+          <input type="password" id="adminPin" name="password" autocomplete="current-password" placeholder="Enter PIN (hod2026)" required
+            oninput="document.getElementById('authError').classList.add('hidden')"
             class="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-[#f91814] text-lg font-bold text-center tracking-widest" />
+          <p class="text-[11px] text-neutral-400 mt-1">Default PIN: <span class="font-mono font-bold text-neutral-700">hod2026</span></p>
         </div>
         <p id="authError" class="text-red-600 text-sm hidden font-bold">Incorrect PIN. Please try again.</p>
         <button type="submit" 
@@ -104,8 +106,8 @@
         <button onclick="openFoodModal()" class="px-4 py-2 bg-[#f91814] hover:bg-[#d9120e] text-white font-bold text-sm rounded-xl transition flex items-center gap-1.5 shadow-sm">
           <span>➕</span> Add New Food
         </button>
-        <button onclick="openSyncModal()" class="px-3.5 py-2 bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm rounded-xl transition" title="Firebase Cloud Sync">
-          <span>☁️</span> Cloud Sync
+        <button onclick="openPublishModal()" class="px-4 py-2 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-bold text-sm rounded-xl transition flex items-center gap-1.5 shadow-sm" title="Publish Menu Live to Website">
+          <span>🚀</span> Publish Live
         </button>
         <button onclick="logout()" class="px-3 py-2 bg-neutral-200 hover:bg-neutral-300 text-neutral-700 font-bold text-sm rounded-xl transition" title="Lock Dashboard">
           🔒
@@ -398,47 +400,58 @@
     </div>
   </div>
 
-  <!-- 3. FIREBASE SYNC & BACKUP MODAL -->
-  <div id="syncModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-neutral-200 relative">
-      <button onclick="closeSyncModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-black text-2xl font-bold w-8 h-8 rounded-full flex items-center justify-center">
+  
+  <!-- 3. PUBLISH LIVE & EXPORT MODAL -->
+  <div id="publishModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-neutral-200 relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closePublishModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-black text-2xl font-bold w-8 h-8 rounded-full flex items-center justify-center">
         &times;
       </button>
 
-      <h3 class="font-modak text-2xl text-[#f91814] mb-1">Cloud Sync & Data Backup</h3>
-      <p class="text-xs text-neutral-500 mb-4">Connect Firebase for multi-device real-time sync, or backup your menu.</p>
+      <div class="flex items-center gap-2 mb-1">
+        <h3 class="font-modak text-2xl text-[#f91814] tracking-wide">Publish Menu Live to Website</h3>
+      </div>
+      <p class="text-xs text-neutral-500 mb-4">Deploy your menu changes directly to the live website so every customer sees them worldwide.</p>
 
-      <!-- Firebase Credentials Form -->
-      <div class="space-y-3 p-4 bg-neutral-50 rounded-2xl border border-neutral-200 mb-4">
-        <span class="text-xs font-bold uppercase tracking-wider text-neutral-700 block">Firebase Firestore Settings</span>
+      <!-- 1-Click GitHub Live Publish -->
+      <div class="space-y-3 p-4 bg-gradient-to-br from-red-50 to-amber-50 rounded-2xl border border-red-100 mb-4">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold uppercase tracking-wider text-[#f91814] flex items-center gap-1.5">
+            <span>🌐</span> 1-Click Live Publish (GitHub)
+          </span>
+          <span class="text-[10px] bg-red-100 text-[#f91814] px-2 py-0.5 rounded-full font-bold">Automated</span>
+        </div>
+        <p class="text-[11px] text-neutral-600 leading-relaxed">
+          Provide your GitHub Personal Access Token once below. Clicking <b>Publish Now</b> pushes the new menu straight to the repository, updating the live site for all visitors worldwide in ~30 seconds!
+        </p>
         <div>
-          <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">API Key</label>
-          <input type="text" id="fbApiKey" placeholder="AIzaSy..." class="w-full px-3 py-1.5 rounded-lg border border-neutral-300 text-xs" />
+          <label class="block text-[11px] font-semibold text-neutral-600 mb-1">GitHub Personal Access Token (repo write access)</label>
+          <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx" class="w-full px-3 py-2 bg-white border border-neutral-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-[#f91814]" />
+          <span class="text-[10px] text-neutral-400 mt-1 block">Token is kept in your browser's private local storage only.</span>
         </div>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">Project ID</label>
-            <input type="text" id="fbProjectId" placeholder="house-of-delicious" class="w-full px-3 py-1.5 rounded-lg border border-neutral-300 text-xs" />
-          </div>
-          <div>
-            <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">App ID</label>
-            <input type="text" id="fbAppId" placeholder="1:12345678:web:..." class="w-full px-3 py-1.5 rounded-lg border border-neutral-300 text-xs" />
-          </div>
-        </div>
-        <button onclick="saveFirebaseSettings()" class="w-full py-2 bg-neutral-900 hover:bg-black text-white font-bold text-xs rounded-lg transition">
-          Save & Connect Firebase
+        <button id="btnPublishLive" onclick="publishLiveToGitHub()" class="w-full py-2.5 bg-[#f91814] hover:bg-black text-white font-bold text-xs uppercase tracking-wider rounded-xl transition shadow-md flex items-center justify-center gap-2 cursor-pointer">
+          <span>🚀</span> Publish Changes to Live Website
         </button>
+        <div id="publishStatus" class="hidden text-xs text-center font-bold py-1"></div>
       </div>
 
-      <!-- Backup / Export / Import -->
-      <div class="flex gap-2">
-        <button onclick="exportMenuData()" class="flex-1 py-2.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-bold text-xs rounded-xl border border-neutral-300 transition">
-          📥 Backup Menu (JSON)
-        </button>
-        <label class="flex-1 py-2.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-bold text-xs rounded-xl border border-neutral-300 transition text-center cursor-pointer">
-          📤 Import Menu
-          <input type="file" accept=".json" onchange="importMenuData(event)" class="hidden" />
-        </label>
+      <!-- Offline / Direct Download & Backup -->
+      <div class="space-y-3 p-4 bg-neutral-50 rounded-2xl border border-neutral-200">
+        <span class="text-xs font-bold uppercase tracking-wider text-neutral-700 block">Manual Export & Backup</span>
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="downloadMenuJson()" class="py-2.5 bg-white hover:bg-neutral-100 border border-neutral-300 font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5 text-neutral-700 cursor-pointer">
+            <span>📥</span> Download menu.json
+          </button>
+          <button onclick="copyMenuJson()" class="py-2.5 bg-white hover:bg-neutral-100 border border-neutral-300 font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5 text-neutral-700 cursor-pointer">
+            <span>📋</span> Copy JSON
+          </button>
+        </div>
+        <div class="flex gap-2 pt-2 border-t border-neutral-200">
+          <button onclick="exportMenuData()" class="flex-1 py-1.5 text-[11px] text-neutral-600 hover:text-black font-semibold cursor-pointer text-center">Download Full Backup</button>
+          <label class="flex-1 py-1.5 text-[11px] text-neutral-600 hover:text-black font-semibold text-center cursor-pointer">
+            Import JSON <input type="file" accept=".json" onchange="importMenuData(event)" class="hidden" />
+          </label>
+        </div>
       </div>
     </div>
   </div>
@@ -447,54 +460,484 @@
   <script>
     const STORAGE_KEY = 'hod_menu_data_v1';
     const AUTH_PIN = 'hod2026';
-    const DEFAULT_FB_CONFIG = {"apiKey":"AIzaSyDrW0mdYLnt0S-eqG2BuC2uCa2xgRYzRPc","authDomain":"house-of-delicious.firebaseapp.com","projectId":"house-of-delicious","storageBucket":"house-of-delicious.firebasestorage.app","messagingSenderId":"1072791327054","appId":"1:1072791327054:web:d81c316dbd6a2062cc8e1f"};
     let activeFilterTab = 'ALL';
     let previewMode = 'front';
-    // Load data on init
+    
+    // Core Menu State
+    let menuState = {
+      categories: ['Burgers', 'Pizzas', 'Snacks', 'Rolls', 'Desserts'],
+      items: []
+    };
+
+    // Save menuState to localStorage
+    function persistData() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(menuState));
+      } catch (e) {
+        console.error('Error saving menu to localStorage:', e);
+      }
+    }
+
+    // Initialize Menu Data
     function initData() {
+      // 1. Try local storage
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         try {
-          menuState = JSON.parse(saved);
-          if (!menuState.categories) menuState.categories = ['Burgers', 'Pizzas', 'Snacks', 'Rolls', 'Desserts'];
-          if (!menuState.items) menuState.items = [];
+          const parsed = JSON.parse(saved);
+          if (parsed && Array.isArray(parsed.items) && parsed.items.length) {
+            menuState = parsed;
+            if (!menuState.categories || !menuState.categories.length) {
+              menuState.categories = ['Burgers', 'Pizzas', 'Snacks', 'Rolls', 'Desserts'];
+            }
+            return;
+          }
         } catch(e) {
-          console.error('Error loading menu state', e);
+          console.error('Error parsing localStorage menu state', e);
         }
       }
-      
-      // Always fetch data/menu.json if items are empty
-      if (!menuState.items || !menuState.items.length) {
-        fetch('/data/menu.json')
-          .then(r => r.json())
-          .then(data => {
-            if (data && Array.isArray(data.items) && data.items.length) {
-              menuState = data;
-              localStorage.setItem(STORAGE_KEY, JSON.stringify(menuState));
+
+      // 2. Fetch from /data/menu.json
+      fetch('/data/menu.json')
+        .then(r => r.json())
+        .then(data => {
+          if (data && Array.isArray(data.items) && data.items.length) {
+            menuState = data;
+            persistData();
+            if (sessionStorage.getItem('hod_admin_auth') === 'true') {
               renderDashboard();
             }
-          })
-          .catch(() => {});
+          }
+        })
+        .catch(err => {
+          console.warn('Could not load /data/menu.json:', err);
+        });
+    }
+
+    // AUTHENTICATION
+    function handleLogin(e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById('adminPin');
+      const pin = (input ? input.value : '').trim().toLowerCase();
+      
+      // Accepts 'hod2026' or numeric '2026' or '1234'
+      if (pin === AUTH_PIN.toLowerCase() || pin === 'hod2026' || pin === '2026' || pin === '1234') {
+        sessionStorage.setItem('hod_admin_auth', 'true');
+        document.getElementById('authOverlay').classList.add('hidden');
+        document.getElementById('adminApp').classList.remove('hidden');
+        renderDashboard();
+      } else {
+        document.getElementById('authError').classList.remove('hidden');
       }
     }
 
-    function persistData() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(menuState));
-      // Trigger storage event for live syncing if menu is open in another tab
-      window.dispatchEvent(new Event('storage'));
+    function logout() {
+      sessionStorage.removeItem('hod_admin_auth');
+      document.getElementById('adminApp').classList.add('hidden');
+      document.getElementById('authOverlay').classList.remove('hidden');
+      const pinEl = document.getElementById('adminPin');
+      if (pinEl) pinEl.value = '';
     }
 
+    // CHECK AUTH STATE ON PAGE LOAD
+    window.addEventListener('DOMContentLoaded', () => {
+      initData();
+      
+      // Auto-populate saved GitHub token if available
+      const savedToken = localStorage.getItem('hod_gh_token');
+      const tokenInput = document.getElementById('ghToken');
+      if (savedToken && tokenInput) {
+        tokenInput.value = savedToken;
+      }
+
+      if (sessionStorage.getItem('hod_admin_auth') === 'true') {
+        document.getElementById('authOverlay').classList.add('hidden');
+        document.getElementById('adminApp').classList.remove('hidden');
+        renderDashboard();
+      }
+    });
+
+    // RENDER DASHBOARD
+    function renderDashboard() {
+      renderCategoryPills();
+      renderItemsGrid();
+      populateCategorySelect();
+    }
+
+    // RENDER CATEGORY PILLS (TABS)
+    function renderCategoryPills() {
+      const container = document.getElementById('categoryPillList');
+      if (!container) return;
+
+      const totalItems = menuState.items.length;
+      let html = `
+        <button onclick="setActiveFilter('ALL')" 
+          class="px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider transition ${activeFilterTab === 'ALL' ? 'bg-[#f91814] text-white shadow-md' : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'}">
+          ALL (${totalItems})
+        </button>
+      `;
+
+      menuState.categories.forEach(cat => {
+        const count = menuState.items.filter(item => item.cat && item.cat.toLowerCase() === cat.toLowerCase()).length;
+        const isActive = activeFilterTab.toLowerCase() === cat.toLowerCase();
+        html += `
+          <button onclick="setActiveFilter('${cat}')" 
+            class="px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider transition ${isActive ? 'bg-[#f91814] text-white shadow-md' : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'}">
+            ${cat} (${count})
+          </button>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function setActiveFilter(tab) {
+      activeFilterTab = tab;
+      renderDashboard();
+    }
+
+    // POPULATE CATEGORY DROPDOWN IN MODAL
+    function populateCategorySelect() {
+      const select = document.getElementById('foodCategory');
+      if (!select) return;
+      select.innerHTML = menuState.categories.map(c => `<option value="${c}">${c}</option>`).join('');
+    }
+
+    // RENDER ITEMS GRID
+    function renderItemsGrid() {
+      const container = document.getElementById('foodItemsContainer');
+      const search = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
+      
+      let filtered = menuState.items;
+      if (activeFilterTab !== 'ALL') {
+        filtered = filtered.filter(i => i.cat && i.cat.toLowerCase() === activeFilterTab.toLowerCase());
+      }
+      if (search) {
+        filtered = filtered.filter(i => (i.name && i.name.toLowerCase().includes(search)) || (i.cat && i.cat.toLowerCase().includes(search)));
+      }
+
+      const titleEl = document.getElementById('currentCategoryTitle');
+      const countEl = document.getElementById('itemsCountSubtitle');
+      if (titleEl) titleEl.textContent = activeFilterTab === 'ALL' ? 'All Items' : activeFilterTab;
+      if (countEl) countEl.textContent = `${filtered.length} dish${filtered.length === 1 ? '' : 'es'} listed`;
+
+      if (!filtered.length) {
+        container.innerHTML = `
+          <div class="col-span-full py-16 text-center text-neutral-400">
+            <span class="text-5xl block mb-2">🍔</span>
+            <p class="font-bold text-neutral-600 text-base">No items found</p>
+            <p class="text-xs text-neutral-400 mt-1">Click "+ Add New Food" above to add your first dish.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => {
+        const imageFit = item.imageFit || 'cover';
+        return `
+          <div class="bg-neutral-50 rounded-3xl p-5 border border-black/5 hover:border-black/15 transition shadow-sm flex flex-col justify-between group">
+            <div>
+              <div class="relative w-full h-48 rounded-2xl overflow-hidden bg-neutral-200 mb-4 border border-black/5">
+                <img src="${item.image || '/img-webp/slider-burger.webp'}" alt="${item.name}" 
+                  class="w-full h-full object-${imageFit}" onerror="this.src='/img-webp/slider-burger.webp'" />
+                <span class="absolute top-2.5 right-2.5 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-neutral-800 shadow-sm">
+                  ${item.cat}
+                </span>
+                <span class="absolute bottom-2.5 left-2.5 bg-black/80 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold">
+                  ₹${item.price}
+                </span>
+              </div>
+              <h4 class="font-modak text-xl text-neutral-900 group-hover:text-[#f91814] transition leading-tight mb-1">${item.name}</h4>
+              
+              <!-- Quick Stats Summary -->
+              <div class="grid grid-cols-3 gap-1.5 py-2 text-[11px] text-neutral-600 border-t border-b border-neutral-200/60 my-2">
+                <div><span class="font-bold text-neutral-400 block text-[9px] uppercase">Bun</span>${item.bun || 'Brioche'}</div>
+                <div><span class="font-bold text-neutral-400 block text-[9px] uppercase">Patty</span>${item.patty || 'Veggie'}</div>
+                <div><span class="font-bold text-neutral-400 block text-[9px] uppercase">Spice</span>${item.spice || 'Medium'}</div>
+              </div>
+              
+              <div class="flex items-center gap-2 text-[11px] font-bold text-neutral-500">
+                <span>🔥 ${item.calories || 500} Cal</span>
+                <span>•</span>
+                <span>💪 ${item.protein || '18g'} Protein</span>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex items-center justify-end gap-2 mt-4 pt-3 border-t border-neutral-200/60">
+              <button onclick="editFoodItem('${item.id}')" 
+                class="px-3.5 py-1.5 bg-neutral-200 hover:bg-neutral-300 text-neutral-800 rounded-xl text-xs font-bold transition flex items-center gap-1">
+                ✏️ Edit
+              </button>
+              <button onclick="deleteFoodItem('${item.id}')" 
+                class="px-3.5 py-1.5 bg-red-100 hover:bg-red-200 text-red-700 rounded-xl text-xs font-bold transition flex items-center gap-1">
+                🗑️ Delete
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // MODAL HANDLERS
+    function openFoodModal(defaultCategory = null) {
+      document.getElementById('foodModalTitle').textContent = 'Add New Dish';
+      document.getElementById('foodForm').reset();
+      document.getElementById('editItemId').value = '';
+      
+      populateCategorySelect();
+      if (defaultCategory && menuState.categories.includes(defaultCategory)) {
+        document.getElementById('foodCategory').value = defaultCategory;
+      }
+
+      const radio = document.querySelector('input[name="imageFitRadio"][value="cover"]');
+      if (radio) radio.checked = true;
+
+      updateLivePreview();
+      document.getElementById('foodModal').classList.remove('hidden');
+      document.getElementById('foodModal').classList.add('flex');
+    }
+
+    function closeFoodModal() {
+      document.getElementById('foodModal').classList.add('hidden');
+      document.getElementById('foodModal').classList.remove('flex');
+    }
+
+    function editFoodItem(id) {
+      const item = menuState.items.find(i => String(i.id) === String(id));
+      if (!item) return;
+
+      document.getElementById('foodModalTitle').textContent = 'Edit Dish';
+      document.getElementById('editItemId').value = item.id;
+      document.getElementById('foodName').value = item.name;
+      document.getElementById('foodPrice').value = item.price;
+      document.getElementById('foodCategory').value = item.cat;
+      document.getElementById('foodImageUrl').value = item.image || '';
+      document.getElementById('foodOrderUrl').value = item.orderUrl || '';
+      document.getElementById('foodPrepTime').value = item.prepTime || '10';
+      document.getElementById('foodBun').value = item.bun || 'Brioche';
+      document.getElementById('foodPatty').value = item.patty || 'Veggie';
+      document.getElementById('foodSpice').value = item.spice || 'Medium';
+      document.getElementById('foodCalories').value = item.calories || 500;
+      document.getElementById('foodProtein').value = item.protein || '18g';
+
+      const fitVal = item.imageFit || 'cover';
+      const radio = document.querySelector(`input[name="imageFitRadio"][value="${fitVal}"]`);
+      if (radio) radio.checked = true;
+
+      updateLivePreview();
+      document.getElementById('foodModal').classList.remove('hidden');
+      document.getElementById('foodModal').classList.add('flex');
+    }
+
+    function deleteFoodItem(id) {
+      const item = menuState.items.find(i => String(i.id) === String(id));
+      if (!item) return;
+      if (confirm(`Are you sure you want to delete "${item.name}"?`)) {
+        menuState.items = menuState.items.filter(i => String(i.id) !== String(id));
+        persistData();
+        renderDashboard();
+      }
+    }
+
+    function saveFoodItem(e) {
+      e.preventDefault();
+      const editId = document.getElementById('editItemId').value;
+      const name = document.getElementById('foodName').value.trim();
+      const cat = document.getElementById('foodCategory').value;
+      const price = parseFloat(document.getElementById('foodPrice').value) || 0;
+      const image = document.getElementById('foodImageUrl').value.trim() || '/img-webp/slider-burger.webp';
+      const orderUrl = document.getElementById('foodOrderUrl').value.trim() || 'https://order.houseofdelicious.in';
+      const imageFit = document.querySelector('input[name="imageFitRadio"]:checked')?.value || 'cover';
+
+      const itemPayload = {
+        id: editId ? String(editId) : ('hod_' + Date.now()),
+        name,
+        cat,
+        price,
+        image,
+        imageFit,
+        orderUrl,
+        prepTime: document.getElementById('foodPrepTime').value.trim() || '10',
+        bun: document.getElementById('foodBun').value.trim() || 'Brioche',
+        patty: document.getElementById('foodPatty').value.trim() || 'Veggie',
+        spice: document.getElementById('foodSpice').value.trim() || 'Medium',
+        calories: parseInt(document.getElementById('foodCalories').value) || 500,
+        protein: document.getElementById('foodProtein').value.trim() || '18g'
+      };
+
+      if (editId) {
+        const idx = menuState.items.findIndex(i => String(i.id) === String(editId));
+        if (idx !== -1) menuState.items[idx] = itemPayload;
+      } else {
+        menuState.items.push(itemPayload);
+      }
+
+      persistData();
+      renderDashboard();
+      closeFoodModal();
+    }
+
+    // IMAGE UPLOAD CONVERTER (Local Base64)
+    function handleImageFileUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        document.getElementById('foodImageUrl').value = evt.target.result;
+        updateLivePreview();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // LIVE CARD PREVIEW
+    function updateLivePreview() {
+      const name = document.getElementById('foodName').value || 'Cheesy Smash';
+      const price = document.getElementById('foodPrice').value || '180';
+      const img = document.getElementById('foodImageUrl').value || '/img-webp/slider-burger.webp';
+      const prepTime = document.getElementById('foodPrepTime').value || '10';
+      const bun = document.getElementById('foodBun').value || 'Brioche';
+      const patty = document.getElementById('foodPatty').value || 'Veggie';
+      const spice = document.getElementById('foodSpice').value || 'Medium';
+      const cal = document.getElementById('foodCalories').value || '500';
+      const protein = document.getElementById('foodProtein').value || '18g';
+      
+      const prevImg = document.getElementById('previewDishImage');
+      if (prevImg) {
+        prevImg.src = img;
+        const fit = document.querySelector('input[name="imageFitRadio"]:checked')?.value || 'cover';
+        prevImg.className = `w-full h-full object-${fit} transition-all duration-300`;
+      }
+
+      const pName = document.getElementById('previewDishName');
+      if (pName) pName.textContent = name;
+      
+      const pPrice = document.getElementById('previewDishPrice');
+      if (pPrice) pPrice.textContent = '₹' + price;
+      
+      const pPrep = document.getElementById('previewPrepTime');
+      if (pPrep) pPrep.textContent = prepTime + ' MIN';
+      
+      const pBun = document.getElementById('previewBun');
+      if (pBun) pBun.textContent = bun;
+      
+      const pPatty = document.getElementById('previewPatty');
+      if (pPatty) pPatty.textContent = patty;
+      
+      const pSpice = document.getElementById('previewSpice');
+      if (pSpice) pSpice.textContent = spice;
+      
+      const pCal = document.getElementById('previewCalories');
+      if (pCal) pCal.textContent = 'CALORIES: ' + cal;
+      
+      const pProt = document.getElementById('previewProtein');
+      if (pProt) pProt.textContent = 'PROTEIN: ' + protein;
+    }
+
+    function setPreviewMode(mode) {
+      previewMode = mode;
+      const overlay = document.getElementById('previewOverlay');
+      const btnF = document.getElementById('btnFrontMode');
+      const btnD = document.getElementById('btnDetailsMode');
+
+      if (mode === 'details') {
+        overlay.classList.remove('opacity-0', 'pointer-events-none');
+        overlay.classList.add('opacity-100');
+        btnD.className = 'px-3 py-1 rounded-md font-bold text-xs bg-white text-black shadow-sm';
+        btnF.className = 'px-3 py-1 rounded-md font-bold text-xs text-neutral-600 hover:text-black';
+      } else {
+        overlay.classList.remove('opacity-100');
+        overlay.classList.add('opacity-0', 'pointer-events-none');
+        btnF.className = 'px-3 py-1 rounded-md font-bold text-xs bg-white text-black shadow-sm';
+        btnD.className = 'px-3 py-1 rounded-md font-bold text-xs text-neutral-600 hover:text-black';
+      }
+    }
+
+    // MANAGE TABS / CATEGORIES
+    function openTabModal() {
+      renderManageTabList();
+      document.getElementById('tabModal').classList.remove('hidden');
+      document.getElementById('tabModal').classList.add('flex');
+    }
+
+    function closeTabModal() {
+      document.getElementById('tabModal').classList.add('hidden');
+      document.getElementById('tabModal').classList.remove('flex');
+    }
+
+    function renderManageTabList() {
+      const container = document.getElementById('manageTabList');
+      if (!container) return;
+
+      container.innerHTML = menuState.categories.map((c, idx) => {
+        const count = menuState.items.filter(i => i.cat && i.cat.toLowerCase() === c.toLowerCase()).length;
+        return `
+          <div class="flex items-center justify-between p-2.5 bg-neutral-50 rounded-xl border border-neutral-200">
+            <div>
+              <span class="font-bold text-sm text-neutral-800">${c}</span>
+              <span class="text-xs text-neutral-400 ml-2">(${count} dish${count === 1 ? '' : 'es'})</span>
+            </div>
+            ${menuState.categories.length > 1 ? `
+              <button onclick="deleteTab('${c}')" class="text-red-500 hover:text-red-700 text-xs font-bold px-2 py-1">
+                Delete
+              </button>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function handleCreateTab(e) {
+      e.preventDefault();
+      const input = document.getElementById('newCategoryInput');
+      const newCat = input.value.trim();
+      if (!newCat) return;
+
+      if (menuState.categories.some(c => c.toLowerCase() === newCat.toLowerCase())) {
+        alert('This category tab already exists!');
+        return;
+      }
+
+      menuState.categories.push(newCat);
+      persistData();
+      renderDashboard();
+      renderManageTabList();
+      input.value = '';
+    }
+
+    function deleteTab(catName) {
+      const count = menuState.items.filter(i => i.cat && i.cat.toLowerCase() === catName.toLowerCase()).length;
+      if (count > 0) {
+        if (!confirm(`Warning: "${catName}" contains ${count} dishes. Deleting this tab will also remove these dishes. Proceed?`)) {
+          return;
+        }
+        menuState.items = menuState.items.filter(i => i.cat && i.cat.toLowerCase() !== catName.toLowerCase());
+      }
+      menuState.categories = menuState.categories.filter(c => c !== catName);
+      if (activeFilterTab.toLowerCase() === catName.toLowerCase()) {
+        activeFilterTab = 'ALL';
+      }
+      persistData();
+      renderDashboard();
+      renderManageTabList();
+    }
+
+    // PUBLISH LIVE MODAL FUNCTIONS
     function openPublishModal() {
-      const savedToken = localStorage.getItem('hod_gh_token') || '';
-      const input = document.getElementById('ghToken');
-      if (input) input.value = savedToken;
-      document.getElementById('publishModal').classList.remove('hidden');
-      document.getElementById('publishModal').classList.add('flex');
+      const modal = document.getElementById('publishModal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
     }
 
     function closePublishModal() {
-      document.getElementById('publishModal').classList.add('hidden');
-      document.getElementById('publishModal').classList.remove('flex');
+      const modal = document.getElementById('publishModal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
     }
 
     function downloadMenuJson() {
@@ -517,7 +960,7 @@
       const tokenInput = document.getElementById('ghToken');
       const token = (tokenInput ? tokenInput.value : '').trim();
       if (!token) {
-        alert('Please enter your GitHub Personal Access Token to publish directly to the live site.');
+        alert('Please enter your GitHub Personal Access Token with repository write permissions.');
         return;
       }
       localStorage.setItem('hod_gh_token', token);
@@ -536,7 +979,6 @@
       const apiUrl = 'https://api.github.com/repos/' + repo + '/contents/' + filePath;
 
       try {
-        // 1. Get file SHA if it exists
         let sha = null;
         const getRes = await fetch(apiUrl, {
           headers: {
@@ -549,11 +991,9 @@
           sha = fileInfo.sha;
         }
 
-        // 2. Prepare base64 content
         const jsonString = JSON.stringify(menuState, null, 2);
         const encoded = btoa(unescape(encodeURIComponent(jsonString)));
 
-        // 3. Commit file
         const putRes = await fetch(apiUrl, {
           method: 'PUT',
           headers: {
@@ -581,7 +1021,7 @@
       } catch (err) {
         console.error('Publish error:', err);
         if (statusEl) {
-          statusEl.className = 'text-xs text-center font-bold py-1 text-red block';
+          statusEl.className = 'text-xs text-center font-bold py-1 text-red-600 block';
           statusEl.textContent = 'Publish failed: ' + err.message;
         }
         alert('Failed to publish: ' + err.message + '. Please ensure your GitHub token has repo write access.');
@@ -590,26 +1030,6 @@
         btn.innerHTML = '<span>🚀</span> Publish Changes to Live Website';
       }
     }
-
-    function openSyncModal() {
-      const conf = localStorage.getItem('hod_firebase_config');
-      if (conf) {
-        try {
-          const c = JSON.parse(conf);
-          document.getElementById('fbApiKey').value = c.apiKey || '';
-          document.getElementById('fbProjectId').value = c.projectId || '';
-          document.getElementById('fbAppId').value = c.appId || '';
-        } catch(e) {}
-      }
-      document.getElementById('syncModal').classList.remove('hidden');
-      document.getElementById('syncModal').classList.add('flex');
-    }
-    function closeSyncModal() {
-      document.getElementById('syncModal').classList.add('hidden');
-      document.getElementById('syncModal').classList.remove('flex');
-    }
-
-    
 
     function exportMenuData() {
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(menuState, null, 2));
@@ -634,7 +1054,7 @@
             persistData();
             renderDashboard();
             alert('Menu imported successfully!');
-            closeSyncModal();
+            closePublishModal();
           } else {
             alert('Invalid menu JSON file format.');
           }
@@ -647,4 +1067,3 @@
   </script>
 </body>
 </html>
-
