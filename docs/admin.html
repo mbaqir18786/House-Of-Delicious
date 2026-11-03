@@ -456,48 +456,64 @@
       }, 2500);
     }
 
-    // Save menuState to localStorage
+    // Save menuState to localStorage AND sync to server in real-time
     function persistData() {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(menuState));
       } catch (e) {
         console.error('Error saving menu to localStorage:', e);
       }
+
+      // Sync across all devices via server API
+      fetch('/api/menu', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(menuState)
+      })
+      .then(r => r.json())
+      .then(res => {
+        if (res && res.success) {
+          console.log('✅ Menu synced live to server for all devices!');
+        }
+      })
+      .catch(err => {
+        console.warn('Server sync notice:', err);
+      });
     }
 
     // Initialize Menu Data
     function initData() {
-      // 1. Try local storage first
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          if (parsed && Array.isArray(parsed.items) && parsed.items.length) {
-            menuState = parsed;
-            if (!menuState.categories || !menuState.categories.length) {
-              menuState.categories = ['Burgers', 'Pizzas', 'Snacks', 'Rolls', 'Desserts'];
-            }
-            return;
-          }
-        } catch(e) {
-          console.error('Error parsing localStorage menu state', e);
-        }
-      }
-
-      // 2. Fetch from /data/menu.json
-      fetch('/data/menu.json')
+      // 1. Fetch latest data from server (cache-busted so other devices always get latest)
+      fetch('/data/menu.json?t=' + Date.now())
         .then(r => r.json())
         .then(data => {
           if (data && Array.isArray(data.items) && data.items.length) {
             menuState = data;
-            persistData();
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(menuState)); } catch(e) {}
             if (sessionStorage.getItem('hod_admin_auth') === 'true') {
               renderDashboard();
             }
           }
         })
         .catch(err => {
-          console.warn('Could not load /data/menu.json:', err);
+          console.warn('Server fetch notice, checking local storage:', err);
+          const saved = localStorage.getItem(STORAGE_KEY);
+          if (saved) {
+            try {
+              const parsed = JSON.parse(saved);
+              if (parsed && Array.isArray(parsed.items) && parsed.items.length) {
+                menuState = parsed;
+                if (!menuState.categories || !menuState.categories.length) {
+                  menuState.categories = ['Burgers', 'Pizzas', 'Snacks', 'Rolls', 'Desserts'];
+                }
+                if (sessionStorage.getItem('hod_admin_auth') === 'true') {
+                  renderDashboard();
+                }
+              }
+            } catch(e) {
+              console.error('Error parsing localStorage menu state', e);
+            }
+          }
         });
     }
 

@@ -34,7 +34,27 @@ const MIME_TYPES = {
   '.ttf': 'font/ttf'
 };
 
+// In-memory real-time menu state across all connected devices
+let currentMenuState = (() => {
+  try {
+    const file1 = path.join(PUBLIC_ROOT, 'data', 'menu.json');
+    if (fs.existsSync(file1)) {
+      return JSON.parse(fs.readFileSync(file1, 'utf8'));
+    }
+    const file2 = path.join(PUBLIC_ROOT, 'menu-data.json');
+    if (fs.existsSync(file2)) {
+      return JSON.parse(fs.readFileSync(file2, 'utf8'));
+    }
+  } catch(e) {
+    console.warn('Notice: Could not load initial menu file:', e.message);
+  }
+  return { categories: ['Burgers', 'Pizzas', 'Snacks', 'Rolls', 'Desserts'], items: [] };
+})();
+
 function getCacheControl(pathname, ext) {
+  if (pathname.includes('menu') || ext === '.json') {
+    return 'no-cache, no-store, must-revalidate';
+  }
   if (ext === '.woff2' || ext === '.webp' || ext === '.png' || ext === '.jpg' || ext === '.jpeg') {
     return 'public, max-age=86400';
   }
@@ -79,6 +99,72 @@ const server = http.createServer((req, res) => {
       'Cache-Control': 'no-cache'
     });
     return res.end(payload);
+  }
+
+  // Cross-device Menu Sync Endpoint: /api/menu and /data/menu.json
+  if (pathname === '/api/menu' || pathname === '/data/menu.json' || pathname === '/menu-data.json') {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-admin-pin');
+
+    if (req.method === 'OPTIONS') {
+      res.writeHead(204);
+      return res.end();
+    }
+
+    if (req.method === 'POST') {
+      let body = '';
+      req.on('data', chunk => {
+        body += chunk;
+        if (body.length > 5 * 1024 * 1024) { // 5MB guard
+          res.writeHead(413, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'Payload too large' }));
+          req.destroy();
+        }
+      });
+      req.on('end', () => {
+        try {
+          const parsed = JSON.parse(body);
+          if (parsed && Array.isArray(parsed.items)) {
+            // Update in-memory menu state across all connected devices
+            currentMenuState = parsed;
+
+            // Save to disk so changes persist across restarts
+            try {
+              const dataDir = path.join(PUBLIC_ROOT, 'data');
+              if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+              const jsonStr = JSON.stringify(parsed, null, 2);
+              fs.writeFileSync(path.join(dataDir, 'menu.json'), jsonStr, 'utf8');
+              fs.writeFileSync(path.join(PUBLIC_ROOT, 'menu-data.json'), jsonStr, 'utf8');
+            } catch(writeErr) {
+              console.warn('Notice: Disk write failed, but updated in-memory state:', writeErr.message);
+            }
+
+            res.writeHead(200, {
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-cache, no-store, must-revalidate'
+            });
+            return res.end(JSON.stringify({ success: true, count: parsed.items.length }));
+          } else {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            return res.end(JSON.stringify({ error: 'Invalid data format' }));
+          }
+        } catch(parseErr) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          return res.end(JSON.stringify({ error: 'Malformed JSON payload' }));
+        }
+      });
+      return;
+    }
+
+    // GET /api/menu or /data/menu.json
+    res.writeHead(200, {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    });
+    return res.end(JSON.stringify(currentMenuState, null, 2));
   }
 
   // Handle Next.js dynamic image endpoint: /_next/image?url=...
