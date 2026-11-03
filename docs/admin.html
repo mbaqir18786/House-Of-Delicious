@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>HOD Admin | Menu Management Dashboard</title>
   <link rel="icon" href="/favicon.ico" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -23,21 +23,21 @@
     .font-modak { font-family: 'Modak', cursive, sans-serif; }
     .font-mouse { font-family: 'Mouse Memoirs', sans-serif; }
     
-    /* Exact Live Card Preview Styles matching HOD website */
+    /* Live Card Preview Styles */
     .preview-card {
       position: relative;
       background: #ffffff;
-      border-radius: 24px;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
       width: 100%;
-      max-width: 320px;
+      max-width: 290px;
       margin: 0 auto;
     }
     .preview-checkers {
       position: absolute;
       width: 100%;
-      height: 44px;
+      height: 40px;
       top: 48%;
       transform: translateY(-50%);
       background-image: url('/img-webp/menu-red-white.webp');
@@ -49,36 +49,48 @@
     .preview-details-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(8px);
       z-index: 20;
-      padding: 16px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       transition: all 0.3s ease;
     }
+
+    /* Hide scrollbars for pill tabs */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
-<body class="bg-[#f5e3cd] text-[#111111] min-h-screen font-sans flex flex-col">
+<body class="bg-[#f5e3cd] text-[#111111] min-h-screen font-sans flex flex-col antialiased">
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toastNotification" class="fixed top-5 left-1/2 -translate-x-1/2 z-[100] transition-all duration-300 transform -translate-y-16 opacity-0 pointer-events-none">
+    <div class="bg-neutral-900 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-2.5 font-bold text-sm border border-white/10">
+      <span id="toastIcon">✅</span>
+      <span id="toastMsg">Menu updated!</span>
+    </div>
+  </div>
 
   <!-- AUTH OVERLAY -->
   <div id="authOverlay" class="fixed inset-0 z-50 bg-[#111111]/90 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl text-center border-4 border-[#f91814]">
-      <h1 class="font-modak text-3xl text-[#f91814] mb-2 tracking-wide">House Of Delicious</h1>
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm sm:max-w-md w-full shadow-2xl text-center border-4 border-[#f91814]">
+      <h1 class="font-modak text-3xl sm:text-4xl text-[#f91814] mb-1 tracking-wide">House Of Delicious</h1>
       <p class="font-mouse text-xl text-neutral-600 mb-6 uppercase tracking-wider">Admin Portal Access</p>
       
       <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
         <div>
-          <label class="block text-left font-bold text-xs uppercase tracking-wider text-neutral-700 mb-1">Enter Admin PIN / Password</label>
+          <label class="block text-left font-bold text-xs uppercase tracking-wider text-neutral-700 mb-1">Enter Admin PIN</label>
           <input type="password" id="adminPin" name="password" autocomplete="current-password" placeholder="Enter PIN (hod2026)" required
             oninput="document.getElementById('authError').classList.add('hidden')"
-            class="w-full px-4 py-3 rounded-xl border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-[#f91814] text-lg font-bold text-center tracking-widest" />
-          <p class="text-[11px] text-neutral-400 mt-1">Default PIN: <span class="font-mono font-bold text-neutral-700">hod2026</span></p>
+            class="w-full px-4 py-3.5 rounded-xl border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-[#f91814] text-lg font-bold text-center tracking-widest" />
+          <p class="text-[11px] text-neutral-400 mt-1.5">Default PIN: <span class="font-mono font-bold text-neutral-700">hod2026</span></p>
         </div>
         <p id="authError" class="text-red-600 text-sm hidden font-bold">Incorrect PIN. Please try again.</p>
         <button type="submit" 
-          class="w-full py-3.5 bg-[#f91814] hover:bg-[#d9120e] text-white font-mouse text-2xl uppercase tracking-wider rounded-xl transition duration-200 shadow-lg">
+          class="w-full py-3.5 bg-[#f91814] hover:bg-[#d9120e] text-white font-mouse text-2xl uppercase tracking-wider rounded-xl transition duration-200 shadow-lg active:scale-98 cursor-pointer">
           Unlock Dashboard
         </button>
       </form>
@@ -87,66 +99,88 @@
 
   <!-- MAIN ADMIN DASHBOARD -->
   <div id="adminApp" class="hidden flex-1 flex flex-col">
-    <!-- TOP NAVIGATION -->
-    <header class="bg-white border-b border-black/10 sticky top-0 z-40 px-6 py-4 flex items-center justify-between shadow-sm">
-      <div class="flex items-center gap-4">
-        <a href="/menu" target="_blank" title="View Live Menu" class="hover:scale-105 transition">
-          <span class="font-modak text-3xl text-[#f91814]">HOD</span>
-        </a>
-        <div>
-          <h2 class="font-modak text-xl text-black leading-none">Menu Management Dashboard</h2>
-          <p class="text-xs text-neutral-500 font-medium">Create, Edit & Delete Dishes in Real-Time</p>
+    <!-- TOP NAVIGATION (RESPONSIVE) -->
+    <header class="bg-white border-b border-black/10 sticky top-0 z-40 px-3 sm:px-6 py-3 sm:py-4 shadow-sm">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        
+        <!-- Row 1 on mobile: Logo + Title + Quick Action Icons -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2.5 sm:gap-4">
+            <a href="/menu" target="_blank" title="View Live Menu" class="hover:scale-105 transition flex items-center gap-1.5">
+              <span class="font-modak text-2xl sm:text-3xl text-[#f91814]">HOD</span>
+            </a>
+            <div>
+              <h2 class="font-modak text-base sm:text-xl text-black leading-tight">Admin Dashboard</h2>
+              <p class="text-[11px] text-neutral-500 font-medium hidden sm:block">Real-Time Menu Management</p>
+            </div>
+          </div>
+
+          <!-- Mobile Only Quick Controls -->
+          <div class="flex sm:hidden items-center gap-2">
+            <a href="/menu" target="_blank" class="px-2.5 py-1.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-700 rounded-xl text-xs font-bold transition flex items-center gap-1">
+              👁️ <span class="text-[11px]">Menu</span>
+            </a>
+            <button onclick="logout()" class="p-2 bg-neutral-100 hover:bg-neutral-200 text-neutral-700 rounded-xl text-xs font-bold transition" title="Lock Dashboard">
+              🔒
+            </button>
+          </div>
         </div>
-      </div>
-      
-      <div class="flex items-center gap-3">
-        <button onclick="openTabModal()" class="px-4 py-2 bg-neutral-900 hover:bg-black text-white font-bold text-sm rounded-xl transition flex items-center gap-1.5 shadow-sm">
-          <span>🏷️</span> Manage Tabs
-        </button>
-        <button onclick="openFoodModal()" class="px-4 py-2 bg-[#f91814] hover:bg-[#d9120e] text-white font-bold text-sm rounded-xl transition flex items-center gap-1.5 shadow-sm">
-          <span>➕</span> Add New Food
-        </button>
-        <button onclick="openPublishModal()" class="px-4 py-2 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-bold text-sm rounded-xl transition flex items-center gap-1.5 shadow-sm" title="Publish Menu Live to Website">
-          <span>🚀</span> Publish Live
-        </button>
-        <button onclick="logout()" class="px-3 py-2 bg-neutral-200 hover:bg-neutral-300 text-neutral-700 font-bold text-sm rounded-xl transition" title="Lock Dashboard">
-          🔒
-        </button>
+        
+        <!-- Row 2 on mobile: Main Action Buttons -->
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <button onclick="openFoodModal()" class="flex-1 sm:flex-initial px-4 sm:px-5 py-2.5 bg-[#f91814] hover:bg-[#d9120e] text-white font-bold text-xs sm:text-sm rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
+            <span>➕</span>
+            <span>Add Food</span>
+          </button>
+          <button onclick="openTabModal()" class="flex-1 sm:flex-initial px-3.5 sm:px-4 py-2.5 bg-neutral-900 hover:bg-black text-white font-bold text-xs sm:text-sm rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
+            <span>🏷️</span>
+            <span>Categories</span>
+          </button>
+          <a href="/menu" target="_blank" class="hidden sm:flex px-3.5 py-2.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-700 font-bold text-sm rounded-xl transition items-center gap-1.5 shadow-sm" title="View Menu">
+            👁️ Menu
+          </a>
+          <button onclick="logout()" class="hidden sm:flex px-3 py-2.5 bg-neutral-200 hover:bg-neutral-300 text-neutral-700 font-bold text-sm rounded-xl transition items-center gap-1" title="Lock Dashboard">
+            🔒
+          </button>
+        </div>
+
       </div>
     </header>
 
     <!-- CONTENT WRAPPER -->
-    <main class="flex-1 max-w-7xl w-full mx-auto p-6 space-y-6">
+    <main class="flex-1 max-w-7xl w-full mx-auto p-3.5 sm:p-6 space-y-4 sm:space-y-6">
 
       <!-- QUICK STATS & TABS FILTER -->
-      <div class="bg-white rounded-3xl p-6 shadow-sm border border-black/5 flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h3 class="font-mouse text-2xl uppercase tracking-wider text-neutral-800">Categories / Tabs</h3>
-          <p class="text-xs text-neutral-500">Filter list by clicking any tab below</p>
+      <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-sm border border-black/5">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h3 class="font-mouse text-xl sm:text-2xl uppercase tracking-wider text-neutral-800">Categories / Tabs</h3>
+            <p class="text-[11px] text-neutral-500">Tap any category to filter</p>
+          </div>
         </div>
         
-        <!-- Category Pill Buttons -->
-        <div id="categoryPillList" class="flex flex-wrap items-center gap-2">
+        <!-- Scrollable Category Pills -->
+        <div id="categoryPillList" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
           <!-- Dynamically populated -->
         </div>
       </div>
 
       <!-- FOOD ITEMS GRID / LIST -->
-      <div class="bg-white rounded-3xl p-6 shadow-sm border border-black/5">
-        <div class="flex items-center justify-between mb-6 pb-4 border-b border-neutral-100">
+      <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-sm border border-black/5">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5 pb-4 border-b border-neutral-100">
           <div>
-            <h3 id="currentCategoryTitle" class="font-modak text-2xl text-neutral-900">All Items</h3>
+            <h3 id="currentCategoryTitle" class="font-modak text-xl sm:text-2xl text-neutral-900">All Items</h3>
             <p id="itemsCountSubtitle" class="text-xs text-neutral-500 font-medium">0 dishes registered</p>
           </div>
-          <div class="flex items-center gap-2">
-            <input type="text" id="searchInput" oninput="renderItemsGrid()" placeholder="Search dishes..."
-              class="px-4 py-2 border border-neutral-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#f91814] w-48 md:w-64" />
+          <div class="w-full sm:w-auto">
+            <input type="text" id="searchInput" oninput="renderItemsGrid()" placeholder="🔍 Search dishes..."
+              class="w-full sm:w-64 px-4 py-2 rounded-xl border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#f91814]" />
           </div>
         </div>
 
         <!-- ITEMS CONTAINER -->
-        <div id="foodItemsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Dynamically populated or empty state -->
+        <div id="foodItemsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <!-- Dynamically populated -->
         </div>
       </div>
 
@@ -154,21 +188,22 @@
 
     <!-- FOOTER -->
     <footer class="bg-white border-t border-black/5 py-4 px-6 text-center text-xs text-neutral-500 font-medium">
-      House Of Delicious Admin Dashboard &bull; Live menu sync active
+      House Of Delicious Admin Dashboard &bull; All changes saved automatically
     </footer>
   </div>
 
   <!-- ================= MODALS ================= -->
 
-  <!-- 1. FOOD ITEM ADD / EDIT MODAL -->
-  <div id="foodModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-3xl max-w-4xl w-full p-6 md:p-8 shadow-2xl border border-neutral-200 my-8 relative">
-      <button onclick="closeFoodModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-black text-2xl font-bold w-10 h-10 rounded-full hover:bg-neutral-100 flex items-center justify-center">
+  <!-- 1. FOOD ITEM ADD / EDIT MODAL (RESPONSIVE) -->
+  <div id="foodModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-2xl sm:max-w-4xl w-full p-4 sm:p-6 md:p-8 shadow-2xl border border-neutral-200 my-4 sm:my-8 relative max-h-[92vh] overflow-y-auto">
+      <button onclick="closeFoodModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-black text-2xl font-bold w-9 h-9 rounded-full hover:bg-neutral-100 flex items-center justify-center cursor-pointer">
         &times;
       </button>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <!-- FORM FIELDS (7 COLS) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+        
+        <!-- FORM FIELDS -->
         <div class="lg:col-span-7 space-y-4">
           <h3 id="foodModalTitle" class="font-modak text-2xl text-[#f91814]">Add New Food Item</h3>
           
@@ -193,7 +228,7 @@
               </div>
               <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-neutral-700 mb-1">Price (₹) *</label>
-                <input type="text" id="foodPrice" required oninput="updateLivePreview()" placeholder="e.g. ₹150"
+                <input type="text" id="foodPrice" required oninput="updateLivePreview()" placeholder="150"
                   class="w-full px-3.5 py-2.5 rounded-xl border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-[#f91814] text-sm font-semibold" />
               </div>
             </div>
@@ -201,44 +236,43 @@
             <!-- Image Input (File Upload OR URL) -->
             <div>
               <label class="block text-xs font-bold uppercase tracking-wider text-neutral-700 mb-1">Food Photo *</label>
-              <div class="flex gap-2">
-                <input type="file" id="foodImageFile" accept="image/*" onchange="handleImageFileUpload(event)"
-                  class="text-xs text-neutral-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-neutral-100 file:text-neutral-700 hover:file:bg-neutral-200 cursor-pointer w-full" />
-              </div>
+              <input type="file" id="foodImageFile" accept="image/*" onchange="handleImageFileUpload(event)"
+                class="text-xs text-neutral-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-neutral-100 file:text-neutral-700 hover:file:bg-neutral-200 cursor-pointer w-full" />
               <p class="text-[11px] text-neutral-400 mt-1">Or paste image URL below:</p>
               <input type="text" id="foodImageUrl" oninput="updateLivePreview()" placeholder="https://... or /burgers/1b.png"
                 class="w-full mt-1 px-3 py-1.5 rounded-lg border border-neutral-200 text-xs text-neutral-600 focus:outline-none focus:ring-1 focus:ring-[#f91814]" />
-              <div class="mt-2.5 flex items-center gap-4 bg-neutral-100/70 p-2.5 rounded-xl border border-neutral-200">
-                <span class="text-xs font-bold text-neutral-700">Display Style:</span>
+              
+              <div class="mt-2.5 flex flex-wrap items-center gap-3 bg-neutral-100/70 p-2.5 rounded-xl border border-neutral-200">
+                <span class="text-xs font-bold text-neutral-700">Display:</span>
                 <label class="flex items-center gap-1.5 text-xs font-semibold text-neutral-800 cursor-pointer">
                   <input type="radio" name="imageFit" value="cover" checked onchange="updateLivePreview()" />
-                  <span>Full Photo (Best for camera photos)</span>
+                  <span>Full Photo</span>
                 </label>
                 <label class="flex items-center gap-1.5 text-xs font-semibold text-neutral-800 cursor-pointer">
                   <input type="radio" name="imageFit" value="contain" onchange="updateLivePreview()" />
-                  <span>Cutout (For PNGs)</span>
+                  <span>Cutout (PNG)</span>
                 </label>
               </div>
             </div>
 
             <!-- Quick Details: Prep time, Bun, Patty -->
-            <div class="p-4 bg-neutral-50 rounded-2xl border border-neutral-200 space-y-3">
-              <span class="text-xs font-bold uppercase tracking-wider text-neutral-800 block">Quick Details (Hover / Specs)</span>
+            <div class="p-3.5 bg-neutral-50 rounded-2xl border border-neutral-200 space-y-2.5">
+              <span class="text-xs font-bold uppercase tracking-wider text-neutral-800 block">Quick Specs</span>
               
               <div class="grid grid-cols-3 gap-2">
                 <div>
-                  <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">Prep Time</label>
-                  <input type="text" id="foodPrepTime" oninput="updateLivePreview()" placeholder="8–10 MIN"
+                  <label class="block text-[10px] font-semibold text-neutral-600 mb-0.5 uppercase">Prep Time</label>
+                  <input type="text" id="foodPrepTime" oninput="updateLivePreview()" placeholder="8-10 min"
                     class="w-full px-2.5 py-1.5 rounded-lg border border-neutral-300 text-xs font-medium" />
                 </div>
                 <div>
-                  <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">Bun</label>
+                  <label class="block text-[10px] font-semibold text-neutral-600 mb-0.5 uppercase">Bun / Crust</label>
                   <input type="text" id="foodBun" oninput="updateLivePreview()" placeholder="Brioche"
                     class="w-full px-2.5 py-1.5 rounded-lg border border-neutral-300 text-xs font-medium" />
                 </div>
                 <div>
-                  <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">Patty</label>
-                  <input type="text" id="foodPatty" oninput="updateLivePreview()" placeholder="Veggie Smash"
+                  <label class="block text-[10px] font-semibold text-neutral-600 mb-0.5 uppercase">Patty / Fill</label>
+                  <input type="text" id="foodPatty" oninput="updateLivePreview()" placeholder="Veggie"
                     class="w-full px-2.5 py-1.5 rounded-lg border border-neutral-300 text-xs font-medium" />
                 </div>
               </div>
@@ -246,7 +280,7 @@
               <!-- Spice, Calories, Protein -->
               <div class="grid grid-cols-3 gap-2">
                 <div>
-                  <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">Spice Level</label>
+                  <label class="block text-[10px] font-semibold text-neutral-600 mb-0.5 uppercase">Spice</label>
                   <select id="foodSpice" onchange="updateLivePreview()" class="w-full px-2.5 py-1.5 rounded-lg border border-neutral-300 text-xs font-medium bg-white">
                     <option value="Mild">Mild</option>
                     <option value="Medium" selected>Medium</option>
@@ -255,13 +289,13 @@
                   </select>
                 </div>
                 <div>
-                  <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">Calories</label>
-                  <input type="text" id="foodCalories" oninput="updateLivePreview()" placeholder="650"
+                  <label class="block text-[10px] font-semibold text-neutral-600 mb-0.5 uppercase">Calories</label>
+                  <input type="text" id="foodCalories" oninput="updateLivePreview()" placeholder="500"
                     class="w-full px-2.5 py-1.5 rounded-lg border border-neutral-300 text-xs font-medium" />
                 </div>
                 <div>
-                  <label class="block text-[11px] font-semibold text-neutral-600 mb-0.5">Protein</label>
-                  <input type="text" id="foodProtein" oninput="updateLivePreview()" placeholder="22g"
+                  <label class="block text-[10px] font-semibold text-neutral-600 mb-0.5 uppercase">Protein</label>
+                  <input type="text" id="foodProtein" oninput="updateLivePreview()" placeholder="18g"
                     class="w-full px-2.5 py-1.5 rounded-lg border border-neutral-300 text-xs font-medium" />
                 </div>
               </div>
@@ -274,184 +308,121 @@
                 class="w-full px-3 py-2 rounded-xl border border-neutral-300 text-xs text-neutral-600 focus:outline-none focus:ring-1 focus:ring-[#f91814]" />
             </div>
 
-            <div class="flex items-center justify-end gap-3 pt-3">
-              <button type="button" onclick="closeFoodModal()" class="px-5 py-2.5 rounded-xl border border-neutral-300 font-bold text-sm hover:bg-neutral-100 transition">
+            <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-neutral-100">
+              <button type="button" onclick="closeFoodModal()" class="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl border border-neutral-300 font-bold text-sm hover:bg-neutral-100 transition cursor-pointer">
                 Cancel
               </button>
-              <button type="submit" class="px-6 py-2.5 rounded-xl bg-[#f91814] hover:bg-[#d9120e] text-white font-bold text-sm shadow-md transition">
+              <button type="submit" class="flex-1 sm:flex-initial px-6 py-2.5 rounded-xl bg-[#f91814] hover:bg-[#d9120e] text-white font-bold text-sm shadow-md transition cursor-pointer">
                 Save Food Item
               </button>
             </div>
           </form>
         </div>
 
-        <!-- LIVE PREVIEW (5 COLS) -->
-        <div class="lg:col-span-5 flex flex-col items-center justify-center bg-neutral-100 p-6 rounded-3xl border border-neutral-200">
-          <div class="w-full flex items-center justify-between mb-4">
-            <span class="text-xs font-bold uppercase tracking-wider text-neutral-500">Live Card Preview</span>
-            <div class="flex items-center gap-1.5">
-              <button type="button" onclick="setPreviewMode('front')" id="btnPreviewFront" class="px-2.5 py-1 rounded-md text-xs font-bold bg-[#f91814] text-white">Front</button>
-              <button type="button" onclick="setPreviewMode('details')" id="btnPreviewDetails" class="px-2.5 py-1 rounded-md text-xs font-bold bg-neutral-200 text-neutral-700">Hover Info</button>
+        <!-- LIVE PREVIEW (COMPACT ON MOBILE) -->
+        <div class="lg:col-span-5 flex flex-col items-center justify-center bg-neutral-100 p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-neutral-200">
+          <div class="w-full flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-neutral-600 uppercase tracking-wider">Live Card Preview</span>
+            <div class="flex items-center gap-1 bg-neutral-200 p-0.5 rounded-lg">
+              <button type="button" id="btnFrontMode" onclick="setPreviewMode('front')" class="px-2.5 py-0.5 rounded-md font-bold text-[11px] bg-white text-black shadow-xs">Front</button>
+              <button type="button" id="btnDetailsMode" onclick="setPreviewMode('details')" class="px-2.5 py-0.5 rounded-md font-bold text-[11px] text-neutral-600 hover:text-black">Specs</button>
             </div>
           </div>
 
-          <!-- EXACT CARD PREVIEW CONTAINER -->
-          <div class="preview-card" id="cardPreviewContainer">
-            <!-- Checkers stripe -->
+          <!-- The Live Preview Card -->
+          <div class="preview-card w-full">
             <div class="preview-checkers"></div>
 
-            <!-- Front Card Inner Content -->
-            <div class="p-6 relative z-10 flex flex-col justify-between min-h-[440px]">
-              <!-- Order Now Pill -->
+            <!-- Card Front -->
+            <div class="p-4 flex flex-col justify-between min-h-[300px] relative z-10">
               <div class="flex justify-end">
-                <span class="bg-[#f91814] text-white text-[13px] font-bold px-4 py-1.5 rounded-full flex items-center gap-1 shadow-sm">
+                <span class="bg-[#f91814] text-white font-mouse text-sm uppercase px-3 py-0.5 rounded-full">
                   ORDER NOW ↗
                 </span>
               </div>
 
               <!-- Dish Photo -->
-              <div class="my-auto py-2 flex items-center justify-center">
-                <img id="previewImage" src="/burgers/1b.png" alt="Food preview" class="w-48 h-48 object-contain transition-transform duration-300" />
+              <div class="w-36 h-36 mx-auto my-2 rounded-xl overflow-hidden flex items-center justify-center bg-neutral-50">
+                <img id="previewDishImage" src="/img-webp/slider-burger.webp" alt="Dish Preview" class="w-full h-full object-cover" />
               </div>
 
-              <!-- Bottom Row: Title & Price -->
-              <div class="flex items-end justify-between pt-3 border-t border-transparent">
-                <h4 id="previewName" class="font-mouse text-3xl font-bold uppercase leading-none text-[#f91814] max-w-[75%]">
-                  HOD Signature Smashed Burger
-                </h4>
-                <span id="previewPrice" class="font-mouse text-3xl font-bold text-neutral-900 leading-none whitespace-nowrap">
-                  ₹150
+              <!-- Bottom Row -->
+              <div class="flex items-end justify-between pt-2">
+                <span id="previewDishName" class="font-mouse text-2xl text-[#f91814] uppercase truncate max-w-[70%]">
+                  Cheesy Smash
+                </span>
+                <span id="previewDishPrice" class="font-mouse text-2xl font-bold text-neutral-900">
+                  ₹180
                 </span>
               </div>
             </div>
 
-            <!-- Hover / Quick Details View -->
-            <div id="previewDetailsOverlay" class="preview-details-overlay hidden">
-              <div>
-                <div class="flex items-center justify-between mb-3">
-                  <span class="font-mouse text-xl uppercase font-bold text-neutral-800">QUICK DETAILS</span>
-                  <span id="previewPrepTime" class="font-mouse text-lg text-neutral-600 font-bold">8–10 MIN</span>
-                </div>
+            <!-- Card Details Overlay -->
+            <div id="previewOverlay" class="preview-details-overlay opacity-0 pointer-events-none">
+              <div class="flex items-center justify-between border-b border-neutral-200 pb-2">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-neutral-400">QUICK DETAILS</span>
+                <span id="previewPrepTime" class="font-mouse text-lg text-neutral-600">10 MIN</span>
+              </div>
 
-                <div class="grid grid-cols-3 gap-2 mb-3">
-                  <div class="bg-neutral-100 p-2.5 rounded-xl text-center">
-                    <span class="block font-mouse text-sm text-neutral-500 uppercase">BUN</span>
-                    <span id="previewBun" class="font-mouse text-lg font-bold text-neutral-900 leading-none">Brioche</span>
-                  </div>
-                  <div class="bg-neutral-100 p-2.5 rounded-xl text-center">
-                    <span class="block font-mouse text-sm text-neutral-500 uppercase">PATTY</span>
-                    <span id="previewPatty" class="font-mouse text-lg font-bold text-neutral-900 leading-none">Veggie Smash</span>
-                  </div>
-                  <div class="bg-neutral-100 p-2.5 rounded-xl text-center">
-                    <span class="block font-mouse text-sm text-neutral-500 uppercase">SPICE</span>
-                    <span id="previewSpice" class="font-mouse text-lg font-bold text-neutral-900 leading-none">Medium</span>
-                  </div>
+              <div class="grid grid-cols-3 gap-1.5 my-2">
+                <div class="bg-neutral-100 rounded-lg p-1.5 text-center">
+                  <span class="text-[9px] uppercase font-bold text-neutral-400 block">BUN</span>
+                  <span id="previewBun" class="font-mouse text-sm text-neutral-700">Brioche</span>
                 </div>
-
-                <div class="flex items-center gap-2">
-                  <span id="previewCalories" class="font-mouse text-sm font-bold bg-[#f5e3cd] text-neutral-800 px-3 py-1.5 rounded-full">
-                    CALORIES: 650
-                  </span>
-                  <span id="previewProtein" class="font-mouse text-sm font-bold bg-[#f5e3cd] text-neutral-800 px-3 py-1.5 rounded-full">
-                    PROTEIN: 22G
-                  </span>
+                <div class="bg-neutral-100 rounded-lg p-1.5 text-center">
+                  <span class="text-[9px] uppercase font-bold text-neutral-400 block">PATTY</span>
+                  <span id="previewPatty" class="font-mouse text-sm text-neutral-700">Veggie</span>
+                </div>
+                <div class="bg-neutral-100 rounded-lg p-1.5 text-center">
+                  <span class="text-[9px] uppercase font-bold text-neutral-400 block">SPICE</span>
+                  <span id="previewSpice" class="font-mouse text-sm text-neutral-700">Medium</span>
                 </div>
               </div>
 
-              <div class="pt-3 border-t border-neutral-200">
-                <span class="text-xs text-neutral-500 font-medium">Exact styling as visitors see on website</span>
+              <div class="flex gap-2 justify-center">
+                <span id="previewCalories" class="font-mouse text-xs font-bold bg-[#f5e3cd] text-neutral-800 px-2.5 py-1 rounded-full">
+                  CALORIES: 500
+                </span>
+                <span id="previewProtein" class="font-mouse text-xs font-bold bg-[#f5e3cd] text-neutral-800 px-2.5 py-1 rounded-full">
+                  PROTEIN: 18G
+                </span>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
 
-  <!-- 2. MANAGE TABS / CATEGORIES MODAL -->
-  <div id="tabModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-neutral-200 relative">
-      <button onclick="closeTabModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-black text-2xl font-bold w-8 h-8 rounded-full flex items-center justify-center">
+  <!-- 2. MANAGE TABS / CATEGORIES MODAL (RESPONSIVE) -->
+  <div id="tabModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-neutral-200 relative">
+      <button onclick="closeTabModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-black text-2xl font-bold w-8 h-8 rounded-full flex items-center justify-center cursor-pointer">
         &times;
       </button>
 
-      <h3 class="font-modak text-2xl text-[#f91814] mb-1">Manage Categories / Tabs</h3>
-      <p class="text-xs text-neutral-500 mb-4">Create, view, or remove category tabs for your menu.</p>
+      <h3 class="font-modak text-2xl text-[#f91814] mb-1">Categories / Tabs</h3>
+      <p class="text-xs text-neutral-500 mb-4">Create or remove categories on your menu.</p>
 
       <!-- Add Tab Form -->
       <form onsubmit="handleCreateTab(event)" class="flex gap-2 mb-4">
-        <input type="text" id="newCategoryInput" required placeholder="e.g. Combos or Drinks"
-          class="flex-1 px-3.5 py-2 rounded-xl border border-neutral-300 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#f91814]" />
-        <button type="submit" class="px-4 py-2 bg-[#f91814] hover:bg-[#d9120e] text-white font-bold text-sm rounded-xl transition">
-          + Add Tab
+        <input type="text" id="newCategoryInput" required placeholder="e.g. Shakes or Combos"
+          class="flex-1 px-3.5 py-2.5 rounded-xl border border-neutral-300 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#f91814]" />
+        <button type="submit" class="px-4 py-2.5 bg-[#f91814] hover:bg-[#d9120e] text-white font-bold text-xs sm:text-sm rounded-xl transition cursor-pointer">
+          + Add
         </button>
       </form>
 
       <!-- List of Existing Tabs -->
-      <div class="border border-neutral-200 rounded-2xl p-3 max-h-60 overflow-y-auto space-y-2" id="manageTabList">
+      <div class="border border-neutral-200 rounded-2xl p-2.5 max-h-56 overflow-y-auto space-y-1.5" id="manageTabList">
         <!-- Dynamically rendered -->
       </div>
 
       <div class="mt-4 pt-3 border-t border-neutral-100 flex justify-end">
-        <button type="button" onclick="closeTabModal()" class="px-5 py-2 rounded-xl bg-neutral-900 text-white font-bold text-sm">
+        <button type="button" onclick="closeTabModal()" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-neutral-900 text-white font-bold text-sm cursor-pointer">
           Done
         </button>
-      </div>
-    </div>
-  </div>
-
-  
-  <!-- 3. PUBLISH LIVE & EXPORT MODAL -->
-  <div id="publishModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-neutral-200 relative max-h-[90vh] overflow-y-auto">
-      <button onclick="closePublishModal()" class="absolute top-4 right-4 text-neutral-400 hover:text-black text-2xl font-bold w-8 h-8 rounded-full flex items-center justify-center">
-        &times;
-      </button>
-
-      <div class="flex items-center gap-2 mb-1">
-        <h3 class="font-modak text-2xl text-[#f91814] tracking-wide">Publish Menu Live to Website</h3>
-      </div>
-      <p class="text-xs text-neutral-500 mb-4">Deploy your menu changes directly to the live website so every customer sees them worldwide.</p>
-
-      <!-- 1-Click GitHub Live Publish -->
-      <div class="space-y-3 p-4 bg-gradient-to-br from-red-50 to-amber-50 rounded-2xl border border-red-100 mb-4">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold uppercase tracking-wider text-[#f91814] flex items-center gap-1.5">
-            <span>🌐</span> 1-Click Live Publish (GitHub)
-          </span>
-          <span class="text-[10px] bg-red-100 text-[#f91814] px-2 py-0.5 rounded-full font-bold">Automated</span>
-        </div>
-        <p class="text-[11px] text-neutral-600 leading-relaxed">
-          Provide your GitHub Personal Access Token once below. Clicking <b>Publish Now</b> pushes the new menu straight to the repository, updating the live site for all visitors worldwide in ~30 seconds!
-        </p>
-        <div>
-          <label class="block text-[11px] font-semibold text-neutral-600 mb-1">GitHub Personal Access Token (repo write access)</label>
-          <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx" class="w-full px-3 py-2 bg-white border border-neutral-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-[#f91814]" />
-          <span class="text-[10px] text-neutral-400 mt-1 block">Token is kept in your browser's private local storage only.</span>
-        </div>
-        <button id="btnPublishLive" onclick="publishLiveToGitHub()" class="w-full py-2.5 bg-[#f91814] hover:bg-black text-white font-bold text-xs uppercase tracking-wider rounded-xl transition shadow-md flex items-center justify-center gap-2 cursor-pointer">
-          <span>🚀</span> Publish Changes to Live Website
-        </button>
-        <div id="publishStatus" class="hidden text-xs text-center font-bold py-1"></div>
-      </div>
-
-      <!-- Offline / Direct Download & Backup -->
-      <div class="space-y-3 p-4 bg-neutral-50 rounded-2xl border border-neutral-200">
-        <span class="text-xs font-bold uppercase tracking-wider text-neutral-700 block">Manual Export & Backup</span>
-        <div class="grid grid-cols-2 gap-2">
-          <button onclick="downloadMenuJson()" class="py-2.5 bg-white hover:bg-neutral-100 border border-neutral-300 font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5 text-neutral-700 cursor-pointer">
-            <span>📥</span> Download menu.json
-          </button>
-          <button onclick="copyMenuJson()" class="py-2.5 bg-white hover:bg-neutral-100 border border-neutral-300 font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5 text-neutral-700 cursor-pointer">
-            <span>📋</span> Copy JSON
-          </button>
-        </div>
-        <div class="flex gap-2 pt-2 border-t border-neutral-200">
-          <button onclick="exportMenuData()" class="flex-1 py-1.5 text-[11px] text-neutral-600 hover:text-black font-semibold cursor-pointer text-center">Download Full Backup</button>
-          <label class="flex-1 py-1.5 text-[11px] text-neutral-600 hover:text-black font-semibold text-center cursor-pointer">
-            Import JSON <input type="file" accept=".json" onchange="importMenuData(event)" class="hidden" />
-          </label>
-        </div>
       </div>
     </div>
   </div>
@@ -469,6 +440,22 @@
       items: []
     };
 
+    // Notification Toast Helper
+    function showToast(msg, icon = '✅') {
+      const el = document.getElementById('toastNotification');
+      const msgEl = document.getElementById('toastMsg');
+      const iconEl = document.getElementById('toastIcon');
+      if (!el || !msgEl) return;
+      msgEl.textContent = msg;
+      if (iconEl) iconEl.textContent = icon;
+      el.classList.remove('-translate-y-16', 'opacity-0', 'pointer-events-none');
+      el.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        el.classList.add('-translate-y-16', 'opacity-0', 'pointer-events-none');
+        el.classList.remove('translate-y-0', 'opacity-100');
+      }, 2500);
+    }
+
     // Save menuState to localStorage
     function persistData() {
       try {
@@ -480,7 +467,7 @@
 
     // Initialize Menu Data
     function initData() {
-      // 1. Try local storage
+      // 1. Try local storage first
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         try {
@@ -520,12 +507,12 @@
       const input = document.getElementById('adminPin');
       const pin = (input ? input.value : '').trim().toLowerCase();
       
-      // Accepts 'hod2026' or numeric '2026' or '1234'
       if (pin === AUTH_PIN.toLowerCase() || pin === 'hod2026' || pin === '2026' || pin === '1234') {
         sessionStorage.setItem('hod_admin_auth', 'true');
         document.getElementById('authOverlay').classList.add('hidden');
         document.getElementById('adminApp').classList.remove('hidden');
         renderDashboard();
+        showToast('Welcome to HOD Admin!', '👋');
       } else {
         document.getElementById('authError').classList.remove('hidden');
       }
@@ -542,14 +529,6 @@
     // CHECK AUTH STATE ON PAGE LOAD
     window.addEventListener('DOMContentLoaded', () => {
       initData();
-      
-      // Auto-populate saved GitHub token if available
-      const savedToken = localStorage.getItem('hod_gh_token');
-      const tokenInput = document.getElementById('ghToken');
-      if (savedToken && tokenInput) {
-        tokenInput.value = savedToken;
-      }
-
       if (sessionStorage.getItem('hod_admin_auth') === 'true') {
         document.getElementById('authOverlay').classList.add('hidden');
         document.getElementById('adminApp').classList.remove('hidden');
@@ -572,7 +551,7 @@
       const totalItems = menuState.items.length;
       let html = `
         <button onclick="setActiveFilter('ALL')" 
-          class="px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider transition ${activeFilterTab === 'ALL' ? 'bg-[#f91814] text-white shadow-md' : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'}">
+          class="shrink-0 px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider transition cursor-pointer ${activeFilterTab === 'ALL' ? 'bg-[#f91814] text-white shadow-md' : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'}">
           ALL (${totalItems})
         </button>
       `;
@@ -582,7 +561,7 @@
         const isActive = activeFilterTab.toLowerCase() === cat.toLowerCase();
         html += `
           <button onclick="setActiveFilter('${cat}')" 
-            class="px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider transition ${isActive ? 'bg-[#f91814] text-white shadow-md' : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'}">
+            class="shrink-0 px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider transition cursor-pointer ${isActive ? 'bg-[#f91814] text-white shadow-md' : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'}">
             ${cat} (${count})
           </button>
         `;
@@ -623,10 +602,10 @@
 
       if (!filtered.length) {
         container.innerHTML = `
-          <div class="col-span-full py-16 text-center text-neutral-400">
-            <span class="text-5xl block mb-2">🍔</span>
-            <p class="font-bold text-neutral-600 text-base">No items found</p>
-            <p class="text-xs text-neutral-400 mt-1">Click "+ Add New Food" above to add your first dish.</p>
+          <div class="col-span-full py-12 text-center text-neutral-400 bg-neutral-50 rounded-2xl border border-dashed border-neutral-200">
+            <span class="text-4xl block mb-2">🍔</span>
+            <p class="font-bold text-neutral-700 text-sm">No dishes in this category</p>
+            <p class="text-xs text-neutral-400 mt-1">Tap "+ Add Food" above to add one.</p>
           </div>
         `;
         return;
@@ -635,28 +614,28 @@
       container.innerHTML = filtered.map(item => {
         const imageFit = item.imageFit || 'cover';
         return `
-          <div class="bg-neutral-50 rounded-3xl p-5 border border-black/5 hover:border-black/15 transition shadow-sm flex flex-col justify-between group">
+          <div class="bg-neutral-50 rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-black/5 hover:border-black/15 transition shadow-xs flex flex-col justify-between group">
             <div>
-              <div class="relative w-full h-48 rounded-2xl overflow-hidden bg-neutral-200 mb-4 border border-black/5">
+              <div class="relative w-full h-44 sm:h-48 rounded-xl sm:rounded-2xl overflow-hidden bg-neutral-200 mb-3 border border-black/5">
                 <img src="${item.image || '/img-webp/slider-burger.webp'}" alt="${item.name}" 
                   class="w-full h-full object-${imageFit}" onerror="this.src='/img-webp/slider-burger.webp'" />
-                <span class="absolute top-2.5 right-2.5 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-neutral-800 shadow-sm">
+                <span class="absolute top-2 right-2 bg-white/95 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[11px] font-bold text-neutral-800 shadow-xs">
                   ${item.cat}
                 </span>
-                <span class="absolute bottom-2.5 left-2.5 bg-black/80 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold">
+                <span class="absolute bottom-2 left-2 bg-black/85 backdrop-blur-md text-white px-2.5 py-0.5 rounded-full text-xs font-bold">
                   ₹${item.price}
                 </span>
               </div>
-              <h4 class="font-modak text-xl text-neutral-900 group-hover:text-[#f91814] transition leading-tight mb-1">${item.name}</h4>
+              <h4 class="font-modak text-lg sm:text-xl text-neutral-900 group-hover:text-[#f91814] transition leading-tight mb-1">${item.name}</h4>
               
               <!-- Quick Stats Summary -->
-              <div class="grid grid-cols-3 gap-1.5 py-2 text-[11px] text-neutral-600 border-t border-b border-neutral-200/60 my-2">
+              <div class="grid grid-cols-3 gap-1 py-1.5 text-[10px] sm:text-[11px] text-neutral-600 border-t border-b border-neutral-200/60 my-2">
                 <div><span class="font-bold text-neutral-400 block text-[9px] uppercase">Bun</span>${item.bun || 'Brioche'}</div>
                 <div><span class="font-bold text-neutral-400 block text-[9px] uppercase">Patty</span>${item.patty || 'Veggie'}</div>
                 <div><span class="font-bold text-neutral-400 block text-[9px] uppercase">Spice</span>${item.spice || 'Medium'}</div>
               </div>
               
-              <div class="flex items-center gap-2 text-[11px] font-bold text-neutral-500">
+              <div class="flex items-center gap-2 text-[10px] sm:text-[11px] font-bold text-neutral-500">
                 <span>🔥 ${item.calories || 500} Cal</span>
                 <span>•</span>
                 <span>💪 ${item.protein || '18g'} Protein</span>
@@ -664,13 +643,13 @@
             </div>
 
             <!-- Actions -->
-            <div class="flex items-center justify-end gap-2 mt-4 pt-3 border-t border-neutral-200/60">
+            <div class="flex items-center justify-end gap-2 mt-3 pt-2.5 border-t border-neutral-200/60">
               <button onclick="editFoodItem('${item.id}')" 
-                class="px-3.5 py-1.5 bg-neutral-200 hover:bg-neutral-300 text-neutral-800 rounded-xl text-xs font-bold transition flex items-center gap-1">
+                class="px-3.5 py-1.5 bg-neutral-200 hover:bg-neutral-300 text-neutral-800 rounded-xl text-xs font-bold transition flex items-center gap-1 cursor-pointer">
                 ✏️ Edit
               </button>
               <button onclick="deleteFoodItem('${item.id}')" 
-                class="px-3.5 py-1.5 bg-red-100 hover:bg-red-200 text-red-700 rounded-xl text-xs font-bold transition flex items-center gap-1">
+                class="px-3.5 py-1.5 bg-red-100 hover:bg-red-200 text-red-700 rounded-xl text-xs font-bold transition flex items-center gap-1 cursor-pointer">
                 🗑️ Delete
               </button>
             </div>
@@ -681,16 +660,19 @@
 
     // MODAL HANDLERS
     function openFoodModal(defaultCategory = null) {
-      document.getElementById('foodModalTitle').textContent = 'Add New Dish';
-      document.getElementById('foodForm').reset();
-      document.getElementById('editItemId').value = '';
+      document.getElementById('foodModalTitle').textContent = 'Add New Food Item';
+      const form = document.getElementById('foodItemForm');
+      if (form) form.reset();
+      
+      const editInput = document.getElementById('editFoodId');
+      if (editInput) editInput.value = '';
       
       populateCategorySelect();
       if (defaultCategory && menuState.categories.includes(defaultCategory)) {
         document.getElementById('foodCategory').value = defaultCategory;
       }
 
-      const radio = document.querySelector('input[name="imageFitRadio"][value="cover"]');
+      const radio = document.querySelector('input[name="imageFit"][value="cover"]');
       if (radio) radio.checked = true;
 
       updateLivePreview();
@@ -707,14 +689,14 @@
       const item = menuState.items.find(i => String(i.id) === String(id));
       if (!item) return;
 
-      document.getElementById('foodModalTitle').textContent = 'Edit Dish';
-      document.getElementById('editItemId').value = item.id;
+      document.getElementById('foodModalTitle').textContent = 'Edit Food Item';
+      document.getElementById('editFoodId').value = item.id;
       document.getElementById('foodName').value = item.name;
       document.getElementById('foodPrice').value = item.price;
       document.getElementById('foodCategory').value = item.cat;
       document.getElementById('foodImageUrl').value = item.image || '';
       document.getElementById('foodOrderUrl').value = item.orderUrl || '';
-      document.getElementById('foodPrepTime').value = item.prepTime || '10';
+      document.getElementById('foodPrepTime').value = item.prepTime || '10 min';
       document.getElementById('foodBun').value = item.bun || 'Brioche';
       document.getElementById('foodPatty').value = item.patty || 'Veggie';
       document.getElementById('foodSpice').value = item.spice || 'Medium';
@@ -722,7 +704,7 @@
       document.getElementById('foodProtein').value = item.protein || '18g';
 
       const fitVal = item.imageFit || 'cover';
-      const radio = document.querySelector(`input[name="imageFitRadio"][value="${fitVal}"]`);
+      const radio = document.querySelector(`input[name="imageFit"][value="${fitVal}"]`);
       if (radio) radio.checked = true;
 
       updateLivePreview();
@@ -733,22 +715,25 @@
     function deleteFoodItem(id) {
       const item = menuState.items.find(i => String(i.id) === String(id));
       if (!item) return;
-      if (confirm(`Are you sure you want to delete "${item.name}"?`)) {
+      if (confirm(`Delete "${item.name}" from menu?`)) {
         menuState.items = menuState.items.filter(i => String(i.id) !== String(id));
         persistData();
         renderDashboard();
+        showToast('Dish removed from menu', '🗑️');
       }
     }
 
+    // INSTANT SAVE FOOD ITEM - NO CONFIRMATION NEEDED
     function saveFoodItem(e) {
       e.preventDefault();
-      const editId = document.getElementById('editItemId').value;
+      const editId = (document.getElementById('editFoodId')?.value || '').trim();
       const name = document.getElementById('foodName').value.trim();
       const cat = document.getElementById('foodCategory').value;
-      const price = parseFloat(document.getElementById('foodPrice').value) || 0;
+      const rawPrice = document.getElementById('foodPrice').value.trim();
+      const price = parseFloat(rawPrice.replace(/[^0-9.]/g, '')) || 0;
       const image = document.getElementById('foodImageUrl').value.trim() || '/img-webp/slider-burger.webp';
-      const orderUrl = document.getElementById('foodOrderUrl').value.trim() || 'https://order.houseofdelicious.in';
-      const imageFit = document.querySelector('input[name="imageFitRadio"]:checked')?.value || 'cover';
+      const orderUrl = document.getElementById('foodOrderUrl').value.trim() || 'https://www.zomato.com/mumbai/house-of-delicious-2-ghatkopar-east/order';
+      const imageFit = document.querySelector('input[name="imageFit"]:checked')?.value || 'cover';
 
       const itemPayload = {
         id: editId ? String(editId) : ('hod_' + Date.now()),
@@ -758,7 +743,7 @@
         image,
         imageFit,
         orderUrl,
-        prepTime: document.getElementById('foodPrepTime').value.trim() || '10',
+        prepTime: document.getElementById('foodPrepTime').value.trim() || '10 min',
         bun: document.getElementById('foodBun').value.trim() || 'Brioche',
         patty: document.getElementById('foodPatty').value.trim() || 'Veggie',
         spice: document.getElementById('foodSpice').value.trim() || 'Medium',
@@ -773,9 +758,11 @@
         menuState.items.push(itemPayload);
       }
 
+      // Immediately persist to localStorage and refresh dashboard
       persistData();
       renderDashboard();
       closeFoodModal();
+      showToast(editId ? 'Dish updated successfully!' : 'Dish added to menu!', '🎉');
     }
 
     // IMAGE UPLOAD CONVERTER (Local Base64)
@@ -793,20 +780,21 @@
 
     // LIVE CARD PREVIEW
     function updateLivePreview() {
-      const name = document.getElementById('foodName').value || 'Cheesy Smash';
-      const price = document.getElementById('foodPrice').value || '180';
-      const img = document.getElementById('foodImageUrl').value || '/img-webp/slider-burger.webp';
-      const prepTime = document.getElementById('foodPrepTime').value || '10';
-      const bun = document.getElementById('foodBun').value || 'Brioche';
-      const patty = document.getElementById('foodPatty').value || 'Veggie';
-      const spice = document.getElementById('foodSpice').value || 'Medium';
-      const cal = document.getElementById('foodCalories').value || '500';
-      const protein = document.getElementById('foodProtein').value || '18g';
+      const name = document.getElementById('foodName')?.value || 'Cheesy Smash';
+      const rawPrice = document.getElementById('foodPrice')?.value || '180';
+      const price = rawPrice.replace(/[^0-9.]/g, '') || rawPrice;
+      const img = document.getElementById('foodImageUrl')?.value || '/img-webp/slider-burger.webp';
+      const prepTime = document.getElementById('foodPrepTime')?.value || '10 min';
+      const bun = document.getElementById('foodBun')?.value || 'Brioche';
+      const patty = document.getElementById('foodPatty')?.value || 'Veggie';
+      const spice = document.getElementById('foodSpice')?.value || 'Medium';
+      const cal = document.getElementById('foodCalories')?.value || '500';
+      const protein = document.getElementById('foodProtein')?.value || '18g';
       
       const prevImg = document.getElementById('previewDishImage');
       if (prevImg) {
         prevImg.src = img;
-        const fit = document.querySelector('input[name="imageFitRadio"]:checked')?.value || 'cover';
+        const fit = document.querySelector('input[name="imageFit"]:checked')?.value || 'cover';
         prevImg.className = `w-full h-full object-${fit} transition-all duration-300`;
       }
 
@@ -817,7 +805,7 @@
       if (pPrice) pPrice.textContent = '₹' + price;
       
       const pPrep = document.getElementById('previewPrepTime');
-      if (pPrep) pPrep.textContent = prepTime + ' MIN';
+      if (pPrep) pPrep.textContent = prepTime.toUpperCase();
       
       const pBun = document.getElementById('previewBun');
       if (pBun) pBun.textContent = bun;
@@ -844,13 +832,13 @@
       if (mode === 'details') {
         overlay.classList.remove('opacity-0', 'pointer-events-none');
         overlay.classList.add('opacity-100');
-        btnD.className = 'px-3 py-1 rounded-md font-bold text-xs bg-white text-black shadow-sm';
-        btnF.className = 'px-3 py-1 rounded-md font-bold text-xs text-neutral-600 hover:text-black';
+        btnD.className = 'px-2.5 py-0.5 rounded-md font-bold text-[11px] bg-white text-black shadow-xs';
+        btnF.className = 'px-2.5 py-0.5 rounded-md font-bold text-[11px] text-neutral-600 hover:text-black';
       } else {
         overlay.classList.remove('opacity-100');
         overlay.classList.add('opacity-0', 'pointer-events-none');
-        btnF.className = 'px-3 py-1 rounded-md font-bold text-xs bg-white text-black shadow-sm';
-        btnD.className = 'px-3 py-1 rounded-md font-bold text-xs text-neutral-600 hover:text-black';
+        btnF.className = 'px-2.5 py-0.5 rounded-md font-bold text-[11px] bg-white text-black shadow-xs';
+        btnD.className = 'px-2.5 py-0.5 rounded-md font-bold text-[11px] text-neutral-600 hover:text-black';
       }
     }
 
@@ -875,11 +863,11 @@
         return `
           <div class="flex items-center justify-between p-2.5 bg-neutral-50 rounded-xl border border-neutral-200">
             <div>
-              <span class="font-bold text-sm text-neutral-800">${c}</span>
-              <span class="text-xs text-neutral-400 ml-2">(${count} dish${count === 1 ? '' : 'es'})</span>
+              <span class="font-bold text-xs sm:text-sm text-neutral-800">${c}</span>
+              <span class="text-[11px] text-neutral-400 ml-1.5">(${count})</span>
             </div>
             ${menuState.categories.length > 1 ? `
-              <button onclick="deleteTab('${c}')" class="text-red-500 hover:text-red-700 text-xs font-bold px-2 py-1">
+              <button onclick="deleteTab('${c}')" class="text-red-500 hover:text-red-700 text-xs font-bold px-2 py-1 cursor-pointer">
                 Delete
               </button>
             ` : ''}
@@ -904,6 +892,7 @@
       renderDashboard();
       renderManageTabList();
       input.value = '';
+      showToast(`Category "${newCat}" added!`, '🏷️');
     }
 
     function deleteTab(catName) {
@@ -921,148 +910,7 @@
       persistData();
       renderDashboard();
       renderManageTabList();
-    }
-
-    // PUBLISH LIVE MODAL FUNCTIONS
-    function openPublishModal() {
-      const modal = document.getElementById('publishModal');
-      if (modal) {
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-      }
-    }
-
-    function closePublishModal() {
-      const modal = document.getElementById('publishModal');
-      if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-      }
-    }
-
-    function downloadMenuJson() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(menuState, null, 2));
-      const a = document.createElement('a');
-      a.href = dataStr;
-      a.download = 'menu.json';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    }
-
-    function copyMenuJson() {
-      navigator.clipboard.writeText(JSON.stringify(menuState, null, 2))
-        .then(() => alert('📋 menu.json copied to clipboard!'))
-        .catch(() => alert('Failed to copy to clipboard'));
-    }
-
-    async function publishLiveToGitHub() {
-      const tokenInput = document.getElementById('ghToken');
-      const token = (tokenInput ? tokenInput.value : '').trim();
-      if (!token) {
-        alert('Please enter your GitHub Personal Access Token with repository write permissions.');
-        return;
-      }
-      localStorage.setItem('hod_gh_token', token);
-
-      const statusEl = document.getElementById('publishStatus');
-      const btn = document.getElementById('btnPublishLive');
-      btn.disabled = true;
-      btn.innerHTML = '<span>⏳</span> Publishing to Live Website...';
-      if (statusEl) {
-        statusEl.className = 'text-xs text-center font-bold py-1 text-neutral-600 block';
-        statusEl.textContent = 'Connecting to GitHub repository...';
-      }
-
-      const repo = 'mbaqir18786/House-Of-Delicious';
-      const filePath = 'docs/data/menu.json';
-      const apiUrl = 'https://api.github.com/repos/' + repo + '/contents/' + filePath;
-
-      try {
-        let sha = null;
-        const getRes = await fetch(apiUrl, {
-          headers: {
-            'Authorization': 'token ' + token,
-            'Accept': 'application/vnd.github.v3+json'
-          }
-        });
-        if (getRes.ok) {
-          const fileInfo = await getRes.json();
-          sha = fileInfo.sha;
-        }
-
-        const jsonString = JSON.stringify(menuState, null, 2);
-        const encoded = btoa(unescape(encodeURIComponent(jsonString)));
-
-        const putRes = await fetch(apiUrl, {
-          method: 'PUT',
-          headers: {
-            'Authorization': 'token ' + token,
-            'Content-Type': 'application/json',
-            'Accept': 'application/vnd.github.v3+json'
-          },
-          body: JSON.stringify({
-            message: 'feat(menu): update menu items from admin panel',
-            content: encoded,
-            sha: sha
-          })
-        });
-
-        if (putRes.ok) {
-          if (statusEl) {
-            statusEl.className = 'text-xs text-center font-bold py-1 text-green-600 block';
-            statusEl.textContent = '🎉 Successfully published! Live website will reflect changes in ~30 seconds.';
-          }
-          alert('🎉 Live publish successful! Your updated menu is now deploying to the website for all customers worldwide.');
-        } else {
-          const errData = await putRes.json();
-          throw new Error(errData.message || 'GitHub API returned ' + putRes.status);
-        }
-      } catch (err) {
-        console.error('Publish error:', err);
-        if (statusEl) {
-          statusEl.className = 'text-xs text-center font-bold py-1 text-red-600 block';
-          statusEl.textContent = 'Publish failed: ' + err.message;
-        }
-        alert('Failed to publish: ' + err.message + '. Please ensure your GitHub token has repo write access.');
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = '<span>🚀</span> Publish Changes to Live Website';
-      }
-    }
-
-    function exportMenuData() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(menuState, null, 2));
-      const a = document.createElement('a');
-      a.setAttribute("href", dataStr);
-      a.setAttribute("download", `hod_menu_backup_${new Date().toISOString().slice(0,10)}.json`);
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    }
-
-    function importMenuData(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        try {
-          const imported = JSON.parse(evt.target.result);
-          if (imported.categories && Array.isArray(imported.items)) {
-            menuState = imported;
-            persistData();
-            renderDashboard();
-            alert('Menu imported successfully!');
-            closePublishModal();
-          } else {
-            alert('Invalid menu JSON file format.');
-          }
-        } catch(err) {
-          alert('Could not parse JSON file.');
-        }
-      };
-      reader.readAsText(file);
+      showToast(`Category "${catName}" removed`, '🗑️');
     }
   </script>
 </body>
